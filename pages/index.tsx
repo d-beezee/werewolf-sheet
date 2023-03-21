@@ -7,7 +7,6 @@ export default function Home() {
   const [scenes, setScenes] = useState(4);
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState<string>();
-  const [response, setResponse] = useState<string>();
 
   return (
     <div>
@@ -53,7 +52,6 @@ ${d}
   })
   .join("")}
               `);
-              setResponse(JSON.stringify(data));
               setInput("");
             } catch (error) {
               // Consider implementing your own error handling logic here
@@ -85,7 +83,6 @@ ${d}
         </form>
         <div className={styles.result}>
           <div style={{ whiteSpace: "pre-wrap" }}>{result}</div>
-          <div style={{ whiteSpace: "pre-wrap" }}>{response}</div>
         </div>
       </main>
     </div>
