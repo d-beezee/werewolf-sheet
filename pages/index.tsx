@@ -40,7 +40,19 @@ export default function Home() {
                 );
               }
 
-              setResult(data.result);
+              setResult(`
+${data.base}
+${data.details
+  .map((d: string, index) => {
+    return `
+----------------------
+Dettagli scena ${index + 1}
+${d}
+----------------------
+`;
+  })
+  .join("")}
+              `);
               setResponse(JSON.stringify(data));
               setInput("");
             } catch (error) {
