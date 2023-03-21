@@ -11,13 +11,13 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>OpenAI Quickstart</title>
-        <link rel="icon" href="/dog.png" />
+        <title>Sigmata Mission Generator</title>
+        <link rel="icon" href="/fist.png" />
       </Head>
 
       <main className={styles.main}>
-        <img src="/dog.png" className={styles.icon} />
-        <h3>Name my pet</h3>
+        <img src="/fist.png" className={styles.icon} />
+        <h3>Sigmata Mission Generator</h3>
         <form
           onSubmit={async (event) => {
             event.preventDefault();
@@ -82,7 +82,17 @@ ${d}
           />
         </form>
         <div className={styles.result}>
-          <div style={{ whiteSpace: "pre-wrap" }}>{result}</div>
+          <div
+            style={{
+              whiteSpace: "pre-wrap",
+              background: "#1d1f21",
+              color: "#a8ff60",
+              fontFamily: "Share Tech Mono",
+              padding: result?.length ? "50px" : 0,
+            }}
+          >
+            {result}
+          </div>
         </div>
       </main>
     </div>
