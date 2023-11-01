@@ -5,19 +5,22 @@ import Patron from "@src/components/Sheet/Patron";
 import Sheet from "@src/database/Sheet";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const SheetSinglePage = () => {
   const router = useRouter();
   const { slug } = router.query;
   const [item, setItem] = useState<Sheet>();
-  const sheet = new Sheet(slug as string);
 
-  sheet.init().then(() => {
-    setItem(sheet);
-  });
+  useEffect(() => {
+    if (slug === undefined) return;
+    const sheet = new Sheet(slug as string);
+    sheet.init().then(() => {
+      setItem(sheet);
+    });
+  }, [slug]);
 
-  if (item === undefined) return <div>loading...</div>;
+  if (item === undefined || slug === undefined) return <div>loading...</div>;
 
   const data = item.get();
   if (data === null) return <div>not found</div>;
@@ -29,6 +32,15 @@ const SheetSinglePage = () => {
       </Head>
 
       <main>
+        <div>
+          <button
+            onClick={() =>
+              item.delete().then(() => (window.location.href = "/sheet"))
+            }
+          >
+            delete
+          </button>
+        </div>
         <Name sheet={item} />
         <Concept sheet={item} />
         <Patron sheet={item} />

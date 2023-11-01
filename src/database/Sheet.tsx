@@ -1,4 +1,4 @@
-import { get, put } from "@src/database";
+import { del, get, put } from "@src/database";
 
 export class SheetAlreadyExistsError extends Error {}
 
@@ -99,12 +99,17 @@ type SheetData = {
 
 class Sheet {
   private data: SheetData | null = null;
+  private ready: boolean = false;
+  private name: string;
 
-  constructor(private name: string) {}
+  constructor(name: string) {
+    this.name = name.toLowerCase().replace(/\s/g, "-");
+  }
 
   public async init() {
     const data = await get(`sheet-${this.name}`);
     if (data) this.data = data as unknown as SheetData;
+    this.ready = true;
     return data;
   }
 
@@ -116,9 +121,26 @@ class Sheet {
   }
 
   public async create() {
+    if (!this.ready) await this.init();
     if (this.exists())
       throw new SheetAlreadyExistsError("Sheet already exists");
+    const sheets = await get("sheets:list");
+    const list: string[] = [...(sheets || []), this.name];
+    await put(`sheets:list`, list);
     return await put(`sheet-${this.name}`, {});
+  }
+
+  public async delete() {
+    if (!this.ready) await this.init();
+    if (!this.exists()) return;
+    const sheets = await get("sheets:list");
+    const list: string[] = [...(sheets || [])];
+    const index = list.indexOf(this.name);
+    if (index > -1) {
+      list.splice(index, 1);
+    }
+    await put(`sheets:list`, list);
+    await del(`sheet-${this.name}`);
   }
 
   public setName(name: string) {
@@ -147,6 +169,12 @@ class Sheet {
 
   private save() {
     return put(`sheet-${this.name}`, this.data);
+  }
+
+  public static async list() {
+    const sheets = await get("sheets:list");
+    if (sheets === null) return [];
+    return sheets as string[];
   }
 }
 

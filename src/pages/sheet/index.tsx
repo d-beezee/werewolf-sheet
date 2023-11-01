@@ -1,9 +1,16 @@
 import Sheet, { SheetAlreadyExistsError } from "@src/database/Sheet";
 import Head from "next/head";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const SheetPage = () => {
   const [name, setName] = useState("");
+  const [list, setList] = useState<string[]>([]);
+
+  useEffect(() => {
+    Sheet.list().then((sheets) => {
+      setList(sheets);
+    });
+  }, []);
   return (
     <div>
       <Head>
@@ -15,20 +22,27 @@ const SheetPage = () => {
         <button
           disabled={name === ""}
           onClick={() => {
-            try {
-              new Sheet(name).create();
-            } catch (error) {
-              if (error instanceof SheetAlreadyExistsError) {
-                return;
-              }
-              throw error;
-            } finally {
-              window.location.href = `/sheet/${name}`;
-            }
+            new Sheet(name)
+              .create()
+              .then(() => {
+                window.location.href = `/sheet/${name}`;
+              })
+              .catch((error) => {
+                if (error instanceof SheetAlreadyExistsError) {
+                  window.location.href = `/sheet/${name}`;
+                  return;
+                }
+                throw error;
+              });
           }}
         >
           create
         </button>
+        {list.map((item) => (
+          <div key={item}>
+            <a href={`/sheet/${item}`}>{item}</a>
+          </div>
+        ))}
       </main>
     </div>
   );
