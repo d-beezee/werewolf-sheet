@@ -1,8 +1,14 @@
+import type { NextApiRequest, NextApiResponse } from "next";
 
-export default async function (_req:any, res:any) {
+type ResponseData = {
+  message: string;
+};
+
+export default async function (
+  _req: NextApiRequest,
+  res: NextApiResponse<ResponseData>
+) {
   res.status(500).json({
-    error: {
-      message: 'Not implemented.',
-    }
+    message: "Not implemented.",
   });
 }
