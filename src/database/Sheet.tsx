@@ -167,6 +167,18 @@ class Sheet {
     this.save();
   }
 
+  public setAuspice(value: string) {
+    if (this.data === null) throw new Error("Sheet does not exists");
+    this.data.auspice = value;
+    this.save();
+  }
+
+  public setTribe(value: string) {
+    if (this.data === null) throw new Error("Sheet does not exists");
+    this.data.tribe = value;
+    this.save();
+  }
+
   private save() {
     return put(`sheet-${this.name}`, this.data);
   }

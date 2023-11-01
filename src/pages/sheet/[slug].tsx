@@ -1,7 +1,9 @@
+import Auspice from "@src/components/Sheet/Auspice";
 import Chronicle from "@src/components/Sheet/Chronicle";
 import Concept from "@src/components/Sheet/Concept";
 import Name from "@src/components/Sheet/Name";
 import Patron from "@src/components/Sheet/Patron";
+import Tribe from "@src/components/Sheet/Tribe";
 import Sheet from "@src/database/Sheet";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -45,6 +47,8 @@ const SheetSinglePage = () => {
         <Concept sheet={item} />
         <Patron sheet={item} />
         <Chronicle sheet={item} />
+        <Auspice sheet={item} />
+        <Tribe sheet={item} />
       </main>
     </div>
   );
