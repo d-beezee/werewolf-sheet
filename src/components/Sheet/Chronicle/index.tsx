@@ -4,7 +4,7 @@ import { styled } from "styled-components";
 
 const CustomInputable = styled(Inputable)`
   span {
-    min-width: 20%;
+    min-width: 25%;
   }
 `;
 

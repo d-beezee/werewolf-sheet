@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const SheetContainerComponent = styled.div`
-    width: calc(420mm - 16%);
+    width: calc(420mm - 20rem);
     height: 436mm ;
     margin: 0 auto;
     box-shadow: 0 0 0 1px #000;   
@@ -9,9 +9,9 @@ const SheetContainerComponent = styled.div`
     background-image: url('/sheetbg.jpg');
     background-size: 100%;
     background-repeat: no-repeat;
-    padding: 10% 8%;
+    padding: 12rem 10rem;
 
-    div{
+    &>div{
         transform: rotate(-0.1deg);
     }
 }
