@@ -180,17 +180,17 @@ class Sheet {
       health: this.data?.health || { aggravated: 0, superficial: 0 },
       crinos: this.data?.crinos || { aggravated: 0, superficial: 0 },
       willpower: this.data?.willpower || { aggravated: 0, superficial: 0 },
+      renown: { glory: 0, honor: 0, wisdom: 0, ...this.data?.renown },
     };
   }
 
   get maxHealth() {
-    return 3 + (this.data?.attributes?.physical?.stamina || 1);
+    return 3 + this.get().attributes.physical.stamina;
   }
 
   get maxWillpower() {
     return (
-      (this.data?.attributes?.mental?.wits || 1) +
-      (this.data?.attributes?.mental?.resolve || 1)
+      this.get().attributes.mental.wits + this.get().attributes.mental.resolve
     );
   }
 
@@ -305,6 +305,7 @@ class Sheet {
       ...this.data.attributes,
       [type]: { ...current, [value]: newValue },
     };
+    console.log(this.data.attributes);
     this.save();
   }
 
@@ -323,6 +324,20 @@ class Sheet {
     this.data.skills = {
       ...this.data.skills,
       [type]: { ...current, [value]: { value: newValue } },
+    };
+    this.save();
+  }
+
+  public setRenown<T extends keyof SheetData["renown"]>(
+    type: T,
+    newValue: number
+  ) {
+    if (this.data === null) throw new Error("Sheet does not exists");
+    const renown = this.get().renown[type];
+    if (renown === newValue) return;
+    this.data.renown = {
+      ...this.data.renown,
+      [type]: newValue,
     };
     this.save();
   }

@@ -5,21 +5,25 @@ const DottableComponent = ({
   title,
   saveValue,
   getValue,
+  allowZero = false,
   className,
 }: {
   className?: string;
   title: string;
+  allowZero?: boolean;
   getValue: () => number;
   saveValue: (value: number) => void;
 }) => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(-1);
   useEffect(() => {
     setValue(getValue());
   }, []);
   useEffect(() => {
+    if (value === -1) return;
     saveValue(value);
   }, [value]);
 
+  if (value === -1) return null;
   return (
     <div className={className}>
       <div className="title">{title}</div>
@@ -28,7 +32,9 @@ const DottableComponent = ({
           <button
             className="filled"
             onClick={() =>
-              i === 0 && value === 1 ? setValue(0) : setValue(i + 1)
+              i === 0 && value === 1 && allowZero
+                ? setValue(0)
+                : setValue(i + 1)
             }
           ></button>
         ))}

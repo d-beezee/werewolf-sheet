@@ -6,6 +6,7 @@ import Dottable from "@src/components/Sheet/Dottable";
 import Health from "@src/components/Sheet/Health";
 import Name from "@src/components/Sheet/Name";
 import Patron from "@src/components/Sheet/Patron";
+import { Renown } from "@src/components/Sheet/Renown";
 import Separator from "@src/components/Sheet/Separator";
 import SheetContainer from "@src/components/Sheet/SheetContainer";
 import Tribe from "@src/components/Sheet/Tribe";
@@ -185,6 +186,7 @@ const SheetSinglePage = () => {
           <div style={{ display: "flex" }}>
             <div style={{ width: "100%" }}>
               <Dottable
+                allowZero
                 title="athletics"
                 getValue={() => data.skills.physical.athletics.value}
                 saveValue={(value) =>
@@ -192,21 +194,25 @@ const SheetSinglePage = () => {
                 }
               />
               <Dottable
+                allowZero
                 title="brawl"
                 getValue={() => data.skills.physical.brawl.value}
                 saveValue={(value) => item.setSkill("physical", "brawl", value)}
               />
               <Dottable
+                allowZero
                 title="craft"
                 getValue={() => data.skills.physical.craft.value}
                 saveValue={(value) => item.setSkill("physical", "craft", value)}
               />
               <Dottable
+                allowZero
                 title="driving"
                 getValue={() => data.skills.physical.drive.value}
                 saveValue={(value) => item.setSkill("physical", "drive", value)}
               />
               <Dottable
+                allowZero
                 title="firearms"
                 getValue={() => data.skills.physical.firearms.value}
                 saveValue={(value) =>
@@ -214,6 +220,7 @@ const SheetSinglePage = () => {
                 }
               />
               <Dottable
+                allowZero
                 title="larceny"
                 getValue={() => data.skills.physical.larceny.value}
                 saveValue={(value) =>
@@ -221,11 +228,13 @@ const SheetSinglePage = () => {
                 }
               />
               <Dottable
+                allowZero
                 title="melee"
                 getValue={() => data.skills.physical.melee.value}
                 saveValue={(value) => item.setSkill("physical", "melee", value)}
               />
               <Dottable
+                allowZero
                 title="stealth"
                 getValue={() => data.skills.physical.stealth.value}
                 saveValue={(value) =>
@@ -233,6 +242,7 @@ const SheetSinglePage = () => {
                 }
               />
               <Dottable
+                allowZero
                 title="survival"
                 getValue={() => data.skills.physical.survival.value}
                 saveValue={(value) =>
@@ -242,6 +252,7 @@ const SheetSinglePage = () => {
             </div>
             <div style={{ width: "100%" }}>
               <Dottable
+                allowZero
                 title="animalKen"
                 getValue={() => data.skills.social.animalKen.value}
                 saveValue={(value) =>
@@ -249,6 +260,7 @@ const SheetSinglePage = () => {
                 }
               />
               <Dottable
+                allowZero
                 title="etiquette"
                 getValue={() => data.skills.social.etiquette.value}
                 saveValue={(value) =>
@@ -256,11 +268,13 @@ const SheetSinglePage = () => {
                 }
               />
               <Dottable
+                allowZero
                 title="insight"
                 getValue={() => data.skills.social.insight.value}
                 saveValue={(value) => item.setSkill("social", "insight", value)}
               />
               <Dottable
+                allowZero
                 title="intimidation"
                 getValue={() => data.skills.social.intimidation.value}
                 saveValue={(value) =>
@@ -268,6 +282,7 @@ const SheetSinglePage = () => {
                 }
               />
               <Dottable
+                allowZero
                 title="leadership"
                 getValue={() => data.skills.social.leadership.value}
                 saveValue={(value) =>
@@ -275,6 +290,7 @@ const SheetSinglePage = () => {
                 }
               />
               <Dottable
+                allowZero
                 title="performance"
                 getValue={() => data.skills.social.performance.value}
                 saveValue={(value) =>
@@ -282,6 +298,7 @@ const SheetSinglePage = () => {
                 }
               />
               <Dottable
+                allowZero
                 title="persuasion"
                 getValue={() => data.skills.social.persuasion.value}
                 saveValue={(value) =>
@@ -289,6 +306,7 @@ const SheetSinglePage = () => {
                 }
               />
               <Dottable
+                allowZero
                 title="streetwise"
                 getValue={() => data.skills.social.streetwise.value}
                 saveValue={(value) =>
@@ -296,6 +314,7 @@ const SheetSinglePage = () => {
                 }
               />
               <Dottable
+                allowZero
                 title="subterfuge"
                 getValue={() => data.skills.social.subterfuge.value}
                 saveValue={(value) =>
@@ -305,6 +324,7 @@ const SheetSinglePage = () => {
             </div>
             <div style={{ width: "100%" }}>
               <Dottable
+                allowZero
                 title="academics"
                 getValue={() => data.skills.mental.academics.value}
                 saveValue={(value) =>
@@ -312,6 +332,7 @@ const SheetSinglePage = () => {
                 }
               />
               <Dottable
+                allowZero
                 title="awareness"
                 getValue={() => data.skills.mental.awareness.value}
                 saveValue={(value) =>
@@ -319,11 +340,13 @@ const SheetSinglePage = () => {
                 }
               />
               <Dottable
+                allowZero
                 title="finance"
                 getValue={() => data.skills.mental.finance.value}
                 saveValue={(value) => item.setSkill("mental", "finance", value)}
               />
               <Dottable
+                allowZero
                 title="investigation"
                 getValue={() => data.skills.mental.investigation.value}
                 saveValue={(value) =>
@@ -331,6 +354,7 @@ const SheetSinglePage = () => {
                 }
               />
               <Dottable
+                allowZero
                 title="medicine"
                 getValue={() => data.skills.mental.medicine.value}
                 saveValue={(value) =>
@@ -338,11 +362,13 @@ const SheetSinglePage = () => {
                 }
               />
               <Dottable
+                allowZero
                 title="occult"
                 getValue={() => data.skills.mental.occult.value}
                 saveValue={(value) => item.setSkill("mental", "occult", value)}
               />
               <Dottable
+                allowZero
                 title="politics"
                 getValue={() => data.skills.mental.politics.value}
                 saveValue={(value) =>
@@ -350,11 +376,13 @@ const SheetSinglePage = () => {
                 }
               />
               <Dottable
+                allowZero
                 title="science"
                 getValue={() => data.skills.mental.science.value}
                 saveValue={(value) => item.setSkill("mental", "science", value)}
               />
               <Dottable
+                allowZero
                 title="technology"
                 getValue={() => data.skills.mental.technology.value}
                 saveValue={(value) =>
@@ -364,6 +392,26 @@ const SheetSinglePage = () => {
             </div>
           </div>
           <Separator text="RENOWN" />
+          <div style={{ display: "flex" }}>
+            <Renown
+              allowZero
+              title="Glory"
+              getValue={() => data.renown.glory}
+              saveValue={(value) => item.setRenown("glory", value)}
+            />
+            <Renown
+              allowZero
+              title="Honor"
+              getValue={() => data.renown.honor}
+              saveValue={(value) => item.setRenown("honor", value)}
+            />
+            <Renown
+              allowZero
+              title="Wisdom"
+              getValue={() => data.renown.wisdom}
+              saveValue={(value) => item.setRenown("wisdom", value)}
+            />
+          </div>
         </SheetContainer>
       </main>
     </div>

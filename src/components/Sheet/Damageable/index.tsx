@@ -134,8 +134,8 @@ const Damageable = styled(DamageableComponent)`
     button,
     .unusable {
       box-sizing: border-box;
-      width: 20px;
-      height: 20px;
+      width: 23px;
+      height: 23px;
       padding: 0;
       margin: 0 1px;
       border: 3px solid black;
