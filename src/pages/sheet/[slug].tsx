@@ -182,6 +182,188 @@ const SheetSinglePage = () => {
             <Crinos sheet={item} />
           </div>
           <Separator text="SKILLS" />
+          <div style={{ display: "flex" }}>
+            <div style={{ width: "100%" }}>
+              <Dottable
+                title="athletics"
+                getValue={() => data.skills.physical.athletics.value}
+                saveValue={(value) =>
+                  item.setSkill("physical", "athletics", value)
+                }
+              />
+              <Dottable
+                title="brawl"
+                getValue={() => data.skills.physical.brawl.value}
+                saveValue={(value) => item.setSkill("physical", "brawl", value)}
+              />
+              <Dottable
+                title="craft"
+                getValue={() => data.skills.physical.craft.value}
+                saveValue={(value) => item.setSkill("physical", "craft", value)}
+              />
+              <Dottable
+                title="driving"
+                getValue={() => data.skills.physical.drive.value}
+                saveValue={(value) => item.setSkill("physical", "drive", value)}
+              />
+              <Dottable
+                title="firearms"
+                getValue={() => data.skills.physical.firearms.value}
+                saveValue={(value) =>
+                  item.setSkill("physical", "firearms", value)
+                }
+              />
+              <Dottable
+                title="larceny"
+                getValue={() => data.skills.physical.larceny.value}
+                saveValue={(value) =>
+                  item.setSkill("physical", "larceny", value)
+                }
+              />
+              <Dottable
+                title="melee"
+                getValue={() => data.skills.physical.melee.value}
+                saveValue={(value) => item.setSkill("physical", "melee", value)}
+              />
+              <Dottable
+                title="stealth"
+                getValue={() => data.skills.physical.stealth.value}
+                saveValue={(value) =>
+                  item.setSkill("physical", "stealth", value)
+                }
+              />
+              <Dottable
+                title="survival"
+                getValue={() => data.skills.physical.survival.value}
+                saveValue={(value) =>
+                  item.setSkill("physical", "survival", value)
+                }
+              />
+            </div>
+            <div style={{ width: "100%" }}>
+              <Dottable
+                title="animalKen"
+                getValue={() => data.skills.social.animalKen.value}
+                saveValue={(value) =>
+                  item.setSkill("social", "animalKen", value)
+                }
+              />
+              <Dottable
+                title="etiquette"
+                getValue={() => data.skills.social.etiquette.value}
+                saveValue={(value) =>
+                  item.setSkill("social", "etiquette", value)
+                }
+              />
+              <Dottable
+                title="insight"
+                getValue={() => data.skills.social.insight.value}
+                saveValue={(value) => item.setSkill("social", "insight", value)}
+              />
+              <Dottable
+                title="intimidation"
+                getValue={() => data.skills.social.intimidation.value}
+                saveValue={(value) =>
+                  item.setSkill("social", "intimidation", value)
+                }
+              />
+              <Dottable
+                title="leadership"
+                getValue={() => data.skills.social.leadership.value}
+                saveValue={(value) =>
+                  item.setSkill("social", "leadership", value)
+                }
+              />
+              <Dottable
+                title="performance"
+                getValue={() => data.skills.social.performance.value}
+                saveValue={(value) =>
+                  item.setSkill("social", "performance", value)
+                }
+              />
+              <Dottable
+                title="persuasion"
+                getValue={() => data.skills.social.persuasion.value}
+                saveValue={(value) =>
+                  item.setSkill("social", "persuasion", value)
+                }
+              />
+              <Dottable
+                title="streetwise"
+                getValue={() => data.skills.social.streetwise.value}
+                saveValue={(value) =>
+                  item.setSkill("social", "streetwise", value)
+                }
+              />
+              <Dottable
+                title="subterfuge"
+                getValue={() => data.skills.social.subterfuge.value}
+                saveValue={(value) =>
+                  item.setSkill("social", "subterfuge", value)
+                }
+              />
+            </div>
+            <div style={{ width: "100%" }}>
+              <Dottable
+                title="academics"
+                getValue={() => data.skills.mental.academics.value}
+                saveValue={(value) =>
+                  item.setSkill("mental", "academics", value)
+                }
+              />
+              <Dottable
+                title="awareness"
+                getValue={() => data.skills.mental.awareness.value}
+                saveValue={(value) =>
+                  item.setSkill("mental", "awareness", value)
+                }
+              />
+              <Dottable
+                title="finance"
+                getValue={() => data.skills.mental.finance.value}
+                saveValue={(value) => item.setSkill("mental", "finance", value)}
+              />
+              <Dottable
+                title="investigation"
+                getValue={() => data.skills.mental.investigation.value}
+                saveValue={(value) =>
+                  item.setSkill("mental", "investigation", value)
+                }
+              />
+              <Dottable
+                title="medicine"
+                getValue={() => data.skills.mental.medicine.value}
+                saveValue={(value) =>
+                  item.setSkill("mental", "medicine", value)
+                }
+              />
+              <Dottable
+                title="occult"
+                getValue={() => data.skills.mental.occult.value}
+                saveValue={(value) => item.setSkill("mental", "occult", value)}
+              />
+              <Dottable
+                title="politics"
+                getValue={() => data.skills.mental.politics.value}
+                saveValue={(value) =>
+                  item.setSkill("mental", "politics", value)
+                }
+              />
+              <Dottable
+                title="science"
+                getValue={() => data.skills.mental.science.value}
+                saveValue={(value) => item.setSkill("mental", "science", value)}
+              />
+              <Dottable
+                title="technology"
+                getValue={() => data.skills.mental.technology.value}
+                saveValue={(value) =>
+                  item.setSkill("mental", "technology", value)
+                }
+              />
+            </div>
+          </div>
+          <Separator text="RENOWN" />
         </SheetContainer>
       </main>
     </div>

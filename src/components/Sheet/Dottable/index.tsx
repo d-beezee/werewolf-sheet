@@ -17,7 +17,6 @@ const DottableComponent = ({
     setValue(getValue());
   }, []);
   useEffect(() => {
-    if (value === 0) return;
     saveValue(value);
   }, [value]);
 
@@ -26,7 +25,12 @@ const DottableComponent = ({
       <div className="title">{title}</div>
       <div className="buttons">
         {[...Array(value)].map((_, i) => (
-          <button className="filled" onClick={() => setValue(i + 1)}></button>
+          <button
+            className="filled"
+            onClick={() =>
+              i === 0 && value === 1 ? setValue(0) : setValue(i + 1)
+            }
+          ></button>
         ))}
         {[...Array(5 - value)].map((_, i) => (
           <button

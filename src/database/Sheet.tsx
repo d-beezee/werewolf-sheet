@@ -4,7 +4,7 @@ export class SheetAlreadyExistsError extends Error {}
 
 type Attribute = number;
 
-type Skill = number;
+type Skill = { value: number; specialty?: string };
 
 type AdvantageFlaw = {
   value: number;
@@ -137,6 +137,46 @@ class Sheet {
           ...this.data?.attributes?.social,
         },
       },
+      skills: {
+        physical: {
+          athletics: { value: 0 },
+          brawl: { value: 0 },
+          craft: { value: 0 },
+          drive: { value: 0 },
+          firearms: { value: 0 },
+          larceny: { value: 0 },
+          melee: { value: 0 },
+          stealth: { value: 0 },
+          survival: { value: 0 },
+
+          ...this.data?.skills?.physical,
+        },
+        social: {
+          animalKen: { value: 0 },
+          etiquette: { value: 0 },
+          insight: { value: 0 },
+          intimidation: { value: 0 },
+          leadership: { value: 0 },
+          performance: { value: 0 },
+          persuasion: { value: 0 },
+          streetwise: { value: 0 },
+          subterfuge: { value: 0 },
+          ...this.data?.skills?.physical,
+        },
+        mental: {
+          academics: { value: 0 },
+          awareness: { value: 0 },
+          finance: { value: 0 },
+          investigation: { value: 0 },
+          medicine: { value: 0 },
+          occult: { value: 0 },
+          politics: { value: 0 },
+          science: { value: 0 },
+          technology: { value: 0 },
+
+          ...this.data?.skills?.physical,
+        },
+      },
       health: this.data?.health || { aggravated: 0, superficial: 0 },
       crinos: this.data?.crinos || { aggravated: 0, superficial: 0 },
       willpower: this.data?.willpower || { aggravated: 0, superficial: 0 },
@@ -264,6 +304,25 @@ class Sheet {
     this.data.attributes = {
       ...this.data.attributes,
       [type]: { ...current, [value]: newValue },
+    };
+    this.save();
+  }
+
+  public setSkill<T extends keyof SheetData["skills"]>(
+    type: T,
+    value: keyof SheetData["skills"][T],
+    newValue: number
+  ) {
+    if (this.data === null) throw new Error("Sheet does not exists");
+    const skill = this.get().skills[type][value] as Skill;
+    if (skill.value === newValue) return;
+    const current =
+      this.data.skills && type in this.data.skills
+        ? this.data.skills[type]
+        : {};
+    this.data.skills = {
+      ...this.data.skills,
+      [type]: { ...current, [value]: { value: newValue } },
     };
     this.save();
   }
