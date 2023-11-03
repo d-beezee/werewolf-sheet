@@ -9,8 +9,7 @@
     "vercel": "vercel"
   },
   "dependencies": {
-    "@vercel/kv": "^0.2.4",
-    "level": "^8.0.0",
+    "mongodb": "^6.2.0",
     "next": "^13.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

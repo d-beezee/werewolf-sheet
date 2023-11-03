@@ -17,7 +17,7 @@ export const get = async (key: string) => {
     const response = await fetch(`/api/get?key=${key}`);
     if (response.status !== 200) return null;
     const result = await response.json();
-    return JSON.parse(result.message);
+    return JSON.parse(result.message).data;
   } catch (error) {
     return null;
   }

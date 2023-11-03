@@ -18,8 +18,8 @@ type SheetData = {
   auspice: string;
   patron: string;
   tribe: string;
-  health: number;
-  willpower: number;
+  health: { aggravated: number; superficial: number };
+  willpower: { aggravated: number; superficial: number };
   attributes: {
     physical: {
       strength: Attribute;
@@ -99,7 +99,7 @@ type SheetData = {
 
 class Sheet {
   private data: SheetData | null = null;
-  private ready: boolean = false;
+  public ready: boolean = false;
   private name: string;
 
   constructor(name: string) {
@@ -114,10 +114,46 @@ class Sheet {
   }
 
   public get() {
-    return this.data;
+    return {
+      ...this.data,
+      attributes: {
+        physical: {
+          strength: 1,
+          dexterity: 1,
+          stamina: 1,
+          ...this.data?.attributes?.physical,
+        },
+        mental: {
+          resolve: 1,
+          intelligence: 1,
+          wits: 1,
+          ...this.data?.attributes?.mental,
+        },
+        social: {
+          charisma: 1,
+          manipulation: 1,
+          appearance: 1,
+          ...this.data?.attributes?.social,
+        },
+      },
+      health: this.data?.health || { aggravated: 0, superficial: 0 },
+      willpower: this.data?.willpower || { aggravated: 0, superficial: 0 },
+    };
   }
+
+  get maxHealth() {
+    return 3 + (this.data?.attributes?.physical?.stamina || 1);
+  }
+
+  get maxWillpower() {
+    return (
+      (this.data?.attributes?.mental?.wits || 1) +
+      (this.data?.attributes?.mental?.resolve || 1)
+    );
+  }
+
   public exists() {
-    return this.get() !== null;
+    return this.data !== null;
   }
 
   public async create() {
@@ -176,6 +212,46 @@ class Sheet {
   public setTribe(value: string) {
     if (this.data === null) throw new Error("Sheet does not exists");
     this.data.tribe = value;
+    this.save();
+  }
+
+  public setHealth(value: { aggravated: number; superficial: number }) {
+    if (this.data === null) throw new Error("Sheet does not exists");
+    if (
+      this.get().health.aggravated === value.aggravated &&
+      this.get().health.superficial === value.superficial
+    )
+      return;
+    this.data.health = value;
+    this.save();
+  }
+
+  public setWillpower(value: { aggravated: number; superficial: number }) {
+    if (this.data === null) throw new Error("Sheet does not exists");
+    if (
+      this.get().health.aggravated === value.aggravated &&
+      this.get().health.superficial === value.superficial
+    )
+      return;
+    this.data.willpower = value;
+    this.save();
+  }
+
+  public setAttributes<T extends keyof SheetData["attributes"]>(
+    type: T,
+    value: keyof SheetData["attributes"][T],
+    newValue: number
+  ) {
+    if (this.data === null) throw new Error("Sheet does not exists");
+    if (this.get().attributes[type][value] === newValue) return;
+    const current =
+      this.data.attributes && type in this.data.attributes
+        ? this.data.attributes[type]
+        : {};
+    this.data.attributes = {
+      ...this.data.attributes,
+      [type]: { ...current, [value]: newValue },
+    };
     this.save();
   }
 
