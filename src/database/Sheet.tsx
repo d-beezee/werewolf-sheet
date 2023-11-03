@@ -19,6 +19,7 @@ type SheetData = {
   patron: string;
   tribe: string;
   health: { aggravated: number; superficial: number };
+  crinos: { aggravated: number; superficial: number };
   willpower: { aggravated: number; superficial: number };
   attributes: {
     physical: {
@@ -137,6 +138,7 @@ class Sheet {
         },
       },
       health: this.data?.health || { aggravated: 0, superficial: 0 },
+      crinos: this.data?.crinos || { aggravated: 0, superficial: 0 },
       willpower: this.data?.willpower || { aggravated: 0, superficial: 0 },
     };
   }
@@ -223,6 +225,17 @@ class Sheet {
     )
       return;
     this.data.health = value;
+    this.save();
+  }
+
+  public setCrinos(value: { aggravated: number; superficial: number }) {
+    if (this.data === null) throw new Error("Sheet does not exists");
+    if (
+      this.get().crinos.aggravated === value.aggravated &&
+      this.get().crinos.superficial === value.superficial
+    )
+      return;
+    this.data.crinos = value;
     this.save();
   }
 

@@ -42,11 +42,13 @@ const DamageableComponent = ({
   getDamageable,
   saveDamageable,
   max,
+  total = 10,
   title,
   className,
 }: {
   className?: string;
   title: string;
+  total?: number;
   getDamageable: () => { aggravated: number; superficial: number };
   saveDamageable: (params: { aggravated: number; superficial: number }) => void;
   max: number;
@@ -69,7 +71,7 @@ const DamageableComponent = ({
   };
   const undamaged = max - damageable.aggravated - damageable.superficial;
   const unusable =
-    10 - damageable.aggravated - damageable.superficial - undamaged;
+    total - damageable.aggravated - damageable.superficial - undamaged;
   return (
     <div className={className}>
       <div className="title">{title}</div>
@@ -109,7 +111,7 @@ const DamageableComponent = ({
             }
             status="none"
           />
-        ))}{" "}
+        ))}
         {[...Array(unusable)].map(() => (
           <div className="unusable" />
         ))}
@@ -136,7 +138,7 @@ const Damageable = styled(DamageableComponent)`
       height: 20px;
       padding: 0;
       margin: 0 1px;
-      border: 1px solid black;
+      border: 3px solid black;
       background-color: transparent;
       &.aggravated {
         &:after {
@@ -145,7 +147,7 @@ const Damageable = styled(DamageableComponent)`
       }
       &.superficial {
         &:after {
-          content: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3Csvg viewBox='0 0 460.775 460.775' fill='%23000000' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 456.199 401.505 C 456.199 401.505 52.384 0.015 48.257 0.015 C 44.131 0.015 40.177 1.654 37.265 4.565 L 4.558 37.284 C -1.519 43.359 -1.519 53.193 4.558 59.27 L 401.505 456.21 C 404.418 459.121 408.371 460.76 412.498 460.76 C 416.626 460.76 420.579 459.121 423.49 456.21 L 456.199 423.491 C 462.273 417.416 462.273 407.582 456.199 401.505 Z'/%3E%3C/svg%3E");
+          content: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3Csvg viewBox='0 0 460.775 460.775' fill='%23000000' height='19px' width='19px' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 456.199 401.505 C 456.199 401.505 52.384 0.015 48.257 0.015 C 44.131 0.015 40.177 1.654 37.265 4.565 L 4.558 37.284 C -1.519 43.359 -1.519 53.193 4.558 59.27 L 401.505 456.21 C 404.418 459.121 408.371 460.76 412.498 460.76 C 416.626 460.76 420.579 459.121 423.49 456.21 L 456.199 423.491 C 462.273 417.416 462.273 407.582 456.199 401.505 Z'/%3E%3C/svg%3E");
         }
       }
       &.empty {

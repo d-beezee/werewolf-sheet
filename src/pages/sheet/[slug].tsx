@@ -1,6 +1,7 @@
 import Auspice from "@src/components/Sheet/Auspice";
 import Chronicle from "@src/components/Sheet/Chronicle";
 import Concept from "@src/components/Sheet/Concept";
+import Crinos from "@src/components/Sheet/Crinos";
 import Dottable from "@src/components/Sheet/Dottable";
 import Health from "@src/components/Sheet/Health";
 import Name from "@src/components/Sheet/Name";
@@ -172,6 +173,13 @@ const SheetSinglePage = () => {
             <Health sheet={item} />
 
             <Willpower sheet={item} />
+          </div>
+          <div
+            style={{
+              display: "flex",
+            }}
+          >
+            <Crinos sheet={item} />
           </div>
           <Separator text="SKILLS" />
         </SheetContainer>
