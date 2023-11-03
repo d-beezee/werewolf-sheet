@@ -110,7 +110,7 @@ const DamageableComponent = ({
             status="none"
           />
         ))}{" "}
-        {[...Array(unusable)].map((_, i) => (
+        {[...Array(unusable)].map(() => (
           <div className="unusable" />
         ))}
       </div>
