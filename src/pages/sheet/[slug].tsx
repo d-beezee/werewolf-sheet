@@ -392,7 +392,7 @@ const SheetSinglePage = () => {
             </div>
           </div>
           <Separator text="RENOWN" />
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex", margin: "20px 0 60px 0" }}>
             <Renown
               allowZero
               title="Glory"
@@ -412,6 +412,7 @@ const SheetSinglePage = () => {
               saveValue={(value) => item.setRenown("wisdom", value)}
             />
           </div>
+          <Separator text="GIFT & RITES" />
         </SheetContainer>
       </main>
     </div>
