@@ -35,6 +35,7 @@ const SkillComponent = ({
 const Skill = styled(SkillComponent)`
   display: flex;
   align-items: center;
+  margin-bottom: 10px;
   .title {
     min-width: ${({ title }) => `${title.length}ch`};
     margin-right: 0.5rem;
@@ -43,7 +44,7 @@ const Skill = styled(SkillComponent)`
     width: ${({ title }) => `calc(22ch - ${title.length}ch)`};
     padding: 0;
     input {
-      padding: 0.5rem 0;
+      padding: 0.25rem 0;
       margin-left: 0;
     }
   }

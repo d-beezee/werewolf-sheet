@@ -13,6 +13,9 @@ const SheetContainerComponent = styled.div`
 
     &>div{
         transform: rotate(-0.1deg);
+        input {
+          transform: rotate(0.1deg);
+        }
     }
 }
 `;

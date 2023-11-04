@@ -15,7 +15,7 @@ const InputableComponent = ({
   return (
     <div className={className}>
       {title && <span>{title}</span>}
-      <input defaultValue={value} onChange={onChange} />
+      <input name={className} defaultValue={value} onChange={onChange} />
     </div>
   );
 };

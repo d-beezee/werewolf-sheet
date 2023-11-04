@@ -34,6 +34,7 @@ const DottableComponent = ({
         {[...Array(value)].map((_, i) => (
           <button
             className="filled"
+            key={i}
             onClick={() =>
               i === 0 && value === 1 && allowZero
                 ? setValue(0)
@@ -44,6 +45,7 @@ const DottableComponent = ({
         {[...Array(5 - value)].map((_, i) => (
           <button
             className="empty"
+            key={i}
             onClick={() => setValue(i + 1 + value)}
           ></button>
         ))}

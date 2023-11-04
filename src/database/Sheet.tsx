@@ -79,6 +79,7 @@ type SheetData = {
     wisdom: number;
   };
   gifts: {
+    _id: string;
     name: string;
     pool: string;
     cost: string;
@@ -181,6 +182,7 @@ class Sheet {
       crinos: this.data?.crinos || { aggravated: 0, superficial: 0 },
       willpower: this.data?.willpower || { aggravated: 0, superficial: 0 },
       renown: { glory: 0, honor: 0, wisdom: 0, ...this.data?.renown },
+      rage: this.data?.rage || 0,
     };
   }
 
@@ -305,7 +307,6 @@ class Sheet {
       ...this.data.attributes,
       [type]: { ...current, [value]: newValue },
     };
-    console.log(this.data.attributes);
     this.save();
   }
 
@@ -318,9 +319,11 @@ class Sheet {
     const skill = this.get().skills[type][value] as tSkill;
     if (
       skill.value === newValue.value &&
-      skill.specialty === newValue.specialty
+      (typeof newValue.specialty === "undefined" ||
+        skill.specialty === newValue.specialty)
     )
       return;
+
     const current =
       this.data.skills && type in this.data.skills
         ? this.data.skills[type]
@@ -349,6 +352,24 @@ class Sheet {
       ...this.data.renown,
       [type]: newValue,
     };
+    this.save();
+  }
+
+  public setGifts(newValue: SheetData["gifts"]) {
+    if (this.data === null) throw new Error("Sheet does not exists");
+    if (JSON.stringify(this.get().gifts) === JSON.stringify(newValue)) return;
+    this.data.gifts = newValue;
+    this.data.gifts = this.data.gifts.map((gift, i) => ({
+      ...gift,
+      _id: i.toString(),
+    }));
+    this.save();
+  }
+
+  public setRage(newValue: number) {
+    if (this.data === null) throw new Error("Sheet does not exists");
+    if (this.get().rage === newValue) return;
+    this.data.rage = newValue;
     this.save();
   }
 

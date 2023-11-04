@@ -3,9 +3,11 @@ import Chronicle from "@src/components/Sheet/Chronicle";
 import Concept from "@src/components/Sheet/Concept";
 import Crinos from "@src/components/Sheet/Crinos";
 import Dottable from "@src/components/Sheet/Dottable";
+import GiftList from "@src/components/Sheet/GiftList";
 import Health from "@src/components/Sheet/Health";
 import Name from "@src/components/Sheet/Name";
 import Patron from "@src/components/Sheet/Patron";
+import Rage from "@src/components/Sheet/Rage";
 import { Renown } from "@src/components/Sheet/Renown";
 import Separator from "@src/components/Sheet/Separator";
 import SheetContainer from "@src/components/Sheet/SheetContainer";
@@ -387,6 +389,25 @@ const SheetSinglePage = () => {
             />
           </div>
           <Separator text="GIFT & RITES" />
+          <GiftList sheet={item} />
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              position: "absolute",
+              bottom: "-120mm",
+              left: 0,
+              right: 0,
+            }}
+          >
+            <div style={{ flexBasis: "18%" }}>
+              <Rage
+                getValue={() => data.rage}
+                saveValue={(value) => item.setRage(value)}
+              />
+            </div>
+          </div>
         </SheetContainer>
       </main>
     </div>
