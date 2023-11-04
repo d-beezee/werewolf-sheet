@@ -22,3 +22,14 @@ export const get = async (key: string) => {
     return null;
   }
 };
+
+export const getAll = async () => {
+  try {
+    const response = await fetch(`/api/getAll`);
+    if (response.status !== 200) return null;
+    const result = await response.json();
+    return JSON.parse(result.message);
+  } catch (error) {
+    return null;
+  }
+};

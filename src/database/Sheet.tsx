@@ -1,4 +1,4 @@
-import { del, get, put } from "@src/database";
+import { del, get, getAll, put } from "@src/database";
 
 export class SheetAlreadyExistsError extends Error {}
 
@@ -204,22 +204,12 @@ class Sheet {
     if (!this.ready) await this.init();
     if (this.exists())
       throw new SheetAlreadyExistsError("Sheet already exists");
-    const sheets = await get("sheets:list");
-    const list: string[] = [...(sheets || []), this.name];
-    await put(`sheets:list`, list);
     return await put(`sheet-${this.name}`, {});
   }
 
   public async delete() {
     if (!this.ready) await this.init();
     if (!this.exists()) return;
-    const sheets = await get("sheets:list");
-    const list: string[] = [...(sheets || [])];
-    const index = list.indexOf(this.name);
-    if (index > -1) {
-      list.splice(index, 1);
-    }
-    await put(`sheets:list`, list);
     await del(`sheet-${this.name}`);
   }
 
@@ -378,7 +368,7 @@ class Sheet {
   }
 
   public static async list() {
-    const sheets = await get("sheets:list");
+    const sheets = await getAll();
     if (sheets === null) return [];
     return sheets as string[];
   }
