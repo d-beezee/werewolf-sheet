@@ -1,5 +1,5 @@
 import Button from "@src/components/Styles/Button";
-import DeleteIcon from "@src/components/Styles/DeleteIcon";
+import DeleteButton from "@src/components/Styles/DeleteButton";
 import Sheet from "@src/database/Sheet";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -82,15 +82,15 @@ const GiftListComponent = ({
                 />
               </td>
               <td className="delete">
-                <button
+                <DeleteButton
+                  width={22}
+                  height={22}
                   onClick={() => {
                     const newGifts = [...gifts];
                     newGifts.splice(i, 1);
                     setGifts(newGifts);
                   }}
-                >
-                  <DeleteIcon width={22} height={22} />
-                </button>
+                />
               </td>
             </tr>
           ))}
@@ -146,14 +146,6 @@ const GiftList = styled(GiftListComponent)`
     }
     .notes {
       width: 50%;
-    }
-    .delete button {
-      border: none;
-      background: none;
-      cursor: pointer;
-      &:hover svg {
-        fill: red;
-      }
     }
     td ${Inputable} {
       margin: 0;

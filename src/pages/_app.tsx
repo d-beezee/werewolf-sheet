@@ -23,6 +23,9 @@ function MyApp({ Component, pageProps }: AppProps<{}>) {
           --bebas-neue: ${bebanue.style.fontFamily};
           --hermes: ${hermes.style.fontFamily};
         }
+        body {
+          background-color: #0f0f0f;
+        }
         * {
           font-family: var(--hermes);
           font-size: 1.1rem;

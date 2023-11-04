@@ -14,6 +14,8 @@ import SheetContainer from "@src/components/Sheet/SheetContainer";
 import Skill from "@src/components/Sheet/Skill";
 import Tribe from "@src/components/Sheet/Tribe";
 import Willpower from "@src/components/Sheet/Willpower";
+import BackButton from "@src/components/Styles/BackButton";
+import DeleteButton from "@src/components/Styles/DeleteButton";
 import Sheet from "@src/database/Sheet";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -44,14 +46,38 @@ const SheetSinglePage = () => {
       </Head>
 
       <main>
-        <div>
-          <button
-            onClick={() =>
-              item.delete().then(() => (window.location.href = "/sheet"))
-            }
-          >
-            delete
-          </button>
+        <div
+          style={{
+            position: "absolute",
+
+            right: "10%",
+            top: "20px",
+          }}
+        >
+          <DeleteButton
+            width={40}
+            height={40}
+            onClick={() => {
+              if (confirm("Are you sure you want to delete this sheet?"))
+                item.delete().then(() => (window.location.href = "/sheet"));
+            }}
+          />
+        </div>
+        <div
+          style={{
+            position: "absolute",
+
+            left: "10%",
+            top: "20px",
+          }}
+        >
+          <BackButton
+            width={40}
+            height={40}
+            onClick={() => {
+              window.location.href = "/sheet";
+            }}
+          />
         </div>
         <SheetContainer>
           <div style={{ display: "flex" }}>

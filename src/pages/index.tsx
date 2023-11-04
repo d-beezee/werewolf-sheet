@@ -1,5 +1,5 @@
+import Button from "@src/components/Styles/Button";
 import Head from "next/head";
-import React from "react";
 
 export default function Home() {
   return (
@@ -8,7 +8,15 @@ export default function Home() {
         <title>Werewolf sheet</title>
       </Head>
 
-      <main></main>
+      <main style={{ paddingTop: "20px" }}>
+        <Button
+          onClick={() => {
+            window.location.href = "/sheet";
+          }}
+        >
+          Go to sheets
+        </Button>
+      </main>
     </div>
   );
 }
