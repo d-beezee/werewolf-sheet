@@ -4,7 +4,7 @@ export class SheetAlreadyExistsError extends Error {}
 
 type Attribute = number;
 
-type Skill = { value: number; specialty?: string };
+export type tSkill = { value: number; specialty?: string };
 
 type AdvantageFlaw = {
   value: number;
@@ -40,37 +40,37 @@ type SheetData = {
   };
   skills: {
     physical: {
-      athletics: Skill;
-      brawl: Skill;
-      craft: Skill;
-      drive: Skill;
-      firearms: Skill;
-      larceny: Skill;
-      melee: Skill;
-      stealth: Skill;
-      survival: Skill;
+      athletics: tSkill;
+      brawl: tSkill;
+      craft: tSkill;
+      drive: tSkill;
+      firearms: tSkill;
+      larceny: tSkill;
+      melee: tSkill;
+      stealth: tSkill;
+      survival: tSkill;
     };
     social: {
-      animalKen: Skill;
-      etiquette: Skill;
-      insight: Skill;
-      intimidation: Skill;
-      leadership: Skill;
-      performance: Skill;
-      persuasion: Skill;
-      streetwise: Skill;
-      subterfuge: Skill;
+      animalKen: tSkill;
+      etiquette: tSkill;
+      insight: tSkill;
+      intimidation: tSkill;
+      leadership: tSkill;
+      performance: tSkill;
+      persuasion: tSkill;
+      streetwise: tSkill;
+      subterfuge: tSkill;
     };
     mental: {
-      academics: Skill;
-      awareness: Skill;
-      finance: Skill;
-      investigation: Skill;
-      medicine: Skill;
-      occult: Skill;
-      politics: Skill;
-      science: Skill;
-      technology: Skill;
+      academics: tSkill;
+      awareness: tSkill;
+      finance: tSkill;
+      investigation: tSkill;
+      medicine: tSkill;
+      occult: tSkill;
+      politics: tSkill;
+      science: tSkill;
+      technology: tSkill;
     };
   };
   renown: {
@@ -312,18 +312,28 @@ class Sheet {
   public setSkill<T extends keyof SheetData["skills"]>(
     type: T,
     value: keyof SheetData["skills"][T],
-    newValue: number
+    newValue: tSkill
   ) {
     if (this.data === null) throw new Error("Sheet does not exists");
-    const skill = this.get().skills[type][value] as Skill;
-    if (skill.value === newValue) return;
+    const skill = this.get().skills[type][value] as tSkill;
+    if (
+      skill.value === newValue.value &&
+      skill.specialty === newValue.specialty
+    )
+      return;
     const current =
       this.data.skills && type in this.data.skills
         ? this.data.skills[type]
         : {};
+    const currentValue =
+      this.data.skills &&
+      type in this.data.skills &&
+      value in this.data.skills[type]
+        ? this.data.skills[type][value]
+        : {};
     this.data.skills = {
       ...this.data.skills,
-      [type]: { ...current, [value]: { value: newValue } },
+      [type]: { ...current, [value]: { ...currentValue, ...newValue } },
     };
     this.save();
   }

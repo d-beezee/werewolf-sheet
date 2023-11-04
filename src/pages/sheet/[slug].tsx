@@ -9,6 +9,7 @@ import Patron from "@src/components/Sheet/Patron";
 import { Renown } from "@src/components/Sheet/Renown";
 import Separator from "@src/components/Sheet/Separator";
 import SheetContainer from "@src/components/Sheet/SheetContainer";
+import Skill from "@src/components/Sheet/Skill";
 import Tribe from "@src/components/Sheet/Tribe";
 import Willpower from "@src/components/Sheet/Willpower";
 import Sheet from "@src/database/Sheet";
@@ -185,206 +186,179 @@ const SheetSinglePage = () => {
           <Separator text="SKILLS" />
           <div style={{ display: "flex" }}>
             <div style={{ width: "100%" }}>
-              <Dottable
-                allowZero
+              <Skill
                 title="athletics"
-                getValue={() => data.skills.physical.athletics.value}
+                getValue={() => data.skills.physical.athletics}
                 saveValue={(value) =>
                   item.setSkill("physical", "athletics", value)
                 }
               />
-              <Dottable
-                allowZero
+              <Skill
                 title="brawl"
-                getValue={() => data.skills.physical.brawl.value}
+                getValue={() => data.skills.physical.brawl}
                 saveValue={(value) => item.setSkill("physical", "brawl", value)}
               />
-              <Dottable
-                allowZero
+              <Skill
                 title="craft"
-                getValue={() => data.skills.physical.craft.value}
+                getValue={() => data.skills.physical.craft}
                 saveValue={(value) => item.setSkill("physical", "craft", value)}
               />
-              <Dottable
-                allowZero
+              <Skill
                 title="driving"
-                getValue={() => data.skills.physical.drive.value}
+                getValue={() => data.skills.physical.drive}
                 saveValue={(value) => item.setSkill("physical", "drive", value)}
               />
-              <Dottable
-                allowZero
+              <Skill
                 title="firearms"
-                getValue={() => data.skills.physical.firearms.value}
+                getValue={() => data.skills.physical.firearms}
                 saveValue={(value) =>
                   item.setSkill("physical", "firearms", value)
                 }
               />
-              <Dottable
-                allowZero
+              <Skill
                 title="larceny"
-                getValue={() => data.skills.physical.larceny.value}
+                getValue={() => data.skills.physical.larceny}
                 saveValue={(value) =>
                   item.setSkill("physical", "larceny", value)
                 }
               />
-              <Dottable
-                allowZero
+              <Skill
                 title="melee"
-                getValue={() => data.skills.physical.melee.value}
+                getValue={() => data.skills.physical.melee}
                 saveValue={(value) => item.setSkill("physical", "melee", value)}
               />
-              <Dottable
-                allowZero
+              <Skill
                 title="stealth"
-                getValue={() => data.skills.physical.stealth.value}
+                getValue={() => data.skills.physical.stealth}
                 saveValue={(value) =>
                   item.setSkill("physical", "stealth", value)
                 }
               />
-              <Dottable
-                allowZero
+              <Skill
                 title="survival"
-                getValue={() => data.skills.physical.survival.value}
+                getValue={() => data.skills.physical.survival}
                 saveValue={(value) =>
                   item.setSkill("physical", "survival", value)
                 }
               />
             </div>
             <div style={{ width: "100%" }}>
-              <Dottable
-                allowZero
+              <Skill
                 title="animalKen"
-                getValue={() => data.skills.social.animalKen.value}
+                getValue={() => data.skills.social.animalKen}
                 saveValue={(value) =>
                   item.setSkill("social", "animalKen", value)
                 }
               />
-              <Dottable
-                allowZero
+              <Skill
                 title="etiquette"
-                getValue={() => data.skills.social.etiquette.value}
+                getValue={() => data.skills.social.etiquette}
                 saveValue={(value) =>
                   item.setSkill("social", "etiquette", value)
                 }
               />
-              <Dottable
-                allowZero
+              <Skill
                 title="insight"
-                getValue={() => data.skills.social.insight.value}
+                getValue={() => data.skills.social.insight}
                 saveValue={(value) => item.setSkill("social", "insight", value)}
               />
-              <Dottable
-                allowZero
+              <Skill
                 title="intimidation"
-                getValue={() => data.skills.social.intimidation.value}
+                getValue={() => data.skills.social.intimidation}
                 saveValue={(value) =>
                   item.setSkill("social", "intimidation", value)
                 }
               />
-              <Dottable
-                allowZero
+              <Skill
                 title="leadership"
-                getValue={() => data.skills.social.leadership.value}
+                getValue={() => data.skills.social.leadership}
                 saveValue={(value) =>
                   item.setSkill("social", "leadership", value)
                 }
               />
-              <Dottable
-                allowZero
+              <Skill
                 title="performance"
-                getValue={() => data.skills.social.performance.value}
+                getValue={() => data.skills.social.performance}
                 saveValue={(value) =>
                   item.setSkill("social", "performance", value)
                 }
               />
-              <Dottable
-                allowZero
+              <Skill
                 title="persuasion"
-                getValue={() => data.skills.social.persuasion.value}
+                getValue={() => data.skills.social.persuasion}
                 saveValue={(value) =>
                   item.setSkill("social", "persuasion", value)
                 }
               />
-              <Dottable
-                allowZero
+              <Skill
                 title="streetwise"
-                getValue={() => data.skills.social.streetwise.value}
+                getValue={() => data.skills.social.streetwise}
                 saveValue={(value) =>
                   item.setSkill("social", "streetwise", value)
                 }
               />
-              <Dottable
-                allowZero
+              <Skill
                 title="subterfuge"
-                getValue={() => data.skills.social.subterfuge.value}
+                getValue={() => data.skills.social.subterfuge}
                 saveValue={(value) =>
                   item.setSkill("social", "subterfuge", value)
                 }
               />
             </div>
             <div style={{ width: "100%" }}>
-              <Dottable
-                allowZero
+              <Skill
                 title="academics"
-                getValue={() => data.skills.mental.academics.value}
+                getValue={() => data.skills.mental.academics}
                 saveValue={(value) =>
                   item.setSkill("mental", "academics", value)
                 }
               />
-              <Dottable
-                allowZero
+              <Skill
                 title="awareness"
-                getValue={() => data.skills.mental.awareness.value}
+                getValue={() => data.skills.mental.awareness}
                 saveValue={(value) =>
                   item.setSkill("mental", "awareness", value)
                 }
               />
-              <Dottable
-                allowZero
+              <Skill
                 title="finance"
-                getValue={() => data.skills.mental.finance.value}
+                getValue={() => data.skills.mental.finance}
                 saveValue={(value) => item.setSkill("mental", "finance", value)}
               />
-              <Dottable
-                allowZero
+              <Skill
                 title="investigation"
-                getValue={() => data.skills.mental.investigation.value}
+                getValue={() => data.skills.mental.investigation}
                 saveValue={(value) =>
                   item.setSkill("mental", "investigation", value)
                 }
               />
-              <Dottable
-                allowZero
+              <Skill
                 title="medicine"
-                getValue={() => data.skills.mental.medicine.value}
+                getValue={() => data.skills.mental.medicine}
                 saveValue={(value) =>
                   item.setSkill("mental", "medicine", value)
                 }
               />
-              <Dottable
-                allowZero
+              <Skill
                 title="occult"
-                getValue={() => data.skills.mental.occult.value}
+                getValue={() => data.skills.mental.occult}
                 saveValue={(value) => item.setSkill("mental", "occult", value)}
               />
-              <Dottable
-                allowZero
+              <Skill
                 title="politics"
-                getValue={() => data.skills.mental.politics.value}
+                getValue={() => data.skills.mental.politics}
                 saveValue={(value) =>
                   item.setSkill("mental", "politics", value)
                 }
               />
-              <Dottable
-                allowZero
+              <Skill
                 title="science"
-                getValue={() => data.skills.mental.science.value}
+                getValue={() => data.skills.mental.science}
                 saveValue={(value) => item.setSkill("mental", "science", value)}
               />
-              <Dottable
-                allowZero
+              <Skill
                 title="technology"
-                getValue={() => data.skills.mental.technology.value}
+                getValue={() => data.skills.mental.technology}
                 saveValue={(value) =>
                   item.setSkill("mental", "technology", value)
                 }

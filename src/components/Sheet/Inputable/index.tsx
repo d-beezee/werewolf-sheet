@@ -9,12 +9,12 @@ const InputableComponent = ({
 }: {
   value: string;
   onChange: InputHTMLAttributes<HTMLInputElement>["onChange"];
-  title: string;
+  title?: string;
   className?: string;
 }) => {
   return (
     <div className={className}>
-      <span>{title}</span>
+      {title && <span>{title}</span>}
       <input defaultValue={value} onChange={onChange} />
     </div>
   );
@@ -26,14 +26,14 @@ const Inputable = styled(InputableComponent)`
   padding: 0.5rem;
   width: 100%;
   span {
-    min-width: 10%;
+    ${({ title }) => (title ? `min-width: 10%;` : ``)}
   }
   input {
     background: none;
     padding: 0.5rem;
     margin-left: 0.5rem;
     border: none;
-    width: 90%;
+    ${({ title }) => (title ? `width: 90%;` : `max-width: 100%;`)}
   }
 `;
 

@@ -7,12 +7,14 @@ const DottableComponent = ({
   getValue,
   allowZero = false,
   className,
+  children,
 }: {
   className?: string;
   title: string;
   allowZero?: boolean;
   getValue: () => number;
   saveValue: (value: number) => void;
+  children?: React.ReactNode;
 }) => {
   const [value, setValue] = useState(-1);
   useEffect(() => {
@@ -27,6 +29,7 @@ const DottableComponent = ({
   return (
     <div className={className}>
       <div className="title">{title}</div>
+      {children}
       <div className="buttons">
         {[...Array(value)].map((_, i) => (
           <button
