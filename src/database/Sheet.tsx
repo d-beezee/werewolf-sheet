@@ -109,7 +109,7 @@ class Sheet {
   }
 
   public async init() {
-    const data = await get(`sheet-${this.name}`);
+    const data = await get(this.name);
     if (data) this.data = data as unknown as SheetData;
     this.ready = true;
     return data;
@@ -204,13 +204,13 @@ class Sheet {
     if (!this.ready) await this.init();
     if (this.exists())
       throw new SheetAlreadyExistsError("Sheet already exists");
-    return await put(`sheet-${this.name}`, {});
+    return await put(this.name, {});
   }
 
   public async delete() {
     if (!this.ready) await this.init();
     if (!this.exists()) return;
-    await del(`sheet-${this.name}`);
+    await del(this.name);
   }
 
   public setName(name: string) {
@@ -364,7 +364,7 @@ class Sheet {
   }
 
   private save() {
-    return put(`sheet-${this.name}`, this.data);
+    return put(this.name, this.data);
   }
 
   public static async list() {

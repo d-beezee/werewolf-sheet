@@ -1,20 +1,23 @@
 export const put = async (key: string, value: any) => {
   const result = await fetch(
-    `/api/set?key=${key}&value=${JSON.stringify(value)}`
+    `/api/sheets/${key}?value=${JSON.stringify(value)}`,
+    {
+      method: "PUT",
+    }
   ).then((res) => res.json());
   return result.message;
 };
 
 export const del = async (key: string) => {
-  const result = await fetch(`/api/delete?key=${key}`).then((res) =>
-    res.json()
-  );
+  const result = await fetch(`/api/sheets/${key}`, {
+    method: "DELETE",
+  }).then((res) => res.json());
   return result.message;
 };
 
 export const get = async (key: string) => {
   try {
-    const response = await fetch(`/api/get?key=${key}`);
+    const response = await fetch(`/api/sheets/${key}`);
     if (response.status !== 200) return null;
     const result = await response.json();
     return JSON.parse(result.message).data;
@@ -25,7 +28,7 @@ export const get = async (key: string) => {
 
 export const getAll = async () => {
   try {
-    const response = await fetch(`/api/getAll`);
+    const response = await fetch(`/api/sheets`);
     if (response.status !== 200) return null;
     const result = await response.json();
     return JSON.parse(result.message);
