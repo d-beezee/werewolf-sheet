@@ -26,6 +26,7 @@ const LoginBox = styled(LoginBoxComponent)`
   position: absolute;
   right: 0;
   top: 3rem;
+  z-index: 100;
   button {
     border: none;
     background: none;
