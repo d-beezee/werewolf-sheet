@@ -71,7 +71,7 @@ const put = async (req: NextApiRequest, res: NextApiResponse<ResponseData>) => {
       $set: {
         id: `sheet-${id}`,
         data: JSON.parse(value),
-        user: session?.user?.email || "anyone",
+        user: [session?.user?.email || "anyone"],
       },
     },
     {
