@@ -46,6 +46,7 @@ const NavHeaderComponent = ({ className }: { className?: string }) => {
         <div className="log-button">
           {user ? (
             <img
+              style={{ maxWidth: "100%" }}
               onClick={() => setHovering(!hovering)}
               src={user.image || ""}
             />
