@@ -1,3 +1,5 @@
+import { Session } from "next-auth";
+import { SessionProvider } from "next-auth/react";
 import { AppProps } from "next/app";
 import { Bebas_Neue } from "next/font/google";
 
@@ -15,9 +17,12 @@ const bebanue = Bebas_Neue({
   subsets: ["latin-ext"],
 });
 
-function MyApp({ Component, pageProps }: AppProps<{}>) {
+function MyApp({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps<{ session: Session }>) {
   return (
-    <>
+    <SessionProvider session={session}>
       <style jsx global>{`
         :root {
           --bebas-neue: ${bebanue.style.fontFamily};
@@ -38,7 +43,7 @@ function MyApp({ Component, pageProps }: AppProps<{}>) {
         }
       `}</style>
       <Component {...pageProps} />
-    </>
+    </SessionProvider>
   );
 }
 
