@@ -5,13 +5,12 @@ import Button from "../Styles/Button";
 
 const LoginBoxComponent = ({
   className,
-  children,
   open,
 }: {
   className?: string;
   open: boolean;
-  children: React.ReactNode;
 }) => {
+  open;
   return (
     <div className={className}>
       <button onClick={() => signOut()}>Sign Out</button>
@@ -57,7 +56,7 @@ const NavHeaderComponent = ({ className }: { className?: string }) => {
           )}
         </div>
       </div>
-      <LoginBox open={hovering}>{JSON.stringify(hovering)}</LoginBox>
+      <LoginBox open={hovering} />
     </>
   );
 };
