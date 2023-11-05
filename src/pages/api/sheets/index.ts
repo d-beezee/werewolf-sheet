@@ -1,5 +1,6 @@
 import { MongoClient } from "mongodb";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { getSession } from "next-auth/react";
 
 type ResponseData = {
   message: string;
@@ -9,6 +10,12 @@ const get = async (
   _req: NextApiRequest,
   res: NextApiResponse<ResponseData>
 ) => {
+  const session = await getSession({ req: _req });
+  if (!session) {
+    return res.status(401).json({
+      message: "Unauthorized",
+    });
+  }
   const client = new MongoClient(process.env.MONGODB_URI || "");
   const database = client.db(process.env.VERCEL_ENV || "development");
   const sheetsCollection = database.collection("sheets");
@@ -16,6 +23,7 @@ const get = async (
     .find(
       {
         id: /^sheet-/,
+        user: session?.user?.email || "anyone",
       },
       {
         projection: {

@@ -1,5 +1,6 @@
 import { MongoClient } from "mongodb";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { getSession } from "next-auth/react";
 
 type ResponseData = {
   message: string;
@@ -7,12 +8,19 @@ type ResponseData = {
 
 const get = async (req: NextApiRequest, res: NextApiResponse<ResponseData>) => {
   const { id } = req.query;
+  const session = await getSession({ req: req });
+  if (!session) {
+    return res.status(401).json({
+      message: "Unauthorized",
+    });
+  }
 
   const client = new MongoClient(process.env.MONGODB_URI || "");
   const database = client.db(process.env.VERCEL_ENV || "development");
   const sheetsCollection = database.collection("sheets");
   const sheet = await sheetsCollection.findOne({
     id: `sheet-${id}`,
+    user: session?.user?.email || "anyone",
   });
   client.close();
 
@@ -39,6 +47,13 @@ const post = async (
 const put = async (req: NextApiRequest, res: NextApiResponse<ResponseData>) => {
   const { id, value } = req.query;
 
+  const session = await getSession({ req: req });
+  if (!session) {
+    return res.status(401).json({
+      message: "Unauthorized",
+    });
+  }
+
   if (typeof id !== "string" || typeof value !== "string") {
     res.status(400).json({
       message: `Invalid key. ${id} ${value}}`,
@@ -53,7 +68,11 @@ const put = async (req: NextApiRequest, res: NextApiResponse<ResponseData>) => {
   await sheetsCollection.updateOne(
     { id: `sheet-${id}` },
     {
-      $set: { id: `sheet-${id}`, data: JSON.parse(value) },
+      $set: {
+        id: `sheet-${id}`,
+        data: JSON.parse(value),
+        user: session?.user?.email || "anyone",
+      },
     },
     {
       upsert: true,
@@ -67,12 +86,19 @@ const put = async (req: NextApiRequest, res: NextApiResponse<ResponseData>) => {
 
 const del = async (req: NextApiRequest, res: NextApiResponse<ResponseData>) => {
   const { id } = req.query;
+  const session = await getSession({ req: req });
+  if (!session) {
+    return res.status(401).json({
+      message: "Unauthorized",
+    });
+  }
 
   const client = new MongoClient(process.env.MONGODB_URI || "");
   const database = client.db(process.env.VERCEL_ENV || "development");
   const sheetsCollection = database.collection("sheets");
   const data = await sheetsCollection.findOne({
     id: `sheet-${id}`,
+    user: session?.user?.email || "anyone",
   });
   if (data === null) {
     client.close();
@@ -83,6 +109,7 @@ const del = async (req: NextApiRequest, res: NextApiResponse<ResponseData>) => {
   }
   await sheetsCollection.deleteOne({
     id: `sheet-${id}`,
+    user: session?.user?.email || "anyone",
   });
   client.close();
   res.status(200).json({
