@@ -1,3 +1,7 @@
+import BackButton from "@src/components/Styles/BackButton";
+import DeleteButton from "@src/components/Styles/DeleteButton";
+import LeftCaretButton from "@src/components/Styles/LeftCaretButton";
+import RightCaretButton from "@src/components/Styles/RightCaretButton";
 import styled from "styled-components";
 
 const SheetContainerComponent = styled.div`
@@ -20,11 +24,63 @@ const SheetContainerComponent = styled.div`
 }
 `;
 
-const SheetContainer = ({ children }: { children: React.ReactNode }) => {
+const SheetContainer = ({
+  action,
+  children,
+}: {
+  action: {
+    flip: () => void;
+    back: () => void;
+    delete: () => void;
+  };
+  children: React.ReactNode;
+}) => {
   return (
-    <SheetContainerComponent>
-      <div>{children}</div>
-    </SheetContainerComponent>
+    <>
+      <SheetContainerComponent>
+        <div
+          style={{
+            position: "absolute",
+            zIndex: 100,
+            left: "9.5%",
+            top: "35px",
+          }}
+        >
+          <BackButton width={40} height={40} onClick={action.back} />
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            zIndex: 100,
+            right: "10%",
+            top: "35px",
+          }}
+        >
+          <DeleteButton width={40} height={40} onClick={action.delete} />
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            zIndex: 100,
+            right: "10%",
+            top: "50%",
+          }}
+        >
+          <RightCaretButton width={60} height={60} onClick={action.flip} />
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            zIndex: 100,
+            left: "9.5%",
+            top: "50%",
+          }}
+        >
+          <LeftCaretButton width={60} height={60} onClick={action.flip} />
+        </div>
+        <div>{children}</div>
+      </SheetContainerComponent>
+    </>
   );
 };
 
