@@ -3,6 +3,7 @@ import styled from "styled-components";
 const RusticBoxItemComponent = ({
   className,
   title,
+  // @ts-ignore
   titleSize = "small",
   style,
   children,
@@ -14,7 +15,7 @@ const RusticBoxItemComponent = ({
   children?: React.ReactNode;
 }) => {
   return (
-    <div className={className}>
+    <div style={style} className={className}>
       <div className="container">
         <div className="title">
           <span>{title}</span>
