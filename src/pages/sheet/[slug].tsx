@@ -5,6 +5,8 @@ import Concept from "@src/components/Sheet/Concept";
 import Crinos from "@src/components/Sheet/Crinos";
 import Dottable from "@src/components/Sheet/Dottable";
 import GiftList from "@src/components/Sheet/GiftList";
+import Harano from "@src/components/Sheet/Harano";
+import Hauglosk from "@src/components/Sheet/Hauglosk";
 import Health from "@src/components/Sheet/Health";
 import Name from "@src/components/Sheet/Name";
 import Patron from "@src/components/Sheet/Patron";
@@ -15,6 +17,7 @@ import SheetContainer from "@src/components/Sheet/SheetContainer";
 import Skill from "@src/components/Sheet/Skill";
 import Tribe from "@src/components/Sheet/Tribe";
 import Willpower from "@src/components/Sheet/Willpower";
+import RusticBox from "@src/components/Styles/RusticBox";
 import Sheet from "@src/database/Sheet";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -444,7 +447,84 @@ const SheetSinglePage = () => {
                 },
               }}
             >
-              ciao
+              <RusticBox>
+                <RusticBox.Item title="Chronicle Tenets">
+                  <div style={{ height: "200px" }} />
+                </RusticBox.Item>
+                <RusticBox.Item title="Touchstones">
+                  <div style={{ height: "200px" }} />
+                </RusticBox.Item>
+                <RusticBox.Item title="Favors & Banes">
+                  <div style={{ height: "200px" }} />
+                </RusticBox.Item>
+              </RusticBox>
+              <div style={{ display: "flex", gap: "32px" }}>
+                <div style={{ width: "50%", paddingTop: "40px" }}>
+                  <RusticBox>
+                    <RusticBox.Item
+                      titleSize="large"
+                      title="Advantages & Flaws"
+                    >
+                      <div style={{ height: "700px" }} />
+                    </RusticBox.Item>
+                  </RusticBox>
+                  <div style={{ display: "flex", marginTop: "20px" }}>
+                    <Harano getValue={() => data.harano} saveValue={() => {}} />
+                    <Hauglosk
+                      getValue={() => data.hauglosk}
+                      saveValue={() => {}}
+                    />
+                  </div>
+                  <RusticBox
+                    style={{
+                      marginTop: "32px",
+                    }}
+                  >
+                    <RusticBox.Item titleSize="medium" title="Appearance">
+                      <div style={{ height: "200px" }} />
+                    </RusticBox.Item>
+                  </RusticBox>
+                  <RusticBox
+                    style={{
+                      marginTop: "-12px",
+                    }}
+                  >
+                    <RusticBox.Item titleSize="medium" title="History">
+                      <div style={{ height: "300px" }} />
+                    </RusticBox.Item>
+                  </RusticBox>
+                </div>
+                <div style={{ width: "50%", paddingTop: "40px" }}>
+                  <RusticBox>
+                    <RusticBox.Item
+                      titleSize="large"
+                      title="Forms of the Garou"
+                    >
+                      <div style={{ height: "900px" }} />
+                    </RusticBox.Item>
+                  </RusticBox>
+                  <p>* Does not apply to intimidation or non-humans</p>
+                  <p>** Does not apply to stealth test</p>
+
+                  <RusticBox
+                    style={{
+                      marginTop: "32px",
+                    }}
+                  >
+                    <RusticBox.Item titleSize="medium" title="Notes">
+                      <div style={{ height: "200px" }} />
+                    </RusticBox.Item>
+                  </RusticBox>
+                  <p className="ww-tall-title" style={{ marginTop: "20px" }}>
+                    Total Experience:
+                    _______________________________________________
+                  </p>
+                  <p className="ww-tall-title" style={{ marginTop: "20px" }}>
+                    Spent Experience:
+                    _______________________________________________
+                  </p>
+                </div>
+              </div>
             </SheetContainer>
           </ReactCardFlip>
         </main>

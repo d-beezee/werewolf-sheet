@@ -183,6 +183,8 @@ class Sheet {
       willpower: this.data?.willpower || { aggravated: 0, superficial: 0 },
       renown: { glory: 0, honor: 0, wisdom: 0, ...this.data?.renown },
       rage: this.data?.rage || 0,
+      harano: this.data?.harano || 0,
+      hauglosk: this.data?.hauglosk || 0,
     };
   }
 

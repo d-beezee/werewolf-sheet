@@ -31,6 +31,9 @@ function MyApp({
         body {
           background-color: #0f0f0f;
         }
+        p {
+          margin: 0;
+        }
         * {
           font-family: var(--hermes);
           font-size: 1.1rem;
