@@ -26,13 +26,16 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import ReactCardFlip from "react-card-flip";
+import { useSwipeable } from "react-swipeable";
 
 const SheetSinglePage = () => {
   const router = useRouter();
   const { slug } = router.query;
   const [item, setItem] = useState<Sheet>();
   const [isFlipped, setIsFlipped] = useState(true);
-
+  const handlers = useSwipeable({
+    onSwiped: () => setIsFlipped(!isFlipped),
+  });
   useEffect(() => {
     if (slug === undefined) return;
     const sheet = new Sheet(slug as string);
@@ -53,7 +56,7 @@ const SheetSinglePage = () => {
           <title>Werewolf sheet</title>
         </Head>
 
-        <main>
+        <main {...handlers}>
           <ReactCardFlip isFlipped={isFlipped}>
             <SheetContainer
               action={{

@@ -37,6 +37,7 @@ const Item = styled(ItemComponent)`
       flex-grow: 1;
       display: flex;
       justify-content: flex-end;
+      align-items: center;
       img {
         max-width: 100%;
         height: fit-content;
