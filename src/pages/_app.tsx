@@ -28,6 +28,11 @@ function MyApp({
           --bebas-neue: ${bebanue.style.fontFamily};
           --hermes: ${hermes.style.fontFamily};
         }
+        @media (max-width: 600px) {
+          #__next {
+            width: 397%;
+          }
+        }
         body {
           background-color: #0f0f0f;
         }
