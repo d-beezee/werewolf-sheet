@@ -2,6 +2,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { useState } from "react";
 import { styled } from "styled-components";
 import Button from "../Styles/Button";
+import Loader from "./Loader";
 
 const LoginBoxComponent = ({
   className,
@@ -94,7 +95,8 @@ export default function Layout({
   showSignout?: boolean;
   children: React.ReactNode;
 }) {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+  if (status === "loading") return <Loader />;
   return (
     <>
       <NavHeader />
