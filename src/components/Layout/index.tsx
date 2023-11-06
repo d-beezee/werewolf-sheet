@@ -6,14 +6,26 @@ import Loader from "./Loader";
 
 const LoginBoxComponent = ({
   className,
-  open,
 }: {
   className?: string;
   open: boolean;
 }) => {
-  open;
+  const locale =
+    (typeof window !== "undefined" &&
+      window.localStorage.getItem("MY_LANGUAGE")) ||
+    "it";
   return (
     <div className={className}>
+      <button
+        onClick={() => {
+          locale === "it"
+            ? window.localStorage.setItem("MY_LANGUAGE", "en")
+            : window.localStorage.setItem("MY_LANGUAGE", "it");
+          window.location.reload();
+        }}
+      >
+        {locale === "it" ? "Switch to english" : "Switch to italian"}{" "}
+      </button>
       <button onClick={() => signOut()}>Sign Out</button>
     </div>
   );
@@ -23,12 +35,16 @@ const LoginBox = styled(LoginBoxComponent)`
   ${({ open }) => (open ? "" : "display:none;")}
   padding: 20px;
   border-radius: 0 0 0 3px;
-  background: #88807b;
+  background-image: url("/navbg.jpg ");
   position: absolute;
   right: 0;
   top: 3rem;
   z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   button {
+    color: white;
     border: none;
     background: none;
     cursor: pointer;

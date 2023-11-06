@@ -5,6 +5,8 @@ import { Bebas_Neue } from "next/font/google";
 
 import localFont from "next/font/local";
 import { useRouter } from "next/router";
+import { appWithI18Next, useSyncLanguage } from "ni18n";
+import { ni18nConfig } from "../../ni18n.config";
 
 const hermes = localFont({
   src: [
@@ -24,6 +26,10 @@ function MyApp({
 }: AppProps<{ session: Session }>) {
   const router = useRouter();
 
+  const locale =
+    typeof window !== "undefined" && window.localStorage.getItem("MY_LANGUAGE");
+
+  useSyncLanguage(locale || "it");
   return (
     <SessionProvider session={session}>
       <style jsx global>{`
@@ -56,4 +62,4 @@ function MyApp({
   );
 }
 
-export default MyApp;
+export default appWithI18Next(MyApp, ni18nConfig);
