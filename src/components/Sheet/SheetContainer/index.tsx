@@ -46,13 +46,15 @@ const SheetContainerComponent = styled.div`
   }
 
   @media (max-width: 768px) {
-    .sheet-button.back-button,
-    .sheet-button.flip-left-button {
+    .sheet-button.back-button {
       left: 2.5%;
     }
-    .sheet-button.delete-button,
-    .sheet-button.flip-right-button {
+    .sheet-button.delete-button {
       right: 3.5%;
+    }
+    .sheet-button.flip-left-button,
+    .sheet-button.flip-right-button {
+      display: none;
     }
   }
 `;
