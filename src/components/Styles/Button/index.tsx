@@ -7,6 +7,7 @@ const ButtonComponent = ({
   HTMLButtonElement
 > & {
   size?: "small" | "medium" | "large";
+  invert?: boolean;
 }) => {
   return <button {...props} />;
 };
@@ -31,7 +32,9 @@ const Button = styled(ButtonComponent)`
   ${({ size }) => size === "small" && ` max-width:200px`};
   position: relative;
   cursor: pointer;
-  transform: rotate(-2deg);
+  ${({ invert }) =>
+    invert ? ` transform: rotate(-2deg);` : ` transform: rotate(2deg);`}
+
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;

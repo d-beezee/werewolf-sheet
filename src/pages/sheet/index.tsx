@@ -51,9 +51,15 @@ const SheetPage = () => {
             Personaggi
           </h1>
           {loading && <Loader />}
-          {list.map((item) => (
-            <div style={{ marginBottom: "10px" }} key={item}>
-              <Button onClick={() => (window.location.href = `/sheet/${item}`)}>
+          {list.map((item, i) => (
+            <div
+              style={{ marginBottom: "50px", width: "33%", float: "left" }}
+              key={item}
+            >
+              <Button
+                invert={i % 2 !== 0}
+                onClick={() => (window.location.href = `/sheet/${item}`)}
+              >
                 {item}
               </Button>
             </div>

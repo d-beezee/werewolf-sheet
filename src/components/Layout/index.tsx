@@ -67,13 +67,8 @@ const NavHeaderComponent = ({ className }: { className?: string }) => {
 };
 const NavHeader = styled(NavHeaderComponent)`
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
-  background: rgb(2, 0, 36);
-  background: linear-gradient(
-    126deg,
-    rgb(45 45 46) 0%,
-    rgb(52 21 11) 35%,
-    rgb(18 9 0) 100%
-  );
+  background-image: url("/navbg.jpg ");
+  background-size: 15%;
   height: 3rem;
   margin-bottom: 30px;
   display: flex;
