@@ -8,7 +8,7 @@ const RusticBoxItemComponent = ({
   style,
   children,
 }: {
-  title: string;
+  title?: string;
   titleSize?: "small" | "medium" | "large";
   className?: string;
   style?: React.CSSProperties;
@@ -17,9 +17,11 @@ const RusticBoxItemComponent = ({
   return (
     <div style={style} className={className}>
       <div className="container">
-        <div className="title">
-          <span>{title}</span>
-        </div>
+        {title && (
+          <div className="title">
+            <span>{title}</span>
+          </div>
+        )}
         {children}
       </div>
     </div>
@@ -74,20 +76,45 @@ const RusticBoxItem = styled(RusticBoxItemComponent)`
   }
 `;
 
-const RusticBox = styled.div`
+const RusticBoxComponent = ({
+  className,
+  style,
+  children,
+}: {
+  className?: string;
+  style?: React.CSSProperties;
+  children?: React.ReactNode;
+  direction?: "row" | "column";
+}) => {
+  return (
+    <div style={style} className={className}>
+      {children}
+    </div>
+  );
+};
+
+const RusticBox = styled(RusticBoxComponent)`
   box-sizing: border-box;
   position: relative;
   border-left: 2px solid #000;
   border-right: 2px solid #000;
   display: flex;
   padding: 5px 0;
-  justify-content: space-between;
 
+  ${({ direction }) =>
+    direction === "column" ? "" : "justify-content: space-between"};
+
+  ${({ direction }) =>
+    direction === "column" ? "flex-direction: column;" : ""}
   ${RusticBoxItem} {
-    border-right: 2px solid #000;
+    ${({ direction }) =>
+      direction === "column"
+        ? "border-bottom: 2px solid #000;"
+        : "border-right: 2px solid #000;"}
   }
   ${RusticBoxItem}:last-child {
-    border-right: none;
+    ${({ direction }) =>
+      direction === "column" ? "border-bottom: none;" : "border-right:none;"}
   }
 
   &:after {

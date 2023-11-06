@@ -1,4 +1,5 @@
 import Layout from "@src/components/Layout";
+import AdvantageList from "@src/components/Sheet/AdvantageList";
 import Auspice from "@src/components/Sheet/Auspice";
 import Chronicle from "@src/components/Sheet/Chronicle";
 import Concept from "@src/components/Sheet/Concept";
@@ -488,13 +489,7 @@ const SheetSinglePage = () => {
               </RusticBox>
               <div style={{ display: "flex", gap: "32px" }}>
                 <div style={{ width: "50%", paddingTop: "40px" }}>
-                  <RusticBox>
-                    <RusticBox.Item
-                      style={{ minHeight: "700px" }}
-                      titleSize="large"
-                      title="Advantages & Flaws"
-                    ></RusticBox.Item>
-                  </RusticBox>
+                  <AdvantageList sheet={item} />
                   <div style={{ display: "flex", marginTop: "20px" }}>
                     <Harano getValue={() => data.harano} saveValue={() => {}} />
                     <Hauglosk

@@ -7,6 +7,7 @@ type Attribute = number;
 export type tSkill = { value: number; specialty?: string };
 
 type AdvantageFlaw = {
+  _id: string;
   value: number;
   name: string;
 };
@@ -359,6 +360,18 @@ class Sheet {
     this.data.gifts = newValue;
     this.data.gifts = this.data.gifts.map((gift, i) => ({
       ...gift,
+      _id: i.toString(),
+    }));
+    this.save();
+  }
+
+  public setAdvantages(newValue: AdvantageFlaw[]) {
+    if (this.data === null) throw new Error("Sheet does not exists");
+    if (JSON.stringify(this.get().advantages) === JSON.stringify(newValue))
+      return;
+    this.data.advantages = newValue;
+    this.data.advantages = this.data.advantages.map((adv, i) => ({
+      ...adv,
       _id: i.toString(),
     }));
     this.save();
