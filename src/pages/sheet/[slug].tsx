@@ -35,6 +35,7 @@ const SheetSinglePage = () => {
   const [isFlipped, setIsFlipped] = useState(true);
   const handlers = useSwipeable({
     onSwiped: () => setIsFlipped(!isFlipped),
+    delta: 200,
   });
   useEffect(() => {
     if (slug === undefined) return;
