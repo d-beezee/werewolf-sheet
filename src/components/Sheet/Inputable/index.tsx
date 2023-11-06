@@ -2,12 +2,24 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 class ChangeEvent extends Event {
+  private _value: string;
+
   constructor(value: string) {
     super("change", { bubbles: true });
+    this._value = value;
     Object.defineProperty(this, "target", {
       writable: false,
       value: { value },
     });
+  }
+
+  get target() {
+    return {
+      value: this._value,
+      addEventListener: () => {},
+      removeEventListener: () => {},
+      dispatchEvent: () => true,
+    };
   }
 }
 
@@ -19,7 +31,7 @@ const InputableComponent = ({
   type = "text",
 }: {
   value: string;
-  onChange: (e: Event) => void;
+  onChange: (e: ChangeEvent) => void;
   title?: string;
   className?: string;
   type?: "text" | "textarea";
@@ -71,15 +83,24 @@ const Inputable = styled(InputableComponent)`
   align-items: center;
   padding: 0.5rem;
   width: 100%;
+  box-sizing: border-box;
+  height: 100%;
   span {
     ${({ title }) => (title ? `min-width: 10%;` : ``)}
   }
-  input {
+  input,
+  textarea {
     background: none;
+    border: none;
+    height: 100%;
+  }
+  input {
     padding: 0.5rem;
     margin-left: 0.5rem;
-    border: none;
     ${({ title }) => (title ? `width: 90%;` : `max-width: 100%;`)}
+  }
+  textarea {
+    width: 100%;
   }
 `;
 

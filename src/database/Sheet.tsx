@@ -87,7 +87,7 @@ type SheetData = {
   }[];
   rage: number;
   tenets: string;
-  touchstones: string[];
+  touchstones: string;
   favor: string;
   bans: string;
   advantages: AdvantageFlaw[];
@@ -185,6 +185,12 @@ class Sheet {
       rage: this.data?.rage || 0,
       harano: this.data?.harano || 0,
       hauglosk: this.data?.hauglosk || 0,
+      appearance: this.data?.appearance || "",
+      tenets: this.data?.tenets || "",
+      touchstones: this.data?.touchstones || "",
+      favor: this.data?.favor || "",
+      history: this.data?.history || "",
+      notes: this.data?.notes || "",
     };
   }
 
@@ -362,6 +368,48 @@ class Sheet {
     if (this.data === null) throw new Error("Sheet does not exists");
     if (this.get().rage === newValue) return;
     this.data.rage = newValue;
+    this.save();
+  }
+
+  public setTenets(newValue: string) {
+    if (this.data === null) throw new Error("Sheet does not exists");
+    if (this.get().tenets === newValue) return;
+    this.data.tenets = newValue;
+    this.save();
+  }
+
+  public setTouchstones(newValue: string) {
+    if (this.data === null) throw new Error("Sheet does not exists");
+    if (this.get().touchstones === newValue) return;
+    this.data.touchstones = newValue;
+    this.save();
+  }
+
+  public setFavor(newValue: string) {
+    if (this.data === null) throw new Error("Sheet does not exists");
+    if (this.get().favor === newValue) return;
+    this.data.favor = newValue;
+    this.save();
+  }
+
+  public setAppearance(newValue: string) {
+    if (this.data === null) throw new Error("Sheet does not exists");
+    if (this.get().appearance === newValue) return;
+    this.data.appearance = newValue;
+    this.save();
+  }
+
+  public setHistory(newValue: string) {
+    if (this.data === null) throw new Error("Sheet does not exists");
+    if (this.get().history === newValue) return;
+    this.data.history = newValue;
+    this.save();
+  }
+
+  public setNotes(newValue: string) {
+    if (this.data === null) throw new Error("Sheet does not exists");
+    if (this.get().notes === newValue) return;
+    this.data.notes = newValue;
     this.save();
   }
 

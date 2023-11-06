@@ -8,6 +8,7 @@ import GiftList from "@src/components/Sheet/GiftList";
 import Harano from "@src/components/Sheet/Harano";
 import Hauglosk from "@src/components/Sheet/Hauglosk";
 import Health from "@src/components/Sheet/Health";
+import Inputable from "@src/components/Sheet/Inputable";
 import Name from "@src/components/Sheet/Name";
 import Patron from "@src/components/Sheet/Patron";
 import Rage from "@src/components/Sheet/Rage";
@@ -28,7 +29,7 @@ const SheetSinglePage = () => {
   const router = useRouter();
   const { slug } = router.query;
   const [item, setItem] = useState<Sheet>();
-  const [isFlipped, setIsFlipped] = useState(false);
+  const [isFlipped, setIsFlipped] = useState(true);
 
   useEffect(() => {
     if (slug === undefined) return;
@@ -448,25 +449,51 @@ const SheetSinglePage = () => {
               }}
             >
               <RusticBox>
-                <RusticBox.Item title="Chronicle Tenets">
-                  <div style={{ height: "200px" }} />
+                <RusticBox.Item
+                  style={{ minHeight: "200px" }}
+                  title="Chronicle Tenets"
+                >
+                  <Inputable
+                    type="textarea"
+                    value={data.tenets}
+                    onChange={(e) => {
+                      item.setTenets(e.target.value);
+                    }}
+                  />
                 </RusticBox.Item>
-                <RusticBox.Item title="Touchstones">
-                  <div style={{ height: "200px" }} />
+                <RusticBox.Item
+                  style={{ minHeight: "200px" }}
+                  title="Touchstones"
+                >
+                  <Inputable
+                    type="textarea"
+                    value={data.touchstones}
+                    onChange={(e) => {
+                      item.setTouchstones(e.target.value);
+                    }}
+                  />
                 </RusticBox.Item>
-                <RusticBox.Item title="Favors & Banes">
-                  <div style={{ height: "200px" }} />
+                <RusticBox.Item
+                  style={{ minHeight: "200px" }}
+                  title="Favors & Banes"
+                >
+                  <Inputable
+                    type="textarea"
+                    value={data.favor}
+                    onChange={(e) => {
+                      item.setFavor(e.target.value);
+                    }}
+                  />
                 </RusticBox.Item>
               </RusticBox>
               <div style={{ display: "flex", gap: "32px" }}>
                 <div style={{ width: "50%", paddingTop: "40px" }}>
                   <RusticBox>
                     <RusticBox.Item
+                      style={{ minHeight: "700px" }}
                       titleSize="large"
                       title="Advantages & Flaws"
-                    >
-                      <div style={{ height: "700px" }} />
-                    </RusticBox.Item>
+                    ></RusticBox.Item>
                   </RusticBox>
                   <div style={{ display: "flex", marginTop: "20px" }}>
                     <Harano getValue={() => data.harano} saveValue={() => {}} />
@@ -480,8 +507,20 @@ const SheetSinglePage = () => {
                       marginTop: "32px",
                     }}
                   >
-                    <RusticBox.Item titleSize="medium" title="Appearance">
-                      <div style={{ height: "200px" }} />
+                    <RusticBox.Item
+                      style={{
+                        minHeight: "200px",
+                      }}
+                      titleSize="medium"
+                      title="Appearance"
+                    >
+                      <Inputable
+                        type="textarea"
+                        value={data.appearance}
+                        onChange={(e) => {
+                          item.setAppearance(e.target.value);
+                        }}
+                      />
                     </RusticBox.Item>
                   </RusticBox>
                   <RusticBox
@@ -489,8 +528,20 @@ const SheetSinglePage = () => {
                       marginTop: "-12px",
                     }}
                   >
-                    <RusticBox.Item titleSize="medium" title="History">
-                      <div style={{ height: "300px" }} />
+                    <RusticBox.Item
+                      style={{
+                        minHeight: "300px",
+                      }}
+                      titleSize="medium"
+                      title="History"
+                    >
+                      <Inputable
+                        type="textarea"
+                        value={data.history}
+                        onChange={(e) => {
+                          item.setHistory(e.target.value);
+                        }}
+                      />
                     </RusticBox.Item>
                   </RusticBox>
                 </div>
@@ -511,8 +562,18 @@ const SheetSinglePage = () => {
                       marginTop: "32px",
                     }}
                   >
-                    <RusticBox.Item titleSize="medium" title="Notes">
-                      <div style={{ height: "200px" }} />
+                    <RusticBox.Item
+                      style={{ minHeight: "200px" }}
+                      titleSize="medium"
+                      title="Notes"
+                    >
+                      <Inputable
+                        type="textarea"
+                        value={data.appearance}
+                        onChange={(e) => {
+                          item.setNotes(e.target.value);
+                        }}
+                      />
                     </RusticBox.Item>
                   </RusticBox>
                   <p className="ww-tall-title" style={{ marginTop: "20px" }}>
