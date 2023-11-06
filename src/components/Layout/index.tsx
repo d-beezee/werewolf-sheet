@@ -44,7 +44,9 @@ const NavHeaderComponent = ({ className }: { className?: string }) => {
   return (
     <>
       <div className={className}>
-        <img className="logo" src="/logo.png" />
+        <a className="logo" href="/">
+          <img src="/logo.png" />
+        </a>
         <div className="log-button">
           {user ? (
             <img
@@ -64,12 +66,19 @@ const NavHeaderComponent = ({ className }: { className?: string }) => {
   );
 };
 const NavHeader = styled(NavHeaderComponent)`
-  background: #88807b;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    126deg,
+    rgb(45 45 46) 0%,
+    rgb(52 21 11) 35%,
+    rgb(18 9 0) 100%
+  );
   height: 3rem;
   margin-bottom: 30px;
   display: flex;
   justify-content: space-between;
-  padding: 0 0.5rem;
+  padding: 5px 1.5rem;
   align-items: center;
   .log-button {
     height: 100%;
@@ -83,6 +92,9 @@ const NavHeader = styled(NavHeaderComponent)`
   }
   .logo {
     height: 80%;
+    img {
+      height: 100%;
+    }
   }
   ${Button}.signin {
     scale: 0.7;

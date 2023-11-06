@@ -1,15 +1,18 @@
 import Layout from "@src/components/Layout";
+import Loader from "@src/components/Layout/Loader";
 import Button from "@src/components/Styles/Button";
 import Sheet, { SheetAlreadyExistsError } from "@src/database/Sheet";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 
 const SheetPage = () => {
+  const [loading, setLoading] = useState(true);
   const [list, setList] = useState<string[]>([]);
 
   useEffect(() => {
     Sheet.list().then((sheets) => {
       setList(sheets);
+      setLoading(false);
     });
   }, []);
   return (
@@ -47,6 +50,7 @@ const SheetPage = () => {
           <h1 style={{ color: "#fff", textAlign: "center", fontSize: "3rem" }}>
             Personaggi
           </h1>
+          {loading && <Loader />}
           {list.map((item) => (
             <div style={{ marginBottom: "10px" }} key={item}>
               <Button onClick={() => (window.location.href = `/sheet/${item}`)}>
