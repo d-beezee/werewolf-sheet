@@ -4,6 +4,7 @@ import { AppProps } from "next/app";
 import { Bebas_Neue } from "next/font/google";
 
 import localFont from "next/font/local";
+import { useRouter } from "next/router";
 
 const hermes = localFont({
   src: [
@@ -21,6 +22,8 @@ function MyApp({
   Component,
   pageProps: { session, ...pageProps },
 }: AppProps<{ session: Session }>) {
+  const router = useRouter();
+
   return (
     <SessionProvider session={session}>
       <style jsx global>{`
@@ -29,9 +32,7 @@ function MyApp({
           --hermes: ${hermes.style.fontFamily};
         }
         @media (max-width: 600px) {
-          #__next {
-            width: 397%;
-          }
+          ${router.pathname === "/sheet/[slug]" && "#__next { width: 397%; }"}
         }
         body {
           background-color: #0f0f0f;
