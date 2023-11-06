@@ -5,6 +5,7 @@ import Chronicle from "@src/components/Sheet/Chronicle";
 import Concept from "@src/components/Sheet/Concept";
 import Crinos from "@src/components/Sheet/Crinos";
 import Dottable from "@src/components/Sheet/Dottable";
+import GarouForms from "@src/components/Sheet/GarouForms";
 import GiftList from "@src/components/Sheet/GiftList";
 import Harano from "@src/components/Sheet/Harano";
 import Hauglosk from "@src/components/Sheet/Hauglosk";
@@ -541,16 +542,7 @@ const SheetSinglePage = () => {
                   </RusticBox>
                 </div>
                 <div style={{ width: "50%", paddingTop: "40px" }}>
-                  <RusticBox>
-                    <RusticBox.Item
-                      titleSize="large"
-                      title="Forms of the Garou"
-                    >
-                      <div style={{ height: "900px" }} />
-                    </RusticBox.Item>
-                  </RusticBox>
-                  <p>* Does not apply to intimidation or non-humans</p>
-                  <p>** Does not apply to stealth test</p>
+                  <GarouForms />
 
                   <RusticBox
                     style={{
