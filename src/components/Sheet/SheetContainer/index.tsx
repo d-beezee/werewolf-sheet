@@ -2,6 +2,7 @@ import BackButton from "@src/components/Styles/BackButton";
 import DeleteButton from "@src/components/Styles/DeleteButton";
 import LeftCaretButton from "@src/components/Styles/LeftCaretButton";
 import RightCaretButton from "@src/components/Styles/RightCaretButton";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 const SheetContainerComponent = styled.div`
@@ -70,9 +71,29 @@ const SheetContainer = ({
   };
   children: React.ReactNode;
 }) => {
+  const [width, setWidth] = useState(0);
+  let containerWidth = document.querySelector("main")?.offsetWidth || 0;
+  const ref = useRef<any>();
+  useEffect(() => {
+    setWidth(ref.current ? ref.current.offsetWidth : 0);
+  }, [ref.current]);
+
+  const percent = containerWidth / width;
+  const left = (100 - percent * 100) / 2;
+
   return (
     <>
-      <SheetContainerComponent>
+      <SheetContainerComponent
+        ref={ref}
+        style={
+          containerWidth < width
+            ? {
+                scale: percent.toFixed(2),
+                translate: `-${left.toFixed(2)}% -${left.toFixed(2)}%`,
+              }
+            : {}
+        }
+      >
         <div className="sheet-button back-button">
           <BackButton width={40} height={40} onClick={action.back} />
         </div>
