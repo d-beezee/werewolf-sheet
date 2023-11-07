@@ -32,7 +32,7 @@ const SheetSinglePage = () => {
   const router = useRouter();
   const { slug } = router.query;
   const [item, setItem] = useState<Sheet>();
-  const [isFlipped, setIsFlipped] = useState(true);
+  const [isFlipped, setIsFlipped] = useState(false);
   const handlers = useSwipeable({
     onSwipedLeft: () => setIsFlipped(!isFlipped),
     onSwipedRight: () => setIsFlipped(!isFlipped),

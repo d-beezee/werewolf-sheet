@@ -32,7 +32,7 @@ const LoginBoxComponent = ({
 };
 
 const LoginBox = styled(LoginBoxComponent)`
-  ${({ open }) => (open ? "" : "display:none;")}
+  ${({ open }) => (open ? "display: flex;" : "display:none;")}
   padding: 20px;
   border-radius: 0 0 0 3px;
   background-image: url("/navbg.jpg ");
@@ -40,7 +40,7 @@ const LoginBox = styled(LoginBoxComponent)`
   right: 0;
   top: 3rem;
   z-index: 100;
-  display: flex;
+
   flex-direction: column;
   gap: 10px;
   button {
