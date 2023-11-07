@@ -22,7 +22,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import ReactCardFlip from "react-card-flip";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useSwipeable } from "react-swipeable";
 
 const SheetSinglePage = () => {
@@ -174,26 +174,37 @@ const SheetSinglePage = () => {
                   >
                     {t("Physical", { context: "sheet" })}
                   </div>
-                  <Dottable
-                    title={t("Strength", { context: "sheet" })}
-                    getValue={() => data.attributes.physical.strength}
-                    saveValue={(value) =>
-                      item.setAttributes("physical", "strength", value)
-                    }
-                  />
-                  <Dottable
-                    title={t("Dexterity", { context: "sheet" })}
-                    getValue={() => data.attributes.physical.dexterity}
-                    saveValue={(value) =>
-                      item.setAttributes("physical", "dexterity", value)
-                    }
-                  />
-                  <Dottable
-                    title={t("Stamina", { context: "sheet" })}
-                    getValue={() => data.attributes.physical.stamina}
-                    saveValue={(value) =>
-                      item.setAttributes("physical", "stamina", value)
-                    }
+                  <Trans
+                    i18nKey="<strength/><dexterity/><stamina/>"
+                    components={{
+                      strength: (
+                        <Dottable
+                          title={t("Strength", { context: "sheet" })}
+                          getValue={() => data.attributes.physical.strength}
+                          saveValue={(value) =>
+                            item.setAttributes("physical", "strength", value)
+                          }
+                        />
+                      ),
+                      dexterity: (
+                        <Dottable
+                          title={t("Dexterity", { context: "sheet" })}
+                          getValue={() => data.attributes.physical.dexterity}
+                          saveValue={(value) =>
+                            item.setAttributes("physical", "dexterity", value)
+                          }
+                        />
+                      ),
+                      stamina: (
+                        <Dottable
+                          title={t("Stamina", { context: "sheet" })}
+                          getValue={() => data.attributes.physical.stamina}
+                          saveValue={(value) =>
+                            item.setAttributes("physical", "stamina", value)
+                          }
+                        />
+                      ),
+                    }}
                   />
                 </div>
                 <div style={{ width: "100%" }}>
@@ -207,26 +218,37 @@ const SheetSinglePage = () => {
                   >
                     {t("Social", { context: "sheet" })}
                   </div>
-                  <Dottable
-                    title={t("Composure", { context: "sheet" })}
-                    getValue={() => data.attributes.social.composure}
-                    saveValue={(value) =>
-                      item.setAttributes("social", "composure", value)
-                    }
-                  />
-                  <Dottable
-                    title={t("Charisma", { context: "sheet" })}
-                    getValue={() => data.attributes.social.charisma}
-                    saveValue={(value) =>
-                      item.setAttributes("social", "charisma", value)
-                    }
-                  />
-                  <Dottable
-                    title={t("Manipulation", { context: "sheet" })}
-                    getValue={() => data.attributes.social.manipulation}
-                    saveValue={(value) =>
-                      item.setAttributes("social", "manipulation", value)
-                    }
+                  <Trans
+                    i18nKey="<composure/><charisma/><manipulation/>"
+                    components={{
+                      composure: (
+                        <Dottable
+                          title={t("Composure", { context: "sheet" })}
+                          getValue={() => data.attributes.social.composure}
+                          saveValue={(value) =>
+                            item.setAttributes("social", "composure", value)
+                          }
+                        />
+                      ),
+                      charisma: (
+                        <Dottable
+                          title={t("Charisma", { context: "sheet" })}
+                          getValue={() => data.attributes.social.charisma}
+                          saveValue={(value) =>
+                            item.setAttributes("social", "charisma", value)
+                          }
+                        />
+                      ),
+                      manipulation: (
+                        <Dottable
+                          title={t("Manipulation", { context: "sheet" })}
+                          getValue={() => data.attributes.social.manipulation}
+                          saveValue={(value) =>
+                            item.setAttributes("social", "manipulation", value)
+                          }
+                        />
+                      ),
+                    }}
                   />
                 </div>
                 <div style={{ width: "100%" }}>
@@ -240,26 +262,37 @@ const SheetSinglePage = () => {
                   >
                     {t("Mental", { context: "sheet" })}
                   </div>
-                  <Dottable
-                    title={t("Intelligence", { context: "sheet" })}
-                    getValue={() => data.attributes.mental.intelligence}
-                    saveValue={(value) =>
-                      item.setAttributes("mental", "intelligence", value)
-                    }
-                  />
-                  <Dottable
-                    title={t("Wits", { context: "sheet" })}
-                    getValue={() => data.attributes.mental.wits}
-                    saveValue={(value) =>
-                      item.setAttributes("mental", "wits", value)
-                    }
-                  />
-                  <Dottable
-                    title={t("Resolve", { context: "sheet" })}
-                    getValue={() => data.attributes.mental.resolve}
-                    saveValue={(value) =>
-                      item.setAttributes("mental", "resolve", value)
-                    }
+                  <Trans
+                    i18nKey="<intelligence/><wits/><resolve/>"
+                    components={{
+                      intelligence: (
+                        <Dottable
+                          title={t("Intelligence", { context: "sheet" })}
+                          getValue={() => data.attributes.mental.intelligence}
+                          saveValue={(value) =>
+                            item.setAttributes("mental", "intelligence", value)
+                          }
+                        />
+                      ),
+                      wits: (
+                        <Dottable
+                          title={t("Wits", { context: "sheet" })}
+                          getValue={() => data.attributes.mental.wits}
+                          saveValue={(value) =>
+                            item.setAttributes("mental", "wits", value)
+                          }
+                        />
+                      ),
+                      resolve: (
+                        <Dottable
+                          title={t("Resolve", { context: "sheet" })}
+                          getValue={() => data.attributes.mental.resolve}
+                          saveValue={(value) =>
+                            item.setAttributes("mental", "resolve", value)
+                          }
+                        />
+                      ),
+                    }}
                   />
                 </div>
               </div>
@@ -285,198 +318,267 @@ const SheetSinglePage = () => {
               <Separator text={t("SKILLS", { context: "sheet" })} />
               <div style={{ display: "flex" }}>
                 <div style={{ width: "100%" }}>
-                  <Skill
-                    title={t("Athletics", { context: "sheet" })}
-                    getValue={() => data.skills.physical.athletics}
-                    saveValue={(value) =>
-                      item.setSkill("physical", "athletics", value)
-                    }
-                  />
-                  <Skill
-                    title={t("Brawl", { context: "sheet" })}
-                    getValue={() => data.skills.physical.brawl}
-                    saveValue={(value) =>
-                      item.setSkill("physical", "brawl", value)
-                    }
-                  />
-                  <Skill
-                    title={t("Craft", { context: "sheet" })}
-                    getValue={() => data.skills.physical.craft}
-                    saveValue={(value) =>
-                      item.setSkill("physical", "craft", value)
-                    }
-                  />
-                  <Skill
-                    title={t("Driving", { context: "sheet" })}
-                    getValue={() => data.skills.physical.drive}
-                    saveValue={(value) =>
-                      item.setSkill("physical", "drive", value)
-                    }
-                  />
-                  <Skill
-                    title={t("Firearms", { context: "sheet" })}
-                    getValue={() => data.skills.physical.firearms}
-                    saveValue={(value) =>
-                      item.setSkill("physical", "firearms", value)
-                    }
-                  />
-                  <Skill
-                    title={t("Larceny", { context: "sheet" })}
-                    getValue={() => data.skills.physical.larceny}
-                    saveValue={(value) =>
-                      item.setSkill("physical", "larceny", value)
-                    }
-                  />
-                  <Skill
-                    title={t("Melee", { context: "sheet" })}
-                    getValue={() => data.skills.physical.melee}
-                    saveValue={(value) =>
-                      item.setSkill("physical", "melee", value)
-                    }
-                  />
-                  <Skill
-                    title={t("Stealth", { context: "sheet" })}
-                    getValue={() => data.skills.physical.stealth}
-                    saveValue={(value) =>
-                      item.setSkill("physical", "stealth", value)
-                    }
-                  />
-                  <Skill
-                    title={t("Survival", { context: "sheet" })}
-                    getValue={() => data.skills.physical.survival}
-                    saveValue={(value) =>
-                      item.setSkill("physical", "survival", value)
-                    }
-                  />
-                </div>
-                <div style={{ width: "100%" }}>
-                  <Skill
-                    title={t("Animal Ken", { context: "sheet" })}
-                    getValue={() => data.skills.social.animalKen}
-                    saveValue={(value) =>
-                      item.setSkill("social", "animalKen", value)
-                    }
-                  />
-                  <Skill
-                    title={t("Etiquette", { context: "sheet" })}
-                    getValue={() => data.skills.social.etiquette}
-                    saveValue={(value) =>
-                      item.setSkill("social", "etiquette", value)
-                    }
-                  />
-                  <Skill
-                    title={t("Insight", { context: "sheet" })}
-                    getValue={() => data.skills.social.insight}
-                    saveValue={(value) =>
-                      item.setSkill("social", "insight", value)
-                    }
-                  />
-                  <Skill
-                    title={t("Intimidation", { context: "sheet" })}
-                    getValue={() => data.skills.social.intimidation}
-                    saveValue={(value) =>
-                      item.setSkill("social", "intimidation", value)
-                    }
-                  />
-                  <Skill
-                    title={t("Leadership", { context: "sheet" })}
-                    getValue={() => data.skills.social.leadership}
-                    saveValue={(value) =>
-                      item.setSkill("social", "leadership", value)
-                    }
-                  />
-                  <Skill
-                    title={t("Performance", { context: "sheet" })}
-                    getValue={() => data.skills.social.performance}
-                    saveValue={(value) =>
-                      item.setSkill("social", "performance", value)
-                    }
-                  />
-                  <Skill
-                    title={t("Persuasion", { context: "sheet" })}
-                    getValue={() => data.skills.social.persuasion}
-                    saveValue={(value) =>
-                      item.setSkill("social", "persuasion", value)
-                    }
-                  />
-                  <Skill
-                    title={t("Streetwise", { context: "sheet" })}
-                    getValue={() => data.skills.social.streetwise}
-                    saveValue={(value) =>
-                      item.setSkill("social", "streetwise", value)
-                    }
-                  />
-                  <Skill
-                    title={t("Subterfuge", { context: "sheet" })}
-                    getValue={() => data.skills.social.subterfuge}
-                    saveValue={(value) =>
-                      item.setSkill("social", "subterfuge", value)
-                    }
+                  <Trans
+                    i18nKey="<athletics/><brawl/><craft/><driving/><firearms/><larceny/><melee/><stealth/><survival/>"
+                    components={{
+                      athletics: (
+                        <Skill
+                          title={t("Athletics", { context: "sheet" })}
+                          getValue={() => data.skills.physical.athletics}
+                          saveValue={(value) =>
+                            item.setSkill("physical", "athletics", value)
+                          }
+                        />
+                      ),
+                      brawl: (
+                        <Skill
+                          title={t("Brawl", { context: "sheet" })}
+                          getValue={() => data.skills.physical.brawl}
+                          saveValue={(value) =>
+                            item.setSkill("physical", "brawl", value)
+                          }
+                        />
+                      ),
+                      craft: (
+                        <Skill
+                          title={t("Craft", { context: "sheet" })}
+                          getValue={() => data.skills.physical.craft}
+                          saveValue={(value) =>
+                            item.setSkill("physical", "craft", value)
+                          }
+                        />
+                      ),
+                      driving: (
+                        <Skill
+                          title={t("Driving", { context: "sheet" })}
+                          getValue={() => data.skills.physical.drive}
+                          saveValue={(value) =>
+                            item.setSkill("physical", "drive", value)
+                          }
+                        />
+                      ),
+                      firearms: (
+                        <Skill
+                          title={t("Firearms", { context: "sheet" })}
+                          getValue={() => data.skills.physical.firearms}
+                          saveValue={(value) =>
+                            item.setSkill("physical", "firearms", value)
+                          }
+                        />
+                      ),
+                      larceny: (
+                        <Skill
+                          title={t("Larceny", { context: "sheet" })}
+                          getValue={() => data.skills.physical.larceny}
+                          saveValue={(value) =>
+                            item.setSkill("physical", "larceny", value)
+                          }
+                        />
+                      ),
+                      melee: (
+                        <Skill
+                          title={t("Melee", { context: "sheet" })}
+                          getValue={() => data.skills.physical.melee}
+                          saveValue={(value) =>
+                            item.setSkill("physical", "melee", value)
+                          }
+                        />
+                      ),
+                      stealth: (
+                        <Skill
+                          title={t("Stealth", { context: "sheet" })}
+                          getValue={() => data.skills.physical.stealth}
+                          saveValue={(value) =>
+                            item.setSkill("physical", "stealth", value)
+                          }
+                        />
+                      ),
+                      survival: (
+                        <Skill
+                          title={t("Survival", { context: "sheet" })}
+                          getValue={() => data.skills.physical.survival}
+                          saveValue={(value) =>
+                            item.setSkill("physical", "survival", value)
+                          }
+                        />
+                      ),
+                    }}
                   />
                 </div>
                 <div style={{ width: "100%" }}>
-                  <Skill
-                    title={t("Academics", { context: "sheet" })}
-                    getValue={() => data.skills.mental.academics}
-                    saveValue={(value) =>
-                      item.setSkill("mental", "academics", value)
-                    }
+                  <Trans
+                    i18nKey="<animalken/><etiquette/><insight/><intimidation/><leadership/><performance/><persuasion/><streetwise/><subterfuge/>"
+                    components={{
+                      animalken: (
+                        <Skill
+                          title={t("Animal Ken", { context: "sheet" })}
+                          getValue={() => data.skills.social.animalKen}
+                          saveValue={(value) =>
+                            item.setSkill("social", "animalKen", value)
+                          }
+                        />
+                      ),
+                      etiquette: (
+                        <Skill
+                          title={t("Etiquette", { context: "sheet" })}
+                          getValue={() => data.skills.social.etiquette}
+                          saveValue={(value) =>
+                            item.setSkill("social", "etiquette", value)
+                          }
+                        />
+                      ),
+                      insight: (
+                        <Skill
+                          title={t("Insight", { context: "sheet" })}
+                          getValue={() => data.skills.social.insight}
+                          saveValue={(value) =>
+                            item.setSkill("social", "insight", value)
+                          }
+                        />
+                      ),
+                      intimidation: (
+                        <Skill
+                          title={t("Intimidation", { context: "sheet" })}
+                          getValue={() => data.skills.social.intimidation}
+                          saveValue={(value) =>
+                            item.setSkill("social", "intimidation", value)
+                          }
+                        />
+                      ),
+                      leadership: (
+                        <Skill
+                          title={t("Leadership", { context: "sheet" })}
+                          getValue={() => data.skills.social.leadership}
+                          saveValue={(value) =>
+                            item.setSkill("social", "leadership", value)
+                          }
+                        />
+                      ),
+                      performance: (
+                        <Skill
+                          title={t("Performance", { context: "sheet" })}
+                          getValue={() => data.skills.social.performance}
+                          saveValue={(value) =>
+                            item.setSkill("social", "performance", value)
+                          }
+                        />
+                      ),
+                      persuasion: (
+                        <Skill
+                          title={t("Persuasion", { context: "sheet" })}
+                          getValue={() => data.skills.social.persuasion}
+                          saveValue={(value) =>
+                            item.setSkill("social", "persuasion", value)
+                          }
+                        />
+                      ),
+                      streetwise: (
+                        <Skill
+                          title={t("Streetwise", { context: "sheet" })}
+                          getValue={() => data.skills.social.streetwise}
+                          saveValue={(value) =>
+                            item.setSkill("social", "streetwise", value)
+                          }
+                        />
+                      ),
+                      subterfuge: (
+                        <Skill
+                          title={t("Subterfuge", { context: "sheet" })}
+                          getValue={() => data.skills.social.subterfuge}
+                          saveValue={(value) =>
+                            item.setSkill("social", "subterfuge", value)
+                          }
+                        />
+                      ),
+                    }}
                   />
-                  <Skill
-                    title={t("Awareness", { context: "sheet" })}
-                    getValue={() => data.skills.mental.awareness}
-                    saveValue={(value) =>
-                      item.setSkill("mental", "awareness", value)
-                    }
-                  />
-                  <Skill
-                    title={t("Finance", { context: "sheet" })}
-                    getValue={() => data.skills.mental.finance}
-                    saveValue={(value) =>
-                      item.setSkill("mental", "finance", value)
-                    }
-                  />
-                  <Skill
-                    title={t("Investigation", { context: "sheet" })}
-                    getValue={() => data.skills.mental.investigation}
-                    saveValue={(value) =>
-                      item.setSkill("mental", "investigation", value)
-                    }
-                  />
-                  <Skill
-                    title={t("Medicine", { context: "sheet" })}
-                    getValue={() => data.skills.mental.medicine}
-                    saveValue={(value) =>
-                      item.setSkill("mental", "medicine", value)
-                    }
-                  />
-                  <Skill
-                    title={t("Occult", { context: "sheet" })}
-                    getValue={() => data.skills.mental.occult}
-                    saveValue={(value) =>
-                      item.setSkill("mental", "occult", value)
-                    }
-                  />
-                  <Skill
-                    title={t("Politics", { context: "sheet" })}
-                    getValue={() => data.skills.mental.politics}
-                    saveValue={(value) =>
-                      item.setSkill("mental", "politics", value)
-                    }
-                  />
-                  <Skill
-                    title={t("Science", { context: "sheet" })}
-                    getValue={() => data.skills.mental.science}
-                    saveValue={(value) =>
-                      item.setSkill("mental", "science", value)
-                    }
-                  />
-                  <Skill
-                    title={t("Technology", { context: "sheet" })}
-                    getValue={() => data.skills.mental.technology}
-                    saveValue={(value) =>
-                      item.setSkill("mental", "technology", value)
-                    }
+                </div>
+                <div style={{ width: "100%" }}>
+                  <Trans
+                    i18nKey="<academics/><awareness/><finance/><investigation/><medicine/><occult/><politics/><science/><technology/>"
+                    components={{
+                      academics: (
+                        <Skill
+                          title={t("Academics", { context: "sheet" })}
+                          getValue={() => data.skills.mental.academics}
+                          saveValue={(value) =>
+                            item.setSkill("mental", "academics", value)
+                          }
+                        />
+                      ),
+                      awareness: (
+                        <Skill
+                          title={t("Awareness", { context: "sheet" })}
+                          getValue={() => data.skills.mental.awareness}
+                          saveValue={(value) =>
+                            item.setSkill("mental", "awareness", value)
+                          }
+                        />
+                      ),
+                      finance: (
+                        <Skill
+                          title={t("Finance", { context: "sheet" })}
+                          getValue={() => data.skills.mental.finance}
+                          saveValue={(value) =>
+                            item.setSkill("mental", "finance", value)
+                          }
+                        />
+                      ),
+                      investigation: (
+                        <Skill
+                          title={t("Investigation", { context: "sheet" })}
+                          getValue={() => data.skills.mental.investigation}
+                          saveValue={(value) =>
+                            item.setSkill("mental", "investigation", value)
+                          }
+                        />
+                      ),
+                      medicine: (
+                        <Skill
+                          title={t("Medicine", { context: "sheet" })}
+                          getValue={() => data.skills.mental.medicine}
+                          saveValue={(value) =>
+                            item.setSkill("mental", "medicine", value)
+                          }
+                        />
+                      ),
+                      occult: (
+                        <Skill
+                          title={t("Occult", { context: "sheet" })}
+                          getValue={() => data.skills.mental.occult}
+                          saveValue={(value) =>
+                            item.setSkill("mental", "occult", value)
+                          }
+                        />
+                      ),
+                      politics: (
+                        <Skill
+                          title={t("Politics", { context: "sheet" })}
+                          getValue={() => data.skills.mental.politics}
+                          saveValue={(value) =>
+                            item.setSkill("mental", "politics", value)
+                          }
+                        />
+                      ),
+                      science: (
+                        <Skill
+                          title={t("Science", { context: "sheet" })}
+                          getValue={() => data.skills.mental.science}
+                          saveValue={(value) =>
+                            item.setSkill("mental", "science", value)
+                          }
+                        />
+                      ),
+                      technology: (
+                        <Skill
+                          title={t("Technology", { context: "sheet" })}
+                          getValue={() => data.skills.mental.technology}
+                          saveValue={(value) =>
+                            item.setSkill("mental", "technology", value)
+                          }
+                        />
+                      ),
+                    }}
                   />
                 </div>
               </div>

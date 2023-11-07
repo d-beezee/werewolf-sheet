@@ -1,4 +1,10 @@
 {
+  "<academics/><awareness/><finance/><investigation/><medicine/><occult/><politics/><science/><technology/>": "",
+  "<animalken/><etiquette/><insight/><intimidation/><leadership/><performance/><persuasion/><streetwise/><subterfuge/>": "<animalken/><leadership/><streetwise/><persuasion/><performance/><etiquette/><intimidation/><insight/><subterfuge/>",
+  "<athletics/><brawl/><craft/><driving/><firearms/><larceny/><melee/><stealth/><survival/>": "<firearms/><athletics/><larceny/><stealth/><driving/><craft/><melee/><brawl/><survival/>",
+  "<composure/><charisma/><manipulation/>": "<charisma/><manipulation/><composure/>",
+  "<intelligence/><wits/><resolve/>": "",
+  "<strength/><dexterity/><stamina/>": "",
   "Academics_sheet": "Accademiche",
   "Add Gift/Rite_sheet": "Aggiungi Dono/Rito",
   "Add_advantagelist": "Aggiungi",
