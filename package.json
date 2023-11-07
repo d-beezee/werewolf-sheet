@@ -10,7 +10,6 @@
     "translate": "i18next-scanner"
   },
   "dependencies": {
-    "babel-preset-next": "^1.4.0",
     "i18next": "^23.6.0",
     "mongodb": "^6.2.0",
     "next": "^13.1.1",
