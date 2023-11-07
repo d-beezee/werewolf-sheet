@@ -28,14 +28,21 @@ const get = async (
       {
         projection: {
           id: 1,
+          data: { name: 1 },
         },
       }
     )
     .toArray();
-
   res.status(200).json({
     message: JSON.stringify(
-      sheets.map((sheet) => sheet.id.replace(/^sheet-/, ""))
+      sheets.map((sheet) => {
+        const id = sheet.id.replace(/^sheet-/, "");
+        return {
+          id,
+          name:
+            sheet.data.name && sheet.data.name !== "" ? sheet.data.name : id,
+        };
+      })
     ),
   });
 };

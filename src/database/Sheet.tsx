@@ -433,7 +433,7 @@ class Sheet {
   public static async list() {
     const sheets = await getAll();
     if (sheets === null) return [];
-    return sheets as string[];
+    return sheets as { name: string; id: string }[];
   }
 }
 

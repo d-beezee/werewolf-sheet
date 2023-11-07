@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 
 const SheetPage = () => {
   const [loading, setLoading] = useState(true);
-  const [list, setList] = useState<string[]>([]);
+  const [list, setList] = useState<{ id: string; name: string }[]>([]);
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -56,13 +56,13 @@ const SheetPage = () => {
           {list.map((item, i) => (
             <div
               style={{ marginBottom: "50px", width: "33%", float: "left" }}
-              key={item}
+              key={item.id}
             >
               <Button
                 invert={i % 2 !== 0}
-                onClick={() => (window.location.href = `/sheet/${item}`)}
+                onClick={() => (window.location.href = `/sheet/${item.id}`)}
               >
-                {item}
+                {item.name}
               </Button>
             </div>
           ))}
