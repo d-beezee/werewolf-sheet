@@ -163,7 +163,7 @@ class Sheet {
           persuasion: { value: 0 },
           streetwise: { value: 0 },
           subterfuge: { value: 0 },
-          ...this.data?.skills?.physical,
+          ...this.data?.skills?.social,
         },
         mental: {
           academics: { value: 0 },
@@ -176,7 +176,7 @@ class Sheet {
           science: { value: 0 },
           technology: { value: 0 },
 
-          ...this.data?.skills?.physical,
+          ...this.data?.skills?.mental,
         },
       },
       health: this.data?.health || { aggravated: 0, superficial: 0 },
