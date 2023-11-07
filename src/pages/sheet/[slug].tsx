@@ -208,10 +208,10 @@ const SheetSinglePage = () => {
                     {t("Social", { context: "sheet" })}
                   </div>
                   <Dottable
-                    title={t("Appearance", { context: "sheet" })}
-                    getValue={() => data.attributes.social.appearance}
+                    title={t("Composure", { context: "sheet" })}
+                    getValue={() => data.attributes.social.composure}
                     saveValue={(value) =>
-                      item.setAttributes("social", "appearance", value)
+                      item.setAttributes("social", "composure", value)
                     }
                   />
                   <Dottable

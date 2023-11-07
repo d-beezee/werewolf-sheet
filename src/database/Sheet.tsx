@@ -31,7 +31,7 @@ type SheetData = {
     social: {
       charisma: Attribute;
       manipulation: Attribute;
-      appearance: Attribute;
+      composure: Attribute;
     };
     mental: {
       resolve: Attribute;
@@ -135,7 +135,7 @@ class Sheet {
         social: {
           charisma: 1,
           manipulation: 1,
-          appearance: 1,
+          composure: 1,
           ...this.data?.attributes?.social,
         },
       },
