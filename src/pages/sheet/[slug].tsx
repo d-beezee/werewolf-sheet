@@ -1,8 +1,6 @@
 import Layout from "@src/components/Layout";
 import AdvantageList from "@src/components/Sheet/AdvantageList";
-import Auspice from "@src/components/Sheet/Auspice";
 import Chronicle from "@src/components/Sheet/Chronicle";
-import Concept from "@src/components/Sheet/Concept";
 import Crinos from "@src/components/Sheet/Crinos";
 import Dottable from "@src/components/Sheet/Dottable";
 import GarouForms from "@src/components/Sheet/GarouForms";
@@ -11,14 +9,12 @@ import Harano from "@src/components/Sheet/Harano";
 import Hauglosk from "@src/components/Sheet/Hauglosk";
 import Health from "@src/components/Sheet/Health";
 import Inputable from "@src/components/Sheet/Inputable";
-import Name from "@src/components/Sheet/Name";
-import Patron from "@src/components/Sheet/Patron";
 import Rage from "@src/components/Sheet/Rage";
 import { Renown } from "@src/components/Sheet/Renown";
+import Selectable from "@src/components/Sheet/Selectable";
 import Separator from "@src/components/Sheet/Separator";
 import SheetContainer from "@src/components/Sheet/SheetContainer";
 import Skill from "@src/components/Sheet/Skill";
-import Tribe from "@src/components/Sheet/Tribe";
 import Willpower from "@src/components/Sheet/Willpower";
 import RusticBox from "@src/components/Styles/RusticBox";
 import Sheet from "@src/database/Sheet";
@@ -26,10 +22,12 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import ReactCardFlip from "react-card-flip";
+import { useTranslation } from "react-i18next";
 import { useSwipeable } from "react-swipeable";
 
 const SheetSinglePage = () => {
   const router = useRouter();
+  const { t } = useTranslation();
   const { slug } = router.query;
   const [item, setItem] = useState<Sheet>();
   const [isFlipped, setIsFlipped] = useState(false);
@@ -67,20 +65,101 @@ const SheetSinglePage = () => {
                   window.location.href = "/sheet";
                 },
                 delete: () => {
-                  if (confirm("Are you sure you want to delete this sheet?"))
+                  if (
+                    confirm(
+                      t("Are you sure you want to delete this sheet?", {
+                        context: "sheet",
+                      })
+                    )
+                  )
                     item.delete().then(() => (window.location.href = "/sheet"));
                 },
               }}
             >
               <div style={{ display: "flex" }}>
-                <Name sheet={item} />
-                <Concept sheet={item} />
-                <Patron sheet={item} />
+                <Inputable
+                  title={t("Name", { context: "sheet" })}
+                  value={data.name || ""}
+                  onChange={(e) => item.setName(e.target.value)}
+                />
+                <Inputable
+                  title={t("Concept", { context: "sheet" })}
+                  value={data.concept || ""}
+                  onChange={(e) => item.setConcept(e.target.value)}
+                />
+                <Inputable
+                  title={t("Patron", { context: "sheet" })}
+                  value={data.patron || ""}
+                  onChange={(e) => item.setPatron(e.target.value)}
+                />
               </div>
               <div style={{ display: "flex" }}>
                 <Chronicle sheet={item} />
-                <Auspice sheet={item} />
-                <Tribe sheet={item} />
+                <Selectable
+                  title={t("Auspice", { context: "sheet" })}
+                  value={data.auspice || "none"}
+                  onChange={(e) => item.setAuspice(e.target.value)}
+                  options={[
+                    { id: "ahroun", name: "Ahroun" },
+                    { id: "galliard", name: "Galliard" },
+                    { id: "philodox", name: "Philodox" },
+                    { id: "ragabash", name: "Ragabash" },
+                    { id: "theurge", name: "Theurge" },
+                  ]}
+                  noOptions={t("Select an auspice", { context: "sheet" })}
+                />
+                <Selectable
+                  title={t("Tribe", { context: "sheet" })}
+                  value={data.tribe || "none"}
+                  onChange={(e) => item.setTribe(e.target.value)}
+                  options={[
+                    {
+                      id: "red-talons",
+                      name: t("Red Talons", { context: "sheet" }),
+                    },
+                    {
+                      id: "glass-walkers",
+                      name: t("Glasswalkers", { context: "sheet" }),
+                    },
+                    {
+                      id: "ghost-council",
+                      name: t("Ghost Council", { context: "sheet" }),
+                    },
+                    {
+                      id: "harth-wardens",
+                      name: t("Harth Wardens", { context: "sheet" }),
+                    },
+                    {
+                      id: "children-of-gaia",
+                      name: t("Children of Gaia", { context: "sheet" }),
+                    },
+                    {
+                      id: "black-furies",
+                      name: t("Black Furies", { context: "sheet" }),
+                    },
+                    {
+                      id: "gale-stalkers",
+                      name: t("Galestalkers", { context: "sheet" }),
+                    },
+                    {
+                      id: "bone-gnawers",
+                      name: t("Bonegnawers", { context: "sheet" }),
+                    },
+                    {
+                      id: "shadow-lords",
+                      name: t("Shadow Lords", { context: "sheet" }),
+                    },
+                    {
+                      id: "silver-fangs",
+                      name: t("Silver Fangs", { context: "sheet" }),
+                    },
+                    {
+                      id: "silent-striders",
+                      name: t("Silent striders", { context: "sheet" }),
+                    },
+                  ]}
+                  noOptions={t("Select a tribe", { context: "sheet" })}
+                />
               </div>
               <Separator text="ATTRIBUTES" />
               <div style={{ display: "flex" }}>
@@ -93,24 +172,24 @@ const SheetSinglePage = () => {
                       marginBottom: "15px",
                     }}
                   >
-                    Physical
+                    {t("Physical", { context: "sheet" })}
                   </div>
                   <Dottable
-                    title="Strength"
+                    title={t("Strength", { context: "sheet" })}
                     getValue={() => data.attributes.physical.strength}
                     saveValue={(value) =>
                       item.setAttributes("physical", "strength", value)
                     }
                   />
                   <Dottable
-                    title="Dexterity"
+                    title={t("Dexterity", { context: "sheet" })}
                     getValue={() => data.attributes.physical.dexterity}
                     saveValue={(value) =>
                       item.setAttributes("physical", "dexterity", value)
                     }
                   />
                   <Dottable
-                    title="Stamina"
+                    title={t("Stamina", { context: "sheet" })}
                     getValue={() => data.attributes.physical.stamina}
                     saveValue={(value) =>
                       item.setAttributes("physical", "stamina", value)
@@ -126,24 +205,24 @@ const SheetSinglePage = () => {
                       marginBottom: "15px",
                     }}
                   >
-                    Social
+                    {t("Social", { context: "sheet" })}
                   </div>
                   <Dottable
-                    title="appearance"
+                    title={t("Appearance", { context: "sheet" })}
                     getValue={() => data.attributes.social.appearance}
                     saveValue={(value) =>
                       item.setAttributes("social", "appearance", value)
                     }
                   />
                   <Dottable
-                    title="charisma"
+                    title={t("Charisma", { context: "sheet" })}
                     getValue={() => data.attributes.social.charisma}
                     saveValue={(value) =>
                       item.setAttributes("social", "charisma", value)
                     }
                   />
                   <Dottable
-                    title="manipulation"
+                    title={t("Manipulation", { context: "sheet" })}
                     getValue={() => data.attributes.social.manipulation}
                     saveValue={(value) =>
                       item.setAttributes("social", "manipulation", value)
@@ -159,24 +238,24 @@ const SheetSinglePage = () => {
                       marginBottom: "15px",
                     }}
                   >
-                    Mental
+                    {t("Mental", { context: "sheet" })}
                   </div>
                   <Dottable
-                    title="intelligence"
+                    title={t("Intelligence", { context: "sheet" })}
                     getValue={() => data.attributes.mental.intelligence}
                     saveValue={(value) =>
                       item.setAttributes("mental", "intelligence", value)
                     }
                   />
                   <Dottable
-                    title="wits"
+                    title={t("Wits", { context: "sheet" })}
                     getValue={() => data.attributes.mental.wits}
                     saveValue={(value) =>
                       item.setAttributes("mental", "wits", value)
                     }
                   />
                   <Dottable
-                    title="resolve"
+                    title={t("Resolve", { context: "sheet" })}
                     getValue={() => data.attributes.mental.resolve}
                     saveValue={(value) =>
                       item.setAttributes("mental", "resolve", value)
@@ -203,67 +282,67 @@ const SheetSinglePage = () => {
               >
                 <Crinos sheet={item} />
               </div>
-              <Separator text="SKILLS" />
+              <Separator text={t("SKILLS", { context: "sheet" })} />
               <div style={{ display: "flex" }}>
                 <div style={{ width: "100%" }}>
                   <Skill
-                    title="athletics"
+                    title={t("Athletics", { context: "sheet" })}
                     getValue={() => data.skills.physical.athletics}
                     saveValue={(value) =>
                       item.setSkill("physical", "athletics", value)
                     }
                   />
                   <Skill
-                    title="brawl"
+                    title={t("Brawl", { context: "sheet" })}
                     getValue={() => data.skills.physical.brawl}
                     saveValue={(value) =>
                       item.setSkill("physical", "brawl", value)
                     }
                   />
                   <Skill
-                    title="craft"
+                    title={t("Craft", { context: "sheet" })}
                     getValue={() => data.skills.physical.craft}
                     saveValue={(value) =>
                       item.setSkill("physical", "craft", value)
                     }
                   />
                   <Skill
-                    title="driving"
+                    title={t("Driving", { context: "sheet" })}
                     getValue={() => data.skills.physical.drive}
                     saveValue={(value) =>
                       item.setSkill("physical", "drive", value)
                     }
                   />
                   <Skill
-                    title="firearms"
+                    title={t("Firearms", { context: "sheet" })}
                     getValue={() => data.skills.physical.firearms}
                     saveValue={(value) =>
                       item.setSkill("physical", "firearms", value)
                     }
                   />
                   <Skill
-                    title="larceny"
+                    title={t("Larceny", { context: "sheet" })}
                     getValue={() => data.skills.physical.larceny}
                     saveValue={(value) =>
                       item.setSkill("physical", "larceny", value)
                     }
                   />
                   <Skill
-                    title="melee"
+                    title={t("Melee", { context: "sheet" })}
                     getValue={() => data.skills.physical.melee}
                     saveValue={(value) =>
                       item.setSkill("physical", "melee", value)
                     }
                   />
                   <Skill
-                    title="stealth"
+                    title={t("Stealth", { context: "sheet" })}
                     getValue={() => data.skills.physical.stealth}
                     saveValue={(value) =>
                       item.setSkill("physical", "stealth", value)
                     }
                   />
                   <Skill
-                    title="survival"
+                    title={t("Survival", { context: "sheet" })}
                     getValue={() => data.skills.physical.survival}
                     saveValue={(value) =>
                       item.setSkill("physical", "survival", value)
@@ -272,63 +351,63 @@ const SheetSinglePage = () => {
                 </div>
                 <div style={{ width: "100%" }}>
                   <Skill
-                    title="animalKen"
+                    title={t("Animal Ken", { context: "sheet" })}
                     getValue={() => data.skills.social.animalKen}
                     saveValue={(value) =>
                       item.setSkill("social", "animalKen", value)
                     }
                   />
                   <Skill
-                    title="etiquette"
+                    title={t("Etiquette", { context: "sheet" })}
                     getValue={() => data.skills.social.etiquette}
                     saveValue={(value) =>
                       item.setSkill("social", "etiquette", value)
                     }
                   />
                   <Skill
-                    title="insight"
+                    title={t("Insight", { context: "sheet" })}
                     getValue={() => data.skills.social.insight}
                     saveValue={(value) =>
                       item.setSkill("social", "insight", value)
                     }
                   />
                   <Skill
-                    title="intimidation"
+                    title={t("Intimidation", { context: "sheet" })}
                     getValue={() => data.skills.social.intimidation}
                     saveValue={(value) =>
                       item.setSkill("social", "intimidation", value)
                     }
                   />
                   <Skill
-                    title="leadership"
+                    title={t("Leadership", { context: "sheet" })}
                     getValue={() => data.skills.social.leadership}
                     saveValue={(value) =>
                       item.setSkill("social", "leadership", value)
                     }
                   />
                   <Skill
-                    title="performance"
+                    title={t("Performance", { context: "sheet" })}
                     getValue={() => data.skills.social.performance}
                     saveValue={(value) =>
                       item.setSkill("social", "performance", value)
                     }
                   />
                   <Skill
-                    title="persuasion"
+                    title={t("Persuasion", { context: "sheet" })}
                     getValue={() => data.skills.social.persuasion}
                     saveValue={(value) =>
                       item.setSkill("social", "persuasion", value)
                     }
                   />
                   <Skill
-                    title="streetwise"
+                    title={t("Streetwise", { context: "sheet" })}
                     getValue={() => data.skills.social.streetwise}
                     saveValue={(value) =>
                       item.setSkill("social", "streetwise", value)
                     }
                   />
                   <Skill
-                    title="subterfuge"
+                    title={t("Subterfuge", { context: "sheet" })}
                     getValue={() => data.skills.social.subterfuge}
                     saveValue={(value) =>
                       item.setSkill("social", "subterfuge", value)
@@ -337,63 +416,63 @@ const SheetSinglePage = () => {
                 </div>
                 <div style={{ width: "100%" }}>
                   <Skill
-                    title="academics"
+                    title={t("Academics", { context: "sheet" })}
                     getValue={() => data.skills.mental.academics}
                     saveValue={(value) =>
                       item.setSkill("mental", "academics", value)
                     }
                   />
                   <Skill
-                    title="awareness"
+                    title={t("Awareness", { context: "sheet" })}
                     getValue={() => data.skills.mental.awareness}
                     saveValue={(value) =>
                       item.setSkill("mental", "awareness", value)
                     }
                   />
                   <Skill
-                    title="finance"
+                    title={t("Finance", { context: "sheet" })}
                     getValue={() => data.skills.mental.finance}
                     saveValue={(value) =>
                       item.setSkill("mental", "finance", value)
                     }
                   />
                   <Skill
-                    title="investigation"
+                    title={t("Investigation", { context: "sheet" })}
                     getValue={() => data.skills.mental.investigation}
                     saveValue={(value) =>
                       item.setSkill("mental", "investigation", value)
                     }
                   />
                   <Skill
-                    title="medicine"
+                    title={t("Medicine", { context: "sheet" })}
                     getValue={() => data.skills.mental.medicine}
                     saveValue={(value) =>
                       item.setSkill("mental", "medicine", value)
                     }
                   />
                   <Skill
-                    title="occult"
+                    title={t("Occult", { context: "sheet" })}
                     getValue={() => data.skills.mental.occult}
                     saveValue={(value) =>
                       item.setSkill("mental", "occult", value)
                     }
                   />
                   <Skill
-                    title="politics"
+                    title={t("Politics", { context: "sheet" })}
                     getValue={() => data.skills.mental.politics}
                     saveValue={(value) =>
                       item.setSkill("mental", "politics", value)
                     }
                   />
                   <Skill
-                    title="science"
+                    title={t("Science", { context: "sheet" })}
                     getValue={() => data.skills.mental.science}
                     saveValue={(value) =>
                       item.setSkill("mental", "science", value)
                     }
                   />
                   <Skill
-                    title="technology"
+                    title={t("Technology", { context: "sheet" })}
                     getValue={() => data.skills.mental.technology}
                     saveValue={(value) =>
                       item.setSkill("mental", "technology", value)
@@ -401,28 +480,28 @@ const SheetSinglePage = () => {
                   />
                 </div>
               </div>
-              <Separator text="RENOWN" />
+              <Separator text={t("RENOWN", { context: "sheet" })} />
               <div style={{ display: "flex", margin: "20px 0 60px 0" }}>
                 <Renown
                   allowZero
-                  title="Glory"
+                  title={t("Glory", { context: "sheet" })}
                   getValue={() => data.renown.glory}
                   saveValue={(value) => item.setRenown("glory", value)}
                 />
                 <Renown
                   allowZero
-                  title="Honor"
+                  title={t("Honor", { context: "sheet" })}
                   getValue={() => data.renown.honor}
                   saveValue={(value) => item.setRenown("honor", value)}
                 />
                 <Renown
                   allowZero
-                  title="Wisdom"
+                  title={t("Wisdom", { context: "sheet" })}
                   getValue={() => data.renown.wisdom}
                   saveValue={(value) => item.setRenown("wisdom", value)}
                 />
               </div>
-              <Separator text="GIFT & RITES" />
+              <Separator text={t("GIFT & RITES", { context: "sheet" })} />
               <GiftList sheet={item} />
               <div
                 style={{
@@ -450,7 +529,13 @@ const SheetSinglePage = () => {
                   window.location.href = "/sheet";
                 },
                 delete: () => {
-                  if (confirm("Are you sure you want to delete this sheet?"))
+                  if (
+                    confirm(
+                      t("Are you sure you want to delete this sheet?", {
+                        context: "sheet",
+                      })
+                    )
+                  )
                     item.delete().then(() => (window.location.href = "/sheet"));
                 },
               }}
@@ -458,7 +543,7 @@ const SheetSinglePage = () => {
               <RusticBox>
                 <RusticBox.Item
                   style={{ minHeight: "200px" }}
-                  title="Chronicle Tenets"
+                  title={t("Chronicle Tenets", { context: "sheet" })}
                 >
                   <Inputable
                     type="textarea"
@@ -470,7 +555,7 @@ const SheetSinglePage = () => {
                 </RusticBox.Item>
                 <RusticBox.Item
                   style={{ minHeight: "200px" }}
-                  title="Touchstones"
+                  title={t("Touchstones", { context: "sheet" })}
                 >
                   <Inputable
                     type="textarea"
@@ -482,7 +567,7 @@ const SheetSinglePage = () => {
                 </RusticBox.Item>
                 <RusticBox.Item
                   style={{ minHeight: "200px" }}
-                  title="Favors & Banes"
+                  title={t("Favors & Banes", { context: "sheet" })}
                 >
                   <Inputable
                     type="textarea"
@@ -513,7 +598,7 @@ const SheetSinglePage = () => {
                         minHeight: "200px",
                       }}
                       titleSize="medium"
-                      title="Appearance"
+                      title={t("Appearance", { context: "sheet" })}
                     >
                       <Inputable
                         type="textarea"
@@ -534,7 +619,7 @@ const SheetSinglePage = () => {
                         minHeight: "300px",
                       }}
                       titleSize="medium"
-                      title="History"
+                      title={t("History", { context: "sheet" })}
                     >
                       <Inputable
                         type="textarea"
@@ -557,7 +642,7 @@ const SheetSinglePage = () => {
                     <RusticBox.Item
                       style={{ minHeight: "200px" }}
                       titleSize="medium"
-                      title="Notes"
+                      title={t("Notes", { context: "sheet" })}
                     >
                       <Inputable
                         type="textarea"
@@ -569,11 +654,11 @@ const SheetSinglePage = () => {
                     </RusticBox.Item>
                   </RusticBox>
                   <p className="ww-tall-title" style={{ marginTop: "20px" }}>
-                    Total Experience:
+                    {t("Total Experience:", { context: "sheet" })}
                     _______________________________________________
                   </p>
                   <p className="ww-tall-title" style={{ marginTop: "20px" }}>
-                    Spent Experience:
+                    {t("Spent Experience:", { context: "sheet" })}
                     _______________________________________________
                   </p>
                 </div>

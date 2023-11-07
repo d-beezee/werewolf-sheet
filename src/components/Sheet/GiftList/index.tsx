@@ -2,6 +2,7 @@ import Button from "@src/components/Styles/Button";
 import DeleteButton from "@src/components/Styles/DeleteButton";
 import Sheet from "@src/database/Sheet";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import Inputable from "../Inputable";
 
@@ -12,6 +13,7 @@ const GiftListComponent = ({
   sheet: Sheet;
   className?: string;
 }) => {
+  const { t } = useTranslation();
   const [gifts, setGifts] = useState(sheet.get().gifts ?? []);
 
   useEffect(() => {
@@ -23,10 +25,10 @@ const GiftListComponent = ({
       <table>
         <thead>
           <tr>
-            <th className="name">Name</th>
-            <th className="pool">Pool</th>
-            <th className="cost">Cost</th>
-            <th className="notes">Notes</th>
+            <th className="name">{t("Name", { context: "giftlist" })}</th>
+            <th className="pool">{t("Pool", { context: "giftlist" })}</th>
+            <th className="cost">{t("Cost", { context: "giftlist" })}</th>
+            <th className="notes">{t("Notes", { context: "giftlist" })}</th>
             <th className="delete"></th>
           </tr>
         </thead>
@@ -117,7 +119,7 @@ const GiftListComponent = ({
             setGifts(newGifts);
           }}
         >
-          Add Gift/Rite
+          {t("Add Gift/Rite", { context: "sheet" })}
         </Button>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import RusticBox from "@src/components/Styles/RusticBox";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 
 const ItemComponent = ({
@@ -48,52 +49,80 @@ const Item = styled(ItemComponent)`
 `;
 
 const GarouFormsComponent = ({ className }: { className?: string }) => {
+  const { t } = useTranslation();
   return (
     <>
       <RusticBox className={className} direction="column">
         <RusticBox.Item
           className="title"
           titleSize="large"
-          title="Forms of the Garou"
+          title={t("Forms of the Garou", { context: "sheet" })}
         ></RusticBox.Item>
         <Item title="HOMID" image={<img src="/forms/Homid.png" />}>
-          <p>Cost: Free</p>
-          <p>Silver Immunity</p>
+          <p>{t("Cost: Free", { context: "garouforms" })}</p>
+          <p>{t("Silver Immunity", { context: "garouforms" })}</p>
         </Item>
         <Item title="GLABRO" image={<img src="/forms/Glabro.png" />}>
-          <p>Cost: One Rage Check</p>
-          <p>Physical Tests: Two-Dice Bonus</p>
-          <p>Social Tests: Two-Dice Penalty*</p>
-          <p>Regenerate: 1 per Rage Check</p>
+          <p>{t("Cost: One Rage Check", { context: "garouforms" })}</p>
+          <p>
+            {t("Physical Tests: Two-Dice Bonus", { context: "garouforms" })}
+          </p>
+          <p>
+            {t("Social Tests: Two-Dice Penalty", { context: "garouforms" })}*
+          </p>
+          <p>{t("Regenerate: 1 per Rage Check", { context: "garouforms" })}</p>
         </Item>
         <Item title="CRINOS" image={<img src="/forms/Crinos.png" />}>
-          <p>Cost: Two Rage Check</p>
-          <p>Spend 1 willpower per turn or frenzy</p>
-          <p>Physical Tests: Four-Dice Bonus</p>
-          <p>Health Level: +4</p>
-          <p>Social and Stealth Tests: Fail</p>
-          <p>Regenerate: 2 per Rage Check</p>
-          <p>Claws: +3</p>
-          <p>Bite: +1 Aggravated</p>
-          <p>Causes Delirium</p>
+          <p>{t("Cost: Two Rage Check", { context: "garouforms" })}</p>
+          <p>
+            {t("Spend 1 willpower per turn or frenzy", {
+              context: "garouforms",
+            })}
+          </p>
+          <p>
+            {t("Physical Tests: Four-Dice Bonus", { context: "garouforms" })}
+          </p>
+          <p>{t("Health Level: +4", { context: "garouforms" })}</p>
+          <p>
+            {t("Social and Stealth Tests: Fail", { context: "garouforms" })}
+          </p>
+          <p>{t("Regenerate: 2 per Rage Check", { context: "garouforms" })}</p>
+          <p>{t("Claws: +3", { context: "garouforms" })}</p>
+          <p>{t("Bite: +1 Aggravated", { context: "garouforms" })}</p>
+          <p>{t("Causes Delirium", { context: "garouforms" })}</p>
         </Item>
         <Item title="HISPO" image={<img src="/forms/Hispo.png" />}>
-          <p>Cost: One Rage Check</p>
-          <p>Physical Tests: Two-Dice Bonus**</p>
-          <p>Stealth Tests: Two-Dice Penalty</p>
-          <p>Social Tests: Limited to wolves and Garou</p>
-          <p>Regenerate: 1 per Rage Check</p>
-          <p>Bite: +1 Aggravated</p>
+          <p>{t("Cost: One Rage Check", { context: "garouforms" })}</p>
+          <p>
+            {t("Physical Tests: Two-Dice Bonus", { context: "garouforms" })}**
+          </p>
+          <p>
+            {t("Stealth Tests: Two-Dice Penalty", { context: "garouforms" })}
+          </p>
+          <p>
+            {t("Social Tests: Limited to wolves and Garou", {
+              context: "garouforms",
+            })}
+          </p>
+          <p>{t("Regenerate: 1 per Rage Check", { context: "garouforms" })}</p>
+          <p>{t("Bite: +1 Aggravated", { context: "garouforms" })}</p>
         </Item>
         <Item title="LUPUS" image={<img src="/forms/Lupus.png" />}>
-          <p>Cost: Free</p>
-          <p>Silver Immunity</p>
-          <p>Social Tests: Limited to wolves</p>
+          <p>{t("Cost: Free", { context: "garouforms" })}</p>
+          <p>{t("Silver Immunity", { context: "garouforms" })}</p>
+          <p>
+            {t("Social Tests: Limited to wolves", { context: "garouforms" })}
+          </p>
         </Item>
       </RusticBox>
 
-      <p>* Does not apply to intimidation or non-humans</p>
-      <p>** Does not apply to stealth test</p>
+      <p>
+        *{" "}
+        {t("Does not apply to intimidation or non-humans", {
+          context: "garouforms",
+        })}
+      </p>
+      <p>** {t("Does not apply to stealth test", { context: "garouforms" })}</p>
     </>
   );
 };

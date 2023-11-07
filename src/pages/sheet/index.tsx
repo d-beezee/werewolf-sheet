@@ -4,10 +4,12 @@ import Button from "@src/components/Styles/Button";
 import Sheet, { SheetAlreadyExistsError } from "@src/database/Sheet";
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const SheetPage = () => {
   const [loading, setLoading] = useState(true);
   const [list, setList] = useState<string[]>([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     Sheet.list().then((sheets) => {
@@ -44,11 +46,11 @@ const SheetPage = () => {
                   });
               }}
             >
-              create
+              {t("Create", { context: "sheet-index" })}
             </Button>
           </div>
           <h1 style={{ color: "#fff", textAlign: "center", fontSize: "3rem" }}>
-            Personaggi
+            {t("Characters", { context: "sheet-index" })}
           </h1>
           {loading && <Loader />}
           {list.map((item, i) => (

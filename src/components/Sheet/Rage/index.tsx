@@ -1,4 +1,5 @@
 import Xcontent from "@src/components/Styles/Xcontent";
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import Dottable from "../Dottable";
 
@@ -11,10 +12,11 @@ const RageComponent = ({
   saveValue: (value: number) => void;
   className?: string;
 }) => {
+  const { t } = useTranslation();
   return (
     <Dottable
       className={className}
-      title="Rage"
+      title={t("Rage", { context: "sheet" })}
       getValue={getValue}
       saveValue={saveValue}
       allowZero

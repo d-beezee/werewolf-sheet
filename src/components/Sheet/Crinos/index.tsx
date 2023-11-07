@@ -1,4 +1,5 @@
 import Sheet from "@src/database/Sheet";
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import Damageable from "../Damageable";
 
@@ -25,12 +26,13 @@ const CustomDamageable = styled(Damageable)`
 `;
 
 const Crinos = ({ sheet }: { sheet: Sheet }) => {
+  const { t } = useTranslation();
   const data = sheet.get();
   if (data === null) return null;
 
   return (
     <CustomDamageable
-      title="Crinos"
+      title={t("Crinos", { context: "sheet" })}
       max={5}
       total={5}
       getDamageable={() => data.crinos}

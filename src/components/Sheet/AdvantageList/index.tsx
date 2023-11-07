@@ -2,6 +2,7 @@ import DeleteButton from "@src/components/Styles/DeleteButton";
 import RusticBox from "@src/components/Styles/RusticBox";
 import Sheet from "@src/database/Sheet";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import Dottable from "../Dottable";
 import Inputable from "../Inputable";
@@ -14,6 +15,7 @@ const AdvantageListComponent = ({
   className?: string;
   sheet: Sheet;
 }) => {
+  const { t } = useTranslation();
   const [advantages, setAdvantages] = useState(sheet.get().advantages ?? []);
 
   useEffect(() => {
@@ -25,7 +27,7 @@ const AdvantageListComponent = ({
       <RusticBox.Item
         className="title"
         titleSize="large"
-        title="Advantages & Flaws"
+        title={t("Advantages & Flaws", { context: "advantagelist" })}
       ></RusticBox.Item>
       {advantages.map((advantage, i) => (
         <RusticBox.Item
@@ -91,7 +93,7 @@ const AdvantageListComponent = ({
             setAdvantages(newAdvantages);
           }}
         >
-          Add
+          {t("Add", { context: "advantagelist" })}
         </button>
       </RusticBox.Item>
     </RusticBox>
