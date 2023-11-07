@@ -646,7 +646,7 @@ const SheetSinglePage = () => {
                     >
                       <Inputable
                         type="textarea"
-                        value={data.appearance}
+                        value={data.notes}
                         onChange={(e) => {
                           item.setNotes(e.target.value);
                         }}
