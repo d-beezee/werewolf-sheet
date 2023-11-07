@@ -106,7 +106,7 @@ const GiftListComponent = ({
         }}
       >
         <Button
-          size="small"
+          size="medium"
           onClick={() => {
             const newGifts = [...gifts];
             newGifts.push({
