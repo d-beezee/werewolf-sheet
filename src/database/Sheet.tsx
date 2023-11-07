@@ -201,7 +201,8 @@ class Sheet {
 
   get maxWillpower() {
     return (
-      this.get().attributes.mental.wits + this.get().attributes.mental.resolve
+      this.get().attributes.social.composure +
+      this.get().attributes.mental.resolve
     );
   }
 
