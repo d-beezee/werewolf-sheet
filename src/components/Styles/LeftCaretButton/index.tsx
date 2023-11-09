@@ -32,8 +32,8 @@ const LeftCaretButtonComponent = ({
             y2="895.84003"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#e00" offset="0" id="stop2" />
-            <stop stop-color="#9a0000" offset="1" id="stop4" />
+            <stop stopColor="#e00" offset="0" id="stop2" />
+            <stop stopColor="#9a0000" offset="1" id="stop4" />
           </linearGradient>
         </defs>
         <g id="layer1">

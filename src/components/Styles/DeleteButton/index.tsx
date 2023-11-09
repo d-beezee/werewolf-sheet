@@ -21,7 +21,7 @@ const DeleteButtonComponent = ({
         width={width}
         height={height}
         viewBox="0 0 256 256"
-        enable-background="new 0 0 256 256"
+        enableBackground="new 0 0 256 256"
       >
         <g>
           <g>

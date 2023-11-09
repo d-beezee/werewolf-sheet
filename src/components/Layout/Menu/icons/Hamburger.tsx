@@ -6,7 +6,7 @@ const Hamburger = () => (
     height="100"
     viewBox="0 0 100 100"
   >
-    <g fill="none" stroke="#000" stroke-width="7.999" stroke-linecap="round">
+    <g fill="none" stroke="#000" strokeWidth="7.999" strokeLinecap="round">
       <path d="M 55,26.000284 L 24.056276,25.999716" />
       <path d="M 24.056276,49.999716 L 75.943724,50.000284" />
       <path d="M 45,73.999716 L 75.943724,74.000284" />

@@ -5,7 +5,7 @@ const Delete = () => (
     x="0px"
     y="0px"
     viewBox="0 0 256 256"
-    enable-background="new 0 0 256 256"
+    enableBackground="new 0 0 256 256"
   >
     <g>
       <g>
