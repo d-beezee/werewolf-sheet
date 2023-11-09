@@ -1,5 +1,4 @@
 import BackButton from "@src/components/Styles/BackButton";
-import DeleteButton from "@src/components/Styles/DeleteButton";
 import LeftCaretButton from "@src/components/Styles/LeftCaretButton";
 import RightCaretButton from "@src/components/Styles/RightCaretButton";
 import { useEffect, useRef, useState } from "react";
@@ -28,8 +27,7 @@ const SheetContainerComponent = styled.div`
     z-index: 100;
   }
 
-  .sheet-button.back-button,
-  .sheet-button.delete-button {
+  .sheet-button.back-button {
     top: 35px;
   }
   .sheet-button.flip-right-button,
@@ -41,7 +39,6 @@ const SheetContainerComponent = styled.div`
   .sheet-button.flip-left-button {
     left: 9.5%;
   }
-  .sheet-button.delete-button,
   .sheet-button.flip-right-button {
     right: 10%;
   }
@@ -67,7 +64,6 @@ const SheetContainer = ({
   action: {
     flip: () => void;
     back: () => void;
-    delete: () => void;
   };
   children: React.ReactNode;
 }) => {
@@ -96,9 +92,6 @@ const SheetContainer = ({
       >
         <div className="sheet-button back-button">
           <BackButton width={40} height={40} onClick={action.back} />
-        </div>
-        <div className="sheet-button delete-button">
-          <DeleteButton width={40} height={40} onClick={action.delete} />
         </div>
         <div className="sheet-button flip-right-button">
           <RightCaretButton width={60} height={60} onClick={action.flip} />

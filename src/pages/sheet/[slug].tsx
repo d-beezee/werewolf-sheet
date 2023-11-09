@@ -1,4 +1,5 @@
 import Layout from "@src/components/Layout";
+import Menu from "@src/components/Layout/Menu";
 import AdvantageList from "@src/components/Sheet/AdvantageList";
 import Chronicle from "@src/components/Sheet/Chronicle";
 import Crinos from "@src/components/Sheet/Crinos";
@@ -18,6 +19,7 @@ import Skill from "@src/components/Sheet/Skill";
 import Willpower from "@src/components/Sheet/Willpower";
 import RusticBox from "@src/components/Styles/RusticBox";
 import Sheet from "@src/database/Sheet";
+import useWindowDimensions from "@src/hooks/useWindowDimensions";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -27,6 +29,7 @@ import { useSwipeable } from "react-swipeable";
 
 const SheetSinglePage = () => {
   const router = useRouter();
+  const [width] = useWindowDimensions();
   const { t } = useTranslation();
   const { slug } = router.query;
   const [item, setItem] = useState<Sheet>();
@@ -49,13 +52,28 @@ const SheetSinglePage = () => {
   const data = item.get();
   if (data === null) return <div>not found</div>;
 
+  console.log(width);
   return (
     <Layout>
       <div>
         <Head>
           <title>Werewolf sheet</title>
         </Head>
-
+        <Menu
+          size={width < 768 ? 400 : undefined}
+          actions={{
+            onDelete: () => {
+              if (
+                confirm(
+                  t("Are you sure you want to delete this sheet?", {
+                    context: "sheet",
+                  })
+                )
+              )
+                item.delete().then(() => (window.location.href = "/sheet"));
+            },
+          }}
+        />
         <main {...handlers}>
           <ReactCardFlip isFlipped={isFlipped}>
             <SheetContainer
@@ -63,16 +81,6 @@ const SheetSinglePage = () => {
                 flip: () => setIsFlipped(!isFlipped),
                 back: () => {
                   window.location.href = "/sheet";
-                },
-                delete: () => {
-                  if (
-                    confirm(
-                      t("Are you sure you want to delete this sheet?", {
-                        context: "sheet",
-                      })
-                    )
-                  )
-                    item.delete().then(() => (window.location.href = "/sheet"));
                 },
               }}
             >
@@ -629,16 +637,6 @@ const SheetSinglePage = () => {
                 flip: () => setIsFlipped(!isFlipped),
                 back: () => {
                   window.location.href = "/sheet";
-                },
-                delete: () => {
-                  if (
-                    confirm(
-                      t("Are you sure you want to delete this sheet?", {
-                        context: "sheet",
-                      })
-                    )
-                  )
-                    item.delete().then(() => (window.location.href = "/sheet"));
                 },
               }}
             >
