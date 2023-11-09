@@ -52,7 +52,6 @@ const SheetSinglePage = () => {
   const data = item.get();
   if (data === null) return <div>not found</div>;
 
-  console.log(width);
   return (
     <Layout>
       <div>
