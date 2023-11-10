@@ -17,11 +17,16 @@ const SheetSinglePage = () => {
     });
   }, [slug]);
 
+  useEffect(() => {
+    if (item) {
+      setTimeout(() => {
+        window.print();
+        location.href = `/sheet/${slug}`;
+      }, 1000);
+    }
+  }, [item]);
+
   if (item === undefined || slug === undefined) return <div>loading...</div>;
-  setTimeout(() => {
-    window.print();
-    location.href = `/sheet/${slug}`;
-  }, 1000);
 
   return (
     <>
