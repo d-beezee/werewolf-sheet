@@ -1,10 +1,8 @@
 export const put = async (key: string, value: any) => {
-  const result = await fetch(
-    `/api/sheets/${key}?value=${JSON.stringify(value)}`,
-    {
-      method: "PUT",
-    }
-  ).then((res) => res.json());
+  const result = await fetch(`/api/sheets/${key}`, {
+    method: "PUT",
+    body: JSON.stringify(value),
+  }).then((res) => res.json());
   return result.message;
 };
 

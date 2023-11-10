@@ -1,6 +1,7 @@
+import auth from "@src/pages/api/auth/[...nextauth]";
 import { MongoClient } from "mongodb";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getSession } from "next-auth/react";
+import { getServerSession } from "next-auth/next";
 
 type ResponseData = {
   message: string;
@@ -8,7 +9,10 @@ type ResponseData = {
 
 const get = async (req: NextApiRequest, res: NextApiResponse<ResponseData>) => {
   const { id } = req.query;
-  const session = await getSession({ req: req });
+
+  const session = (await getServerSession(req, res, auth)) as {
+    user: { email: string };
+  } | null;
   if (!session) {
     return res.status(401).json({
       message: "Unauthorized",
@@ -45,18 +49,21 @@ const post = async (
 };
 
 const put = async (req: NextApiRequest, res: NextApiResponse<ResponseData>) => {
-  const { id, value } = req.query;
+  const { id } = req.query;
+  const { body } = req;
 
-  const session = await getSession({ req: req });
+  const session = (await getServerSession(req, res, auth)) as {
+    user: { email: string };
+  } | null;
   if (!session) {
     return res.status(401).json({
       message: "Unauthorized",
     });
   }
 
-  if (typeof id !== "string" || typeof value !== "string") {
+  if (typeof id !== "string") {
     res.status(400).json({
-      message: `Invalid key. ${id} ${value}}`,
+      message: `Invalid key. ${id}`,
     });
     return;
   }
@@ -65,13 +72,28 @@ const put = async (req: NextApiRequest, res: NextApiResponse<ResponseData>) => {
   const database = client.db(process.env.VERCEL_ENV || "development");
   const sheetsCollection = database.collection("sheets");
 
+  const sheet = await sheetsCollection.findOne({
+    id: `sheet-${id}`,
+    user: session?.user?.email || "anyone",
+  });
+
+  if (sheet === null || "data" in sheet === false) {
+    res.status(404).json({
+      message: "Not found.",
+    });
+    return;
+  }
+
   await sheetsCollection.updateOne(
     { id: `sheet-${id}` },
     {
       $set: {
         id: `sheet-${id}`,
-        data: JSON.parse(value),
-        user: [session?.user?.email || "anyone"],
+        data: {
+          ...sheet.data,
+          ...JSON.parse(body),
+        },
+        user: [session.user.email || "anyone"],
       },
     },
     {
@@ -86,7 +108,9 @@ const put = async (req: NextApiRequest, res: NextApiResponse<ResponseData>) => {
 
 const del = async (req: NextApiRequest, res: NextApiResponse<ResponseData>) => {
   const { id } = req.query;
-  const session = await getSession({ req: req });
+  const session = (await getServerSession(req, res, auth)) as {
+    user: { email: string };
+  } | null;
   if (!session) {
     return res.status(401).json({
       message: "Unauthorized",
