@@ -5,6 +5,7 @@ import Sheet, { SheetAlreadyExistsError } from "@src/database/Sheet";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 
 const SheetPage = () => {
   const [loading, setLoading] = useState(true);
@@ -54,22 +55,28 @@ const SheetPage = () => {
           </h1>
           {loading && <Loader />}
           {list.map((item, i) => (
-            <div
-              style={{ marginBottom: "50px", width: "33%", float: "left" }}
-              key={item.id}
-            >
+            <ButtonContainer key={item.id}>
               <Button
                 invert={i % 2 !== 0}
                 onClick={() => (window.location.href = `/sheet/${item.id}`)}
               >
                 {item.name}
               </Button>
-            </div>
+            </ButtonContainer>
           ))}
         </main>
       </div>
     </Layout>
   );
 };
+
+const ButtonContainer = styled.div`
+  margin-bottom: 50px;
+  width: 50%;
+  @media (min-width: 768px) {
+    width: 33%;
+  }
+  float: left;
+`;
 
 export default SheetPage;
