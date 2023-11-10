@@ -55,17 +55,63 @@ const SheetContainerComponent = styled.div`
       display: none;
     }
   }
+  @media print {
+    width: 350mm;
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    margin: 0;
+    padding: 0;
+    padding-top: 10mm;
+    background-size: 0;
+    box-shadow: none;
+    background: url(/sheetbg.jpg);
+    background-size: 350mm 440mm;
+
+    &:after {
+      position: absolute;
+      z-index: -1;
+      content: "";
+      background-size: 100%;
+      left: 0;
+      right: 0;
+      height: 440mm;
+      width: 350mm;
+      top: -10mm;
+      background-repeat: no-repeat;
+    }
+    & > div {
+      transform: scale(0.8);
+      input {
+        transform: none;
+      }
+    }
+    .sheet-button {
+      display: none;
+    }
+  }
+  @page {
+    size: 350mm 450mm;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin: 0;
+    -webkit-print-color-adjust: exact;
+  }
 `;
 
 const SheetContainer = ({
   action,
   children,
+  resize = true,
 }: {
   action: {
-    flip: () => void;
-    back: () => void;
+    flip?: () => void;
+    back?: () => void;
   };
   children: React.ReactNode;
+  resize?: boolean;
 }) => {
   const [width, setWidth] = useState(0);
   let containerWidth = document.querySelector("main")?.offsetWidth || 0;
@@ -82,7 +128,7 @@ const SheetContainer = ({
       <SheetContainerComponent
         ref={ref}
         style={
-          containerWidth < width
+          containerWidth < width && resize
             ? {
                 scale: percent.toFixed(2),
                 translate: `-${left.toFixed(2)}% -${left.toFixed(2)}%`,
@@ -90,15 +136,21 @@ const SheetContainer = ({
             : {}
         }
       >
-        <div className="sheet-button back-button">
-          <BackButton width={40} height={40} onClick={action.back} />
-        </div>
-        <div className="sheet-button flip-right-button">
-          <RightCaretButton width={60} height={60} onClick={action.flip} />
-        </div>
-        <div className="sheet-button flip-left-button">
-          <LeftCaretButton width={60} height={60} onClick={action.flip} />
-        </div>
+        {action.back && (
+          <div className="sheet-button back-button">
+            <BackButton width={40} height={40} onClick={action.back} />
+          </div>
+        )}
+        {action.flip && (
+          <div className="sheet-button flip-right-button">
+            <RightCaretButton width={60} height={60} onClick={action.flip} />
+          </div>
+        )}
+        {action.flip && (
+          <div className="sheet-button flip-left-button">
+            <LeftCaretButton width={60} height={60} onClick={action.flip} />
+          </div>
+        )}
         <div>{children}</div>
       </SheetContainerComponent>
     </>

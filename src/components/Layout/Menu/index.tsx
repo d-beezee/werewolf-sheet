@@ -165,7 +165,6 @@ const MenuComponent = ({
         />
         <MenuItemTwo
           size={size}
-          disabled
           onClick={() => {
             setActive(false);
             actions.onPrint && actions.onPrint();
