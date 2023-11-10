@@ -1,5 +1,6 @@
 import Layout from "@src/components/Layout";
 import Menu from "@src/components/Layout/Menu";
+import Modal from "@src/components/Layout/ShareModal";
 import AdvantageList from "@src/components/Sheet/AdvantageList";
 import Chronicle from "@src/components/Sheet/Chronicle";
 import Crinos from "@src/components/Sheet/Crinos";
@@ -33,6 +34,7 @@ const SheetSinglePage = () => {
   const { t } = useTranslation();
   const { slug } = router.query;
   const [item, setItem] = useState<Sheet>();
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [isFlipped, setIsFlipped] = useState(false);
   const handlers = useSwipeable({
     onSwipedLeft: () => setIsFlipped(!isFlipped),
@@ -58,6 +60,11 @@ const SheetSinglePage = () => {
         <Head>
           <title>Werewolf sheet</title>
         </Head>
+        <Modal
+          sheet={item}
+          open={isShareModalOpen}
+          onClose={() => setIsShareModalOpen(false)}
+        />
         <Menu
           size={width < 768 ? 400 : undefined}
           actions={{
@@ -71,6 +78,7 @@ const SheetSinglePage = () => {
               )
                 item.delete().then(() => (window.location.href = "/sheet"));
             },
+            onShare: () => setIsShareModalOpen(!isShareModalOpen),
           }}
         />
         <main {...handlers}>

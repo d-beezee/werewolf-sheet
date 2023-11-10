@@ -153,37 +153,38 @@ const MenuComponent = ({
 }) => {
   const [active, setActive] = useState(false);
   return (
-    <div className={`${className} ${active ? "active" : ""}`}>
-      <MenuItemOne
-        size={size}
-        onClick={() => {
-          setActive(false);
-          actions.onDelete && actions.onDelete();
-        }}
-        icon={<Delete />}
-      />
-      <MenuItemTwo
-        size={size}
-        disabled
-        onClick={() => {
-          setActive(false);
-          actions.onPrint && actions.onPrint();
-        }}
-        icon={<Print />}
-      />
-      <MenuItemThree
-        size={size}
-        disabled
-        onClick={() => {
-          setActive(false);
-          actions.onShare && actions.onShare();
-        }}
-        icon={<Share />}
-      />
-      <div className="menu" onClick={() => setActive(!active)}>
-        <Hamburger />
+    <>
+      <div className={`${className} ${active ? "active" : ""}`}>
+        <MenuItemOne
+          size={size}
+          onClick={() => {
+            setActive(false);
+            actions.onDelete && actions.onDelete();
+          }}
+          icon={<Delete />}
+        />
+        <MenuItemTwo
+          size={size}
+          disabled
+          onClick={() => {
+            setActive(false);
+            actions.onPrint && actions.onPrint();
+          }}
+          icon={<Print />}
+        />
+        <MenuItemThree
+          size={size}
+          onClick={() => {
+            setActive(false);
+            actions.onShare && actions.onShare();
+          }}
+          icon={<Share />}
+        />
+        <div className="menu" onClick={() => setActive(!active)}>
+          <Hamburger />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,4 +1,4 @@
-import { del, get, getAll, put } from "@src/database";
+import { del, get, getAll, getUsers, put, setUsers } from "@src/database";
 
 export class SheetAlreadyExistsError extends Error {}
 
@@ -114,6 +114,9 @@ class Sheet {
     if (data) this.data = data as unknown as SheetData;
     this.ready = true;
     return data;
+  }
+  public async getUsers() {
+    return await getUsers(this.name);
   }
 
   public get() {
@@ -429,6 +432,10 @@ class Sheet {
 
   private save() {
     return put(this.name, this.data);
+  }
+
+  public updateUsers(users: string[]) {
+    return setUsers(this.name, users);
   }
 
   public static async list() {
