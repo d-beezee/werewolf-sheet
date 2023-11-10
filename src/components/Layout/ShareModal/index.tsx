@@ -79,7 +79,25 @@ const ModalComponent = ({
 };
 
 const Modal = styled(ModalComponent)`
-  ${({ open }) => (open ? "" : "display: none;")}
+  ${({ open }) =>
+    open
+      ? `
+      .content {
+        transform: translateY(0);
+      }
+      .background {
+          opacity: 1;
+      }
+  `
+      : `
+      pointer-events: none;
+      .content {
+        transform: translateY(-500%);
+      }
+    .background {
+        opacity: 0;
+    }
+  `}
   width: 100%;
   height: 100%;
   position: fixed;
@@ -92,8 +110,10 @@ const Modal = styled(ModalComponent)`
     position: absolute;
     top: 0;
     z-index: -1;
+    transition: opacity 0.3s;
   }
   .content {
+    transition: transform 0.3s;
     border-radius: 35px;
     box-shadow: 2px 2px 10px 0px #000;
     position: absolute;
