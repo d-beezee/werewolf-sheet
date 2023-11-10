@@ -6,6 +6,14 @@ export const put = async (key: string, value: any) => {
   return result.message;
 };
 
+export const setUsers = async (key: string, value: string[]) => {
+  const result = await fetch(`/api/sheets/${key}/users`, {
+    method: "PUT",
+    body: JSON.stringify(value),
+  }).then((res) => res.json());
+  return result.message;
+};
+
 export const del = async (key: string) => {
   const result = await fetch(`/api/sheets/${key}`, {
     method: "DELETE",
@@ -19,6 +27,17 @@ export const get = async (key: string) => {
     if (response.status !== 200) return null;
     const result = await response.json();
     return JSON.parse(result.message).data;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const getUsers = async (key: string) => {
+  try {
+    const response = await fetch(`/api/sheets/${key}/users`);
+    if (response.status !== 200) return null;
+    const result = await response.json();
+    return result.users;
   } catch (error) {
     return null;
   }

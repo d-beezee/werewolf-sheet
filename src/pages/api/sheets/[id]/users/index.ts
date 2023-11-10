@@ -2,10 +2,13 @@ import auth from "@src/pages/api/auth/[...nextauth]";
 import { MongoClient } from "mongodb";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth/next";
-
-type ResponseData = {
-  message: string;
-};
+type ResponseData =
+  | {
+      users: string[];
+    }
+  | {
+      message: string;
+    };
 
 const get = async (req: NextApiRequest, res: NextApiResponse<ResponseData>) => {
   const { id } = req.query;
@@ -26,16 +29,18 @@ const get = async (req: NextApiRequest, res: NextApiResponse<ResponseData>) => {
     id: `sheet-${id}`,
     user: session?.user?.email || "anyone",
   });
-  client.close();
 
   if (sheet === null || "data" in sheet === false) {
+    client.close();
     res.status(404).json({
       message: "Not found.",
     });
     return;
   }
-  res.status(200).json({
-    message: JSON.stringify(sheet),
+  client.close();
+
+  return res.status(200).json({
+    users: sheet.user,
   });
 };
 
@@ -61,17 +66,9 @@ const put = async (req: NextApiRequest, res: NextApiResponse<ResponseData>) => {
     });
   }
 
-  if (typeof id !== "string") {
-    res.status(400).json({
-      message: `Invalid key. ${id}`,
-    });
-    return;
-  }
-
   const client = new MongoClient(process.env.MONGODB_URI || "");
   const database = client.db(process.env.VERCEL_ENV || "development");
   const sheetsCollection = database.collection("sheets");
-
   const sheet = await sheetsCollection.findOne({
     id: `sheet-${id}`,
     user: session?.user?.email || "anyone",
@@ -85,60 +82,29 @@ const put = async (req: NextApiRequest, res: NextApiResponse<ResponseData>) => {
     return;
   }
 
+  // update sheet
   await sheetsCollection.updateOne(
     { id: `sheet-${id}` },
     {
       $set: {
-        id: `sheet-${id}`,
-        data: {
-          ...sheet.data,
-          ...JSON.parse(body),
-        },
-        user: [session.user.email || "anyone"],
+        user: [...new Set([session.user.email, ...JSON.parse(body)])],
       },
-    },
-    {
-      upsert: true,
     }
   );
+
   client.close();
-  res.status(200).json({
+
+  return res.status(200).json({
     message: "ok",
   });
 };
 
-const del = async (req: NextApiRequest, res: NextApiResponse<ResponseData>) => {
-  const { id } = req.query;
-  const session = (await getServerSession(req, res, auth)) as {
-    user: { email: string };
-  } | null;
-  if (!session) {
-    return res.status(401).json({
-      message: "Unauthorized",
-    });
-  }
-
-  const client = new MongoClient(process.env.MONGODB_URI || "");
-  const database = client.db(process.env.VERCEL_ENV || "development");
-  const sheetsCollection = database.collection("sheets");
-  const data = await sheetsCollection.findOne({
-    id: `sheet-${id}`,
-    user: session?.user?.email || "anyone",
-  });
-  if (data === null) {
-    client.close();
-    res.status(404).json({
-      message: "Not found.",
-    });
-    return;
-  }
-  await sheetsCollection.deleteOne({
-    id: `sheet-${id}`,
-    user: session?.user?.email || "anyone",
-  });
-  client.close();
-  res.status(200).json({
-    message: "ok",
+const del = async (
+  _req: NextApiRequest,
+  res: NextApiResponse<ResponseData>
+) => {
+  return res.status(500).json({
+    message: "Not implemented.",
   });
 };
 
