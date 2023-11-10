@@ -140,6 +140,7 @@ const MenuItemThree = styled(MenuItem)`
 
 const MenuComponent = ({
   className,
+  size,
   actions,
 }: {
   actions: {
@@ -154,6 +155,7 @@ const MenuComponent = ({
   return (
     <div className={`${className} ${active ? "active" : ""}`}>
       <MenuItemOne
+        size={size}
         onClick={() => {
           setActive(false);
           actions.onDelete && actions.onDelete();
@@ -161,6 +163,7 @@ const MenuComponent = ({
         icon={<Delete />}
       />
       <MenuItemTwo
+        size={size}
         disabled
         onClick={() => {
           setActive(false);
@@ -169,6 +172,7 @@ const MenuComponent = ({
         icon={<Print />}
       />
       <MenuItemThree
+        size={size}
         disabled
         onClick={() => {
           setActive(false);
