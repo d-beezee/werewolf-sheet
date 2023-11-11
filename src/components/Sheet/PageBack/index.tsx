@@ -11,7 +11,6 @@ import { useTranslation } from "react-i18next";
 const PageBack = ({
   resize,
   item,
-  version = 0,
   action,
 }: {
   resize?: boolean;

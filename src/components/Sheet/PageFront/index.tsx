@@ -17,7 +17,6 @@ import { Trans, useTranslation } from "react-i18next";
 const PageFront = ({
   resize,
   item,
-  version = 0,
   action,
 }: {
   resize?: boolean;
