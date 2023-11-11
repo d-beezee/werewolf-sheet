@@ -70,8 +70,8 @@ const PageBack = ({
           <div style={{ width: "50%", paddingTop: "40px" }}>
             <AdvantageList sheet={item} />
             <div style={{ display: "flex", marginTop: "20px" }}>
-              <Harano getValue={() => data.harano} saveValue={() => {}} />
-              <Hauglosk getValue={() => data.hauglosk} saveValue={() => {}} />
+              <Harano value={data.harano} saveValue={() => {}} />
+              <Hauglosk value={data.hauglosk} saveValue={() => {}} />
             </div>
             <RusticBox
               style={{

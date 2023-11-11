@@ -4,11 +4,11 @@ import styled from "styled-components";
 import Dottable from "../Dottable";
 
 const HaranoComponent = ({
-  getValue,
+  value,
   saveValue,
   className,
 }: {
-  getValue: () => number;
+  value: number;
   saveValue: (value: number) => void;
   className?: string;
 }) => {
@@ -17,7 +17,7 @@ const HaranoComponent = ({
     <Dottable
       className={className}
       title={t("Harano", { context: "sheet" })}
-      getValue={getValue}
+      value={value}
       saveValue={saveValue}
       allowZero
     />
