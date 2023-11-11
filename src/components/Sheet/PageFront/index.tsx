@@ -24,7 +24,6 @@ const PageFront = ({
   version?: number;
   action?: {
     flip?: () => void;
-    back?: () => void;
   };
 }) => {
   const { t } = useTranslation();
