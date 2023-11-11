@@ -11,10 +11,12 @@ import { useTranslation } from "react-i18next";
 const PageBack = ({
   resize,
   item,
+  version = 0,
   action,
 }: {
   resize?: boolean;
   item: Sheet;
+  version?: number;
   action?: {
     flip?: () => void;
     back?: () => void;

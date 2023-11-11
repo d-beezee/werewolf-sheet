@@ -6,26 +6,26 @@ import Inputable from "../Inputable";
 const SkillComponent = ({
   title,
   saveValue,
-  getValue,
+  value,
   className,
 }: {
   className?: string;
   title: string;
-  getValue: () => tSkill;
+  value: tSkill;
   saveValue: (skill: tSkill) => void;
 }) => {
   return (
     <Dottable
       className={className}
       title={title}
-      getValue={() => getValue().value}
+      value={value?.value || 0}
       saveValue={(value) => saveValue({ value })}
       allowZero
     >
       <Inputable
-        value={getValue().specialty || ""}
+        value={value?.specialty || ""}
         onChange={(e) =>
-          saveValue({ value: getValue().value, specialty: e.target.value })
+          saveValue({ value: value?.value || 0, specialty: e.target.value })
         }
       />
     </Dottable>

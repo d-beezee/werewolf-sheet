@@ -4,7 +4,7 @@ import { styled } from "styled-components";
 const DottableComponent = ({
   title,
   saveValue,
-  getValue,
+  value,
   allowZero = false,
   className,
   children,
@@ -12,41 +12,41 @@ const DottableComponent = ({
   className?: string;
   title: string;
   allowZero?: boolean;
-  getValue: () => number;
+  value: number;
   saveValue: (value: number) => void;
   children?: React.ReactNode;
 }) => {
-  const [value, setValue] = useState(-1);
+  const [_value, setValue] = useState(-1);
   useEffect(() => {
-    setValue(getValue());
-  }, []);
-  useEffect(() => {
-    if (value === -1) return;
-    saveValue(value);
+    setValue(value);
   }, [value]);
+  useEffect(() => {
+    if (_value === -1) return;
+    saveValue(_value);
+  }, [_value]);
 
-  if (value === -1) return null;
+  if (_value === -1) return null;
   return (
     <div className={className}>
       <div className="title">{title}</div>
       {children}
       <div className="buttons">
-        {[...Array(value)].map((_, i) => (
+        {[...Array(_value || 0)].map((_, i) => (
           <button
             className="filled"
             key={i}
             onClick={() =>
-              i === 0 && value === 1 && allowZero
+              i === 0 && _value === 1 && allowZero
                 ? setValue(0)
                 : setValue(i + 1)
             }
           ></button>
         ))}
-        {[...Array(5 - value)].map((_, i) => (
+        {[...Array(5 - _value || 0)].map((_, i) => (
           <button
             className="empty"
             key={i}
-            onClick={() => setValue(i + 1 + value)}
+            onClick={() => setValue(i + 1 + _value || 0)}
           ></button>
         ))}
       </div>

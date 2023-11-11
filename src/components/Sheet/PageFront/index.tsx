@@ -17,10 +17,12 @@ import { Trans, useTranslation } from "react-i18next";
 const PageFront = ({
   resize,
   item,
+  version = 0,
   action,
 }: {
   resize?: boolean;
   item: Sheet;
+  version?: number;
   action?: {
     flip?: () => void;
     back?: () => void;
@@ -138,7 +140,7 @@ const PageFront = ({
                 strength: (
                   <Dottable
                     title={t("Strength", { context: "sheet" })}
-                    getValue={() => data.attributes.physical.strength}
+                    value={data.attributes.physical.strength}
                     saveValue={(value) =>
                       item.setAttributes("physical", "strength", value)
                     }
@@ -147,7 +149,7 @@ const PageFront = ({
                 dexterity: (
                   <Dottable
                     title={t("Dexterity", { context: "sheet" })}
-                    getValue={() => data.attributes.physical.dexterity}
+                    value={data.attributes.physical.dexterity}
                     saveValue={(value) =>
                       item.setAttributes("physical", "dexterity", value)
                     }
@@ -156,7 +158,7 @@ const PageFront = ({
                 stamina: (
                   <Dottable
                     title={t("Stamina", { context: "sheet" })}
-                    getValue={() => data.attributes.physical.stamina}
+                    value={data.attributes.physical.stamina}
                     saveValue={(value) =>
                       item.setAttributes("physical", "stamina", value)
                     }
@@ -182,7 +184,7 @@ const PageFront = ({
                 composure: (
                   <Dottable
                     title={t("Composure", { context: "sheet" })}
-                    getValue={() => data.attributes.social.composure}
+                    value={data.attributes.social.composure}
                     saveValue={(value) =>
                       item.setAttributes("social", "composure", value)
                     }
@@ -191,7 +193,7 @@ const PageFront = ({
                 charisma: (
                   <Dottable
                     title={t("Charisma", { context: "sheet" })}
-                    getValue={() => data.attributes.social.charisma}
+                    value={data.attributes.social.charisma}
                     saveValue={(value) =>
                       item.setAttributes("social", "charisma", value)
                     }
@@ -200,7 +202,7 @@ const PageFront = ({
                 manipulation: (
                   <Dottable
                     title={t("Manipulation", { context: "sheet" })}
-                    getValue={() => data.attributes.social.manipulation}
+                    value={data.attributes.social.manipulation}
                     saveValue={(value) =>
                       item.setAttributes("social", "manipulation", value)
                     }
@@ -226,7 +228,7 @@ const PageFront = ({
                 intelligence: (
                   <Dottable
                     title={t("Intelligence", { context: "sheet" })}
-                    getValue={() => data.attributes.mental.intelligence}
+                    value={data.attributes.mental.intelligence}
                     saveValue={(value) =>
                       item.setAttributes("mental", "intelligence", value)
                     }
@@ -235,7 +237,7 @@ const PageFront = ({
                 wits: (
                   <Dottable
                     title={t("Wits", { context: "sheet" })}
-                    getValue={() => data.attributes.mental.wits}
+                    value={data.attributes.mental.wits}
                     saveValue={(value) =>
                       item.setAttributes("mental", "wits", value)
                     }
@@ -244,7 +246,7 @@ const PageFront = ({
                 resolve: (
                   <Dottable
                     title={t("Resolve", { context: "sheet" })}
-                    getValue={() => data.attributes.mental.resolve}
+                    value={data.attributes.mental.resolve}
                     saveValue={(value) =>
                       item.setAttributes("mental", "resolve", value)
                     }
@@ -282,7 +284,7 @@ const PageFront = ({
                 athletics: (
                   <Skill
                     title={t("Athletics", { context: "sheet" })}
-                    getValue={() => data.skills.physical.athletics}
+                    value={data.skills.physical.athletics}
                     saveValue={(value) =>
                       item.setSkill("physical", "athletics", value)
                     }
@@ -291,7 +293,7 @@ const PageFront = ({
                 brawl: (
                   <Skill
                     title={t("Brawl", { context: "sheet" })}
-                    getValue={() => data.skills.physical.brawl}
+                    value={data.skills.physical.brawl}
                     saveValue={(value) =>
                       item.setSkill("physical", "brawl", value)
                     }
@@ -300,7 +302,7 @@ const PageFront = ({
                 craft: (
                   <Skill
                     title={t("Craft", { context: "sheet" })}
-                    getValue={() => data.skills.physical.craft}
+                    value={data.skills.physical.craft}
                     saveValue={(value) =>
                       item.setSkill("physical", "craft", value)
                     }
@@ -309,7 +311,7 @@ const PageFront = ({
                 driving: (
                   <Skill
                     title={t("Driving", { context: "sheet" })}
-                    getValue={() => data.skills.physical.drive}
+                    value={data.skills.physical.drive}
                     saveValue={(value) =>
                       item.setSkill("physical", "drive", value)
                     }
@@ -318,7 +320,7 @@ const PageFront = ({
                 firearms: (
                   <Skill
                     title={t("Firearms", { context: "sheet" })}
-                    getValue={() => data.skills.physical.firearms}
+                    value={data.skills.physical.firearms}
                     saveValue={(value) =>
                       item.setSkill("physical", "firearms", value)
                     }
@@ -327,7 +329,7 @@ const PageFront = ({
                 larceny: (
                   <Skill
                     title={t("Larceny", { context: "sheet" })}
-                    getValue={() => data.skills.physical.larceny}
+                    value={data.skills.physical.larceny}
                     saveValue={(value) =>
                       item.setSkill("physical", "larceny", value)
                     }
@@ -336,7 +338,7 @@ const PageFront = ({
                 melee: (
                   <Skill
                     title={t("Melee", { context: "sheet" })}
-                    getValue={() => data.skills.physical.melee}
+                    value={data.skills.physical.melee}
                     saveValue={(value) =>
                       item.setSkill("physical", "melee", value)
                     }
@@ -345,7 +347,7 @@ const PageFront = ({
                 stealth: (
                   <Skill
                     title={t("Stealth", { context: "sheet" })}
-                    getValue={() => data.skills.physical.stealth}
+                    value={data.skills.physical.stealth}
                     saveValue={(value) =>
                       item.setSkill("physical", "stealth", value)
                     }
@@ -354,7 +356,7 @@ const PageFront = ({
                 survival: (
                   <Skill
                     title={t("Survival", { context: "sheet" })}
-                    getValue={() => data.skills.physical.survival}
+                    value={data.skills.physical.survival}
                     saveValue={(value) =>
                       item.setSkill("physical", "survival", value)
                     }
@@ -370,7 +372,7 @@ const PageFront = ({
                 animalken: (
                   <Skill
                     title={t("Animal Ken", { context: "sheet" })}
-                    getValue={() => data.skills.social.animalKen}
+                    value={data.skills.social.animalKen}
                     saveValue={(value) =>
                       item.setSkill("social", "animalKen", value)
                     }
@@ -379,7 +381,7 @@ const PageFront = ({
                 etiquette: (
                   <Skill
                     title={t("Etiquette", { context: "sheet" })}
-                    getValue={() => data.skills.social.etiquette}
+                    value={data.skills.social.etiquette}
                     saveValue={(value) =>
                       item.setSkill("social", "etiquette", value)
                     }
@@ -388,7 +390,7 @@ const PageFront = ({
                 insight: (
                   <Skill
                     title={t("Insight", { context: "sheet" })}
-                    getValue={() => data.skills.social.insight}
+                    value={data.skills.social.insight}
                     saveValue={(value) =>
                       item.setSkill("social", "insight", value)
                     }
@@ -397,7 +399,7 @@ const PageFront = ({
                 intimidation: (
                   <Skill
                     title={t("Intimidation", { context: "sheet" })}
-                    getValue={() => data.skills.social.intimidation}
+                    value={data.skills.social.intimidation}
                     saveValue={(value) =>
                       item.setSkill("social", "intimidation", value)
                     }
@@ -406,7 +408,7 @@ const PageFront = ({
                 leadership: (
                   <Skill
                     title={t("Leadership", { context: "sheet" })}
-                    getValue={() => data.skills.social.leadership}
+                    value={data.skills.social.leadership}
                     saveValue={(value) =>
                       item.setSkill("social", "leadership", value)
                     }
@@ -415,7 +417,7 @@ const PageFront = ({
                 performance: (
                   <Skill
                     title={t("Performance", { context: "sheet" })}
-                    getValue={() => data.skills.social.performance}
+                    value={data.skills.social.performance}
                     saveValue={(value) =>
                       item.setSkill("social", "performance", value)
                     }
@@ -424,7 +426,7 @@ const PageFront = ({
                 persuasion: (
                   <Skill
                     title={t("Persuasion", { context: "sheet" })}
-                    getValue={() => data.skills.social.persuasion}
+                    value={data.skills.social.persuasion}
                     saveValue={(value) =>
                       item.setSkill("social", "persuasion", value)
                     }
@@ -433,7 +435,7 @@ const PageFront = ({
                 streetwise: (
                   <Skill
                     title={t("Streetwise", { context: "sheet" })}
-                    getValue={() => data.skills.social.streetwise}
+                    value={data.skills.social.streetwise}
                     saveValue={(value) =>
                       item.setSkill("social", "streetwise", value)
                     }
@@ -442,7 +444,7 @@ const PageFront = ({
                 subterfuge: (
                   <Skill
                     title={t("Subterfuge", { context: "sheet" })}
-                    getValue={() => data.skills.social.subterfuge}
+                    value={data.skills.social.subterfuge}
                     saveValue={(value) =>
                       item.setSkill("social", "subterfuge", value)
                     }
@@ -458,7 +460,7 @@ const PageFront = ({
                 academics: (
                   <Skill
                     title={t("Academics", { context: "sheet" })}
-                    getValue={() => data.skills.mental.academics}
+                    value={data.skills.mental.academics}
                     saveValue={(value) =>
                       item.setSkill("mental", "academics", value)
                     }
@@ -467,7 +469,7 @@ const PageFront = ({
                 awareness: (
                   <Skill
                     title={t("Awareness", { context: "sheet" })}
-                    getValue={() => data.skills.mental.awareness}
+                    value={data.skills.mental.awareness}
                     saveValue={(value) =>
                       item.setSkill("mental", "awareness", value)
                     }
@@ -476,7 +478,7 @@ const PageFront = ({
                 finance: (
                   <Skill
                     title={t("Finance", { context: "sheet" })}
-                    getValue={() => data.skills.mental.finance}
+                    value={data.skills.mental.finance}
                     saveValue={(value) =>
                       item.setSkill("mental", "finance", value)
                     }
@@ -485,7 +487,7 @@ const PageFront = ({
                 investigation: (
                   <Skill
                     title={t("Investigation", { context: "sheet" })}
-                    getValue={() => data.skills.mental.investigation}
+                    value={data.skills.mental.investigation}
                     saveValue={(value) =>
                       item.setSkill("mental", "investigation", value)
                     }
@@ -494,7 +496,7 @@ const PageFront = ({
                 medicine: (
                   <Skill
                     title={t("Medicine", { context: "sheet" })}
-                    getValue={() => data.skills.mental.medicine}
+                    value={data.skills.mental.medicine}
                     saveValue={(value) =>
                       item.setSkill("mental", "medicine", value)
                     }
@@ -503,7 +505,7 @@ const PageFront = ({
                 occult: (
                   <Skill
                     title={t("Occult", { context: "sheet" })}
-                    getValue={() => data.skills.mental.occult}
+                    value={data.skills.mental.occult}
                     saveValue={(value) =>
                       item.setSkill("mental", "occult", value)
                     }
@@ -512,7 +514,7 @@ const PageFront = ({
                 politics: (
                   <Skill
                     title={t("Politics", { context: "sheet" })}
-                    getValue={() => data.skills.mental.politics}
+                    value={data.skills.mental.politics}
                     saveValue={(value) =>
                       item.setSkill("mental", "politics", value)
                     }
@@ -521,7 +523,7 @@ const PageFront = ({
                 science: (
                   <Skill
                     title={t("Science", { context: "sheet" })}
-                    getValue={() => data.skills.mental.science}
+                    value={data.skills.mental.science}
                     saveValue={(value) =>
                       item.setSkill("mental", "science", value)
                     }
@@ -530,7 +532,7 @@ const PageFront = ({
                 technology: (
                   <Skill
                     title={t("Technology", { context: "sheet" })}
-                    getValue={() => data.skills.mental.technology}
+                    value={data.skills.mental.technology}
                     saveValue={(value) =>
                       item.setSkill("mental", "technology", value)
                     }
@@ -545,19 +547,19 @@ const PageFront = ({
           <Renown
             allowZero
             title={t("Glory", { context: "sheet" })}
-            getValue={() => data.renown.glory}
+            value={data.renown.glory}
             saveValue={(value) => item.setRenown("glory", value)}
           />
           <Renown
             allowZero
             title={t("Honor", { context: "sheet" })}
-            getValue={() => data.renown.honor}
+            value={data.renown.honor}
             saveValue={(value) => item.setRenown("honor", value)}
           />
           <Renown
             allowZero
             title={t("Wisdom", { context: "sheet" })}
-            getValue={() => data.renown.wisdom}
+            value={data.renown.wisdom}
             saveValue={(value) => item.setRenown("wisdom", value)}
           />
         </div>
@@ -576,7 +578,7 @@ const PageFront = ({
         >
           <div style={{ flexBasis: "18%" }}>
             <Rage
-              getValue={() => data.rage}
+              value={data.rage}
               saveValue={(value) => item.setRage(value)}
             />
           </div>

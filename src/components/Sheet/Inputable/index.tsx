@@ -36,7 +36,7 @@ const InputableComponent = ({
   className?: string;
   type?: "text" | "textarea";
 }) => {
-  const [inputValue, setInputValue] = useState(value);
+  const [inputValue, setInputValue] = useState("");
   const [debouncedInputValue, setDebouncedInputValue] = useState(value);
 
   useEffect(() => {
@@ -53,13 +53,17 @@ const InputableComponent = ({
     return () => clearTimeout(delayInputTimeoutId);
   }, [inputValue, 500]);
 
+  useEffect(() => {
+    setInputValue(value);
+  }, [value]);
+
   return (
     <div className={className}>
       {title && <span>{title}</span>}
       {type === "textarea" && (
         <textarea
           name={className}
-          defaultValue={inputValue}
+          value={inputValue}
           onChange={(e) => {
             setInputValue(e.target.value);
           }}
@@ -68,7 +72,7 @@ const InputableComponent = ({
       {type === "text" && (
         <input
           name={className}
-          defaultValue={inputValue}
+          value={inputValue}
           onChange={(e) => {
             setInputValue(e.target.value);
           }}

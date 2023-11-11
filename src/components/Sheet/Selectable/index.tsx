@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes, useEffect, useState } from "react";
 import { styled } from "styled-components";
 
 const SelectableComponent = ({
@@ -16,10 +16,22 @@ const SelectableComponent = ({
   onChange: InputHTMLAttributes<HTMLSelectElement>["onChange"];
   className?: string;
 }) => {
+  const [_value, setValue] = useState("none");
+
+  useEffect(() => {
+    setValue(value);
+  }, [value]);
+
   return (
     <div className={className}>
       <span>{title}</span>
-      <select defaultValue={value} onChange={onChange}>
+      <select
+        value={_value}
+        onChange={(e) => {
+          setValue(e.target.value);
+          onChange && onChange(e);
+        }}
+      >
         <option value="none" disabled>
           {noOptions}
         </option>

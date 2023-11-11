@@ -17,6 +17,7 @@ const SheetSinglePage = () => {
   const componentRef = useRef(null);
   const router = useRouter();
   const [width] = useWindowDimensions();
+  const [version, setVersion] = useState(0);
   const { t } = useTranslation();
   const { slug } = router.query;
   const [item, setItem] = useState<Sheet>();
@@ -55,10 +56,14 @@ const SheetSinglePage = () => {
           open={isShareModalOpen}
           onClose={() => setIsShareModalOpen(false)}
         />
-        <div style={{ display: "none" }}>
+        <div
+          style={{
+            display: "none",
+          }}
+        >
           <div ref={componentRef}>
-            <PageFront resize={false} item={item} />
-            <PageBack resize={false} item={item} />
+            <PageFront resize={false} item={item} version={version} />
+            <PageBack resize={false} item={item} version={version} />
           </div>
         </div>
 
@@ -76,7 +81,10 @@ const SheetSinglePage = () => {
                 item.delete().then(() => (window.location.href = "/sheet"));
             },
             onPrint: () => {
-              handlePrint();
+              item.init().then(() => {
+                setVersion(version + 1);
+                handlePrint();
+              });
             },
             onShare: () => setIsShareModalOpen(!isShareModalOpen),
           }}
