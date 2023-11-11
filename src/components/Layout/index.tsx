@@ -179,7 +179,10 @@ export default function Layout({
       {session ? (
         children
       ) : (
-        <img style={{ margin: "0 auto", display: "block" }} src="/moon.png" />
+        <img
+          style={{ margin: "3rem auto", display: "block", maxWidth: "60%" }}
+          src="/moon.png"
+        />
       )}
     </>
   );
