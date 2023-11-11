@@ -4,11 +4,11 @@ import styled from "styled-components";
 import Dottable from "../Dottable";
 
 const HaugloskComponent = ({
-  getValue,
+  value,
   saveValue,
   className,
 }: {
-  getValue: () => number;
+  value: number;
   saveValue: (value: number) => void;
   className?: string;
 }) => {
@@ -17,7 +17,7 @@ const HaugloskComponent = ({
     <Dottable
       className={className}
       title={t("Hauglosk", { context: "sheet" })}
-      getValue={getValue}
+      value={value}
       saveValue={saveValue}
       allowZero
     />
