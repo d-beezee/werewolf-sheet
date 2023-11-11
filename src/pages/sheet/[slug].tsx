@@ -7,12 +7,14 @@ import Sheet from "@src/database/Sheet";
 import useWindowDimensions from "@src/hooks/useWindowDimensions";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ReactCardFlip from "react-card-flip";
 import { useTranslation } from "react-i18next";
 import { useSwipeable } from "react-swipeable";
+import { useReactToPrint } from "react-to-print";
 
 const SheetSinglePage = () => {
+  const componentRef = useRef(null);
   const router = useRouter();
   const [width] = useWindowDimensions();
   const { t } = useTranslation();
@@ -25,6 +27,10 @@ const SheetSinglePage = () => {
     onSwipedRight: () => setIsFlipped(!isFlipped),
     delta: 200,
   });
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
+
   useEffect(() => {
     if (slug === undefined) return;
     const sheet = new Sheet(slug as string);
@@ -49,6 +55,13 @@ const SheetSinglePage = () => {
           open={isShareModalOpen}
           onClose={() => setIsShareModalOpen(false)}
         />
+        <div style={{ display: "none" }}>
+          <div ref={componentRef}>
+            <PageFront resize={false} item={item} />
+            <PageBack resize={false} item={item} />
+          </div>
+        </div>
+
         <Menu
           size={width < 768 ? 400 : undefined}
           actions={{
@@ -63,7 +76,7 @@ const SheetSinglePage = () => {
                 item.delete().then(() => (window.location.href = "/sheet"));
             },
             onPrint: () => {
-              location.href = `/sheet/${slug}/print`;
+              handlePrint();
             },
             onShare: () => setIsShareModalOpen(!isShareModalOpen),
           }}
