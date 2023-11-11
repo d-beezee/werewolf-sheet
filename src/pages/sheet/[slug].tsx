@@ -49,7 +49,7 @@ const SheetSinglePage = () => {
     <Layout>
       <div>
         <Head>
-          <title>Werewolf sheet</title>
+          <title>{data.name || slug} - Werewolf sheet</title>
         </Head>
         <Modal
           sheet={item}
