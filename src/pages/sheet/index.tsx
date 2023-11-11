@@ -25,45 +25,57 @@ const SheetPage = () => {
           <title>Werewolf sheet</title>
         </Head>
 
-        <main>
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <Button
-              size="medium"
-              onClick={() => {
-                const name = prompt("Nome del personaggio");
-                if (name === null || name === "") return;
-
-                new Sheet(name)
-                  .create()
-                  .then(() => {
-                    window.location.href = `/sheet/${name}`;
-                  })
-                  .catch((error) => {
-                    if (error instanceof SheetAlreadyExistsError) {
-                      window.location.href = `/sheet/${name}`;
-                      return;
-                    }
-                    throw error;
-                  });
-              }}
-            >
-              {t("Create", { context: "sheet-index" })}
-            </Button>
-          </div>
-          <h1 style={{ color: "#fff", textAlign: "center", fontSize: "3rem" }}>
-            {t("Characters", { context: "sheet-index" })}
-          </h1>
-          {loading && <Loader />}
-          {list.map((item, i) => (
-            <ButtonContainer key={item.id}>
-              <Button
-                invert={i % 2 !== 0}
-                onClick={() => (window.location.href = `/sheet/${item.id}`)}
+        <main style={{ paddingTop: "3rem" }}>
+          {loading ? (
+            <Loader />
+          ) : (
+            <>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                }}
               >
-                {item.name}
-              </Button>
-            </ButtonContainer>
-          ))}
+                <Button
+                  size="medium"
+                  onClick={() => {
+                    const name = prompt("Nome del personaggio");
+                    if (name === null || name === "") return;
+
+                    new Sheet(name)
+                      .create()
+                      .then(() => {
+                        window.location.href = `/sheet/${name}`;
+                      })
+                      .catch((error) => {
+                        if (error instanceof SheetAlreadyExistsError) {
+                          window.location.href = `/sheet/${name}`;
+                          return;
+                        }
+                        throw error;
+                      });
+                  }}
+                >
+                  {t("Create", { context: "sheet-index" })}
+                </Button>
+              </div>
+              <h1
+                style={{ color: "#fff", textAlign: "center", fontSize: "3rem" }}
+              >
+                {t("Characters", { context: "sheet-index" })}
+              </h1>
+              {list.map((item, i) => (
+                <ButtonContainer key={item.id}>
+                  <Button
+                    invert={i % 2 !== 0}
+                    onClick={() => (window.location.href = `/sheet/${item.id}`)}
+                  >
+                    {item.name}
+                  </Button>
+                </ButtonContainer>
+              ))}
+            </>
+          )}
         </main>
       </div>
     </Layout>
