@@ -51,7 +51,7 @@ const AdvantageListComponent = ({
             <Dottable
               allowZero
               title=""
-              getValue={() => advantage.value}
+              value={advantage.value}
               saveValue={(newValue) => {
                 const newAdvantages = [...advantages];
                 const newAdvantage = { ...advantage };
