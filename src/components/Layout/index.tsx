@@ -1,4 +1,6 @@
+import useIsSheet from "@src/hooks/useIsSheet";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { styled } from "styled-components";
 import Button from "../Styles/Button";
@@ -10,12 +12,14 @@ const LoginBoxComponent = ({
   className?: string;
   open: boolean;
 }) => {
+  const isSheet = useIsSheet();
+
   const locale =
     (typeof window !== "undefined" &&
       window.localStorage.getItem("MY_LANGUAGE")) ||
     "it";
   return (
-    <div className={className}>
+    <div className={`${className} ${isSheet ? "sheet" : ""}`}>
       <button
         onClick={() => {
           locale === "it"
@@ -49,20 +53,60 @@ const LoginBox = styled(LoginBoxComponent)`
     background: none;
     cursor: pointer;
   }
+
+  @media (max-width: 768px) {
+    &.sheet {
+      top: 9rem;
+      button {
+        font-size: 3.5rem;
+      }
+    }
+  }
+`;
+
+const NavigationTitleComponent = ({ className }: { className?: string }) => {
+  const { pathname } = useRouter();
+
+  function _backItem() {
+    if (pathname === "/") return null;
+    if (pathname === "/sheet") return { title: "Back home", url: "/" };
+    if (pathname === "/sheet/[slug]")
+      return { title: "Back to sheets", url: "/sheet" };
+    return null;
+  }
+  const backItem = _backItem();
+
+  if (null === backItem) return null;
+
+  const { title, url } = backItem;
+
+  return (
+    <div className={className} onClick={() => (location.href = url)}>
+      {title}
+    </div>
+  );
+};
+
+const NavigationTitle = styled(NavigationTitleComponent)`
+  cursor: pointer;
+  color: #fff;
+  padding: 2% 5%;
 `;
 
 const NavHeaderComponent = ({ className }: { className?: string }) => {
   const [hovering, setHovering] = useState(false);
+  const isSheet = useIsSheet();
   const { data: session } = useSession();
 
   const user = session?.user ? session.user : null;
 
   return (
     <>
-      <div className={className}>
+      <div className={`${className} ${isSheet ? "sheet" : ""}`}>
         <a className="logo" href="/">
           <img src="/logo.png" />
         </a>
+        <NavigationTitle />
         <div className="log-button">
           {user ? (
             <img
@@ -86,7 +130,6 @@ const NavHeader = styled(NavHeaderComponent)`
   background-image: url("/navbg.jpg ");
   background-size: 15%;
   height: 3rem;
-  margin-bottom: 30px;
   display: flex;
   justify-content: space-between;
   padding: 5px 1.5rem;
@@ -109,6 +152,16 @@ const NavHeader = styled(NavHeaderComponent)`
   }
   ${Button}.signin {
     scale: 0.7;
+  }
+
+  @media (max-width: 768px) {
+    &.sheet {
+      height: 140px;
+
+      ${NavigationTitle} {
+        font-size: 4rem;
+      }
+    }
   }
 `;
 

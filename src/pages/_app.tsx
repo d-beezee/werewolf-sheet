@@ -38,7 +38,8 @@ function MyApp({
           --hermes: ${hermes.style.fontFamily};
         }
         @media (max-width: 600px) {
-          ${router.pathname === "/sheet/[slug]" && "#__next { width: 401vw; }"}
+          ${router.pathname === "/sheet/[slug]" &&
+          "#__next { width: 401vw;position: relative; }"}
         }
         body {
           background-color: #0f0f0f;

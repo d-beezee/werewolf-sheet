@@ -1,6 +1,3 @@
-import BackButton from "@src/components/Styles/BackButton";
-import LeftCaretButton from "@src/components/Styles/LeftCaretButton";
-import RightCaretButton from "@src/components/Styles/RightCaretButton";
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
@@ -35,14 +32,27 @@ const SheetContainerComponent = styled.div`
     top: 50%;
   }
 
-  .sheet-button.back-button,
-  .sheet-button.flip-left-button {
+  .sheet-button.back-button {
     left: 9.5%;
   }
+
+  .sheet-button.flip-left-button {
+    left: 8.4%;
+  }
   .sheet-button.flip-right-button {
-    right: 10%;
+    right: 8.2%;
   }
 
+  .sheet-button.flip-left-button,
+  .sheet-button.flip-right-button {
+    height: 100%;
+    top: 5%;
+    width: 5%;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+    }
+  }
   @media (max-width: 768px) {
     .sheet-button.back-button {
       left: 2.5%;
@@ -108,7 +118,6 @@ const SheetContainer = ({
 }: {
   action: {
     flip?: () => void;
-    back?: () => void;
   };
   children: React.ReactNode;
   resize?: boolean;
@@ -136,20 +145,17 @@ const SheetContainer = ({
             : {}
         }
       >
-        {action.back && (
-          <div className="sheet-button back-button">
-            <BackButton width={40} height={40} onClick={action.back} />
-          </div>
+        {action.flip && (
+          <div
+            className="sheet-button flip-right-button"
+            onClick={action.flip}
+          />
         )}
         {action.flip && (
-          <div className="sheet-button flip-right-button">
-            <RightCaretButton width={60} height={60} onClick={action.flip} />
-          </div>
-        )}
-        {action.flip && (
-          <div className="sheet-button flip-left-button">
-            <LeftCaretButton width={60} height={60} onClick={action.flip} />
-          </div>
+          <div
+            className="sheet-button flip-left-button"
+            onClick={action.flip}
+          />
         )}
         <div>{children}</div>
       </SheetContainerComponent>
