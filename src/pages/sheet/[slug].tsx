@@ -95,18 +95,12 @@ const SheetSinglePage = () => {
               item={item}
               action={{
                 flip: () => setIsFlipped(!isFlipped),
-                back: () => {
-                  window.location.href = "/sheet";
-                },
               }}
             />
             <PageBack
               item={item}
               action={{
                 flip: () => setIsFlipped(!isFlipped),
-                back: () => {
-                  window.location.href = "/sheet";
-                },
               }}
             />
           </ReactCardFlip>
